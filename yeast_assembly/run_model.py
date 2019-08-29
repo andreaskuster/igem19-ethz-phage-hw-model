@@ -86,28 +86,28 @@ plt.title('Host Concentration over Time')
 plt.legend()
 
 
-plt.subplot(3, 2, 2)
+plt.subplot(3, 2, 3)
 plt.plot(xs, [T(t) for t in xs])
 plt.xlabel('time [min]')
 plt.ylabel('temperature [°C]')
 plt.title('Temperature over Time')
 
 LB = [y[2] for y in ys]
-plt.subplot(3, 2, 3)
+plt.subplot(3, 2, 4)
 plt.plot(xs, LB)
 plt.xlabel('time [min]')
 plt.ylabel('LB concentration [mg]')
 plt.title('LB Concentration over Time')
 
 
-plt.subplot(3, 2, 4)
+plt.subplot(3, 2, 5)
 plt.plot(np.linspace(0, 80, 100), [t_dep(x) for x in np.linspace(0, 80, 100)])
 plt.xlabel('temperature [°C]')
 plt.ylabel('rate')
 plt.title('Growth Rate (T)')
 
 
-plt.subplot(3, 2, 5)
+plt.subplot(3, 2, 6)
 lb_x = np.linspace(0, 1.3*lb_thresh)
 plt.plot(lb_x, [lb_dep(x) for x in lb_x])
 plt.xlabel('LB concentration [mg/bacteria]')
@@ -115,7 +115,7 @@ plt.ylabel('rate')
 plt.title('Growth Rate (LB)')
 
 
-plt.subplot(3, 2, 6)
+plt.subplot(3, 2, 2)
 plt.plot(xs, [lb_dep(LB[x])*t_dep(T(x))*original_host.growth_rate for x in np.arange(0, len(xs))], label="original host")
 plt.plot(xs, [lb_dep(LB[x])*t_dep(T(x))*new_host.growth_rate for x in np.arange(0, len(xs))], label="new host")
 plt.xlabel('time [min]')
