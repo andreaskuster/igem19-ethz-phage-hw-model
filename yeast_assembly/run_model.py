@@ -81,7 +81,7 @@ plt.subplot(3, 2, 1)
 plt.plot(xs, [y[0] for y in ys], label="original host")
 plt.plot(xs, [y[1] for y in ys], label="new host")
 plt.xlabel('time [min]')
-plt.ylabel('concentration [units]')
+plt.ylabel('concentration [#bacteria]')
 plt.title('Host Concentration over Time')
 plt.legend()
 
