@@ -40,7 +40,7 @@ def lb_cons():
     """
     return 1.5
 
-
+# define temperature profile over time for simulation
 def T(t):
     """
     :param t: time t
@@ -54,12 +54,17 @@ def T(t):
 
 # instantiate all hosts
 original_host = Host(
-    growth_rate=0.040773364,
-    c0=1
+    growth_rate=0.040773364, # doubling time of 17min at optimal temperatures
+    c0=1,
+    t_dep=t_dep,
+    lb_dep=lb_dep
 )
+
 new_host = Host(
-    growth_rate=0.02,
-    c0=8
+    growth_rate=0.02, # doubling time of ~34min at optimal temperature
+    c0=8,
+    t_dep=t_dep,
+    lb_dep=lb_dep
 )
 
 
@@ -92,6 +97,7 @@ plt.xlabel('time [min]')
 plt.ylabel('temperature [°C]')
 plt.title('Temperature over Time')
 
+
 LB = [y[2] for y in ys]
 plt.subplot(3, 2, 4)
 plt.plot(xs, LB)
@@ -123,5 +129,5 @@ plt.ylabel('rate')
 plt.title('Actual Growth Rate over Time')
 plt.legend()
 
-
+#plt.savefig("test2.png")
 plt.show()
