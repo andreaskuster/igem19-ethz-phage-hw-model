@@ -31,7 +31,7 @@ def lb_dep(x):
     if x < lb_thresh:
         return x / lb_thresh
     else:
-        return 1.0 #  lb_thresh / lb_thresh
+        return 1.0  #  lb_thresh / lb_thresh
 
 
 def lb_cons():
@@ -78,7 +78,11 @@ def dX_dt(X, t):
     ])
 
 
-ys = odeint(dX_dt, [original_host.c0, new_host.c0, 10000], xs)
+ys = odeint(dX_dt, [
+    original_host.c0,  # initial original host concentration
+    new_host.c0,  # initial new host concentration
+    10000  # initial lb concentration
+], xs)
 
 plt.figure(figsize=(8, 8))
 
