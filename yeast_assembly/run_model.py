@@ -72,9 +72,9 @@ new_host = Host(
 def dX_dt(X, t):
     [c1, c2, lb] = X
     return np.array([
-        t_dep(T(t)) * lb_dep(lb)*original_host.growth_rate * c1,
-        t_dep(T(t))*lb_dep(lb)*new_host.growth_rate * c2,
-        -lb_cons() * (c1+c2)
+        original_host.t_dep(T(t)) * original_host.lb_dep(lb)*original_host.growth_rate * c1,  # original host concentration
+        new_host.t_dep(T(t))*new_host.lb_dep(lb)*new_host.growth_rate * c2,  # new host concentration
+        -lb_cons() * (c1 + c2)  # lb concentration
     ])
 
 
