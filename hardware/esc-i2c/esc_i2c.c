@@ -51,7 +51,7 @@ void receiveEvent (int bytes) {
 
         // false length: read all and void
         for(int i = 0; i < bytes; i++){
-         Wire.read();
+            Wire.read();
         }
     }
 }
