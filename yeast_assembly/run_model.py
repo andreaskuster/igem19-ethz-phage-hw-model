@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import odeint
 
-from yeast_assembly.host import Host
+from host import Host
 
 # simulation time and resolution of samples
 xs = np.linspace(0, 120, 100)
@@ -27,32 +27,14 @@ def t_dep_new_host(x):
     :param x: temperature
     :return: growth rate factor
     """
-    mu = 30.0
+    mu = 28.0
     sigma_l = 120.0
     sigma_r = 10.0
     if x < mu:
-        return np.exp(-0.5*(np.square(x-mu)/sigma_l)) # gaussian l: ~(30.0, 120)
+        return np.exp(-0.5*(np.square(x-mu)/sigma_l)) # gaussian l: ~(28.0, 120)
     else:
-        return np.exp(-0.5*(np.square(x-mu)/sigma_r)) # gaussian r: ~(30.0, 10)
+        return np.exp(-0.5*(np.square(x-mu)/sigma_r)) # gaussian r: ~(28.0, 10)
 
-
-lb_thresh_original_host = 7000
-def lb_dep_original_host(x):
-    """
-    :param x: lb concentration
-    :return: growth rate factor
-    """
-    if x < lb_thresh:
-        return x / lb_thresh
-    else:
-        return 1.0
-
-
-def lb_cons():
-    """
-    :return: lb consumption per bacterium
-    """
-    return 1.5
 
 # define temperature profile over time for simulation
 def T(t):
@@ -63,7 +45,7 @@ def T(t):
     if t < 60:
         return 39.7
     else:
-        return 25.0
+        return 24.0
 
 
 # instantiate all hosts
@@ -72,15 +54,15 @@ original_host = Host(
     c0=1,
     t_dep=t_dep_original_host,
     lb_threshold=7000,
-    lb_cons=lambda: 1.5
+    lb_cons=lambda: 1.5  # lb consumption per bacterium
 )
 
 new_host = Host(
     growth_rate=0.02, # doubling time of ~34min at optimal temperature
     c0=8,
     t_dep=t_dep_new_host,
-    lb_threshold=6800,
-    lb_cons=lambda: 1.5
+    lb_threshold=9000,
+    lb_cons=lambda: 1.5  # lb consumption per bacterium
 )
 
 # define system of differential equations
@@ -96,7 +78,7 @@ def dX_dt(X, t):
 ys = odeint(dX_dt, [
     original_host.c0,  # initial original host concentration
     new_host.c0,  # initial new host concentration
-    10000  # initial lb concentration
+    8000  # initial lb concentration
 ], xs)
 
 plt.figure(figsize=(8, 8))
