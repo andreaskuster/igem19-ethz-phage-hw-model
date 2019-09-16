@@ -32,7 +32,7 @@ def extract_temperature(raw_sensor_data: str) -> float:
 
 while True:
     for sensor in sensors:
-        print("{}: {}°C".format(sensor, extract_temperature(raw_sensor_data(sensors[sensor]))))
+        print("{}: {}°C".format(sensor, extract_temperature(raw_sensor_data(sensors[sensor]['socket']))))
     time.sleep(10)
 
 # credits: https://thepihut.com/blogs/raspberry-pi-tutorials/ds18b20-one-wire-digital-temperature-sensor-and-the-raspberry-pi
