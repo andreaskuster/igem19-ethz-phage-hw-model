@@ -1,0 +1,10 @@
+https://hackaday.com/tag/oversampling/
+https://en.wikipedia.org/wiki/Oversampling
+https://web.archive.org/web/20160318101005/http://www.paulallenengineering.com/blog/noise-oversampling-and-a-1-bit-adc
+
+-> image noise: normal distributed https://en.wikipedia.org/wiki/Image_noise
+
+https://github.com/denyssene/SimpleKalmanFilter
+
+
+
