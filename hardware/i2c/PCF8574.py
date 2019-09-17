@@ -1,3 +1,4 @@
+import time
 import smbus
 
 _BUS_NO = 1
@@ -28,8 +29,11 @@ def clear(port: int):
     bus.write_byte(_DEVICE_ADDRESS, state & (0xff ^ (0x1 << port)))
 
 
+if __name__ == "__main__":
+    while True:
+        set_all()
+        time.sleep(10)
+        clear_all()
+        time.sleep(10)
+
 # note: PCF8574 uses 'sinking': 0 -> on, 1 -> off
-
-set_all()
-clear(0)
-
