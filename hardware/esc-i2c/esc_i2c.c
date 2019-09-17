@@ -22,7 +22,7 @@ void receiveEvent (int bytes) {
         byte device = Wire.read();
 
         // map value from [0, 200] to [1500, 2000]
-        int value = map(Wire.read(), 150, 200, 0, 200);
+        int value = map(Wire.read(), 0, 200, 150, 200);
         value *= 10;
 
         // choose the device according to the id
@@ -53,6 +53,7 @@ void receiveEvent (int bytes) {
         for(int i = 0; i < bytes; i++){
             Wire.read();
         }
+        Serial.println("wrong length, discard data");
     }
 }
 
@@ -71,14 +72,17 @@ void setup() {
     ESC1.writeMicroseconds(1750);
     ESC2.writeMicroseconds(1750);
 
-    // start i2c slave at address 77
+    // start i2c slave at address 7
     Serial.println("init i2c");
-    Wire.begin(77);
+    Wire.begin(7);
     Wire.onReceive(receiveEvent);
 
     // give the escs some time to set up
     Serial.println("wait for esc");
     delay(2000);
+
+    // ready
+    Serial.println("ready");
 }
 
 void loop() {
