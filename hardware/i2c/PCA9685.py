@@ -17,18 +17,26 @@ pca.frequency = 60
 # but the PCA9685 will only actually give 12 bits of resolution.
 
 # peristaltic pumps
-pca.channels[0].duty_cycle = 0xffff
-pca.channels[1].duty_cycle = 0xffff
-pca.channels[2].duty_cycle = 0xffff
-pca.channels[3].duty_cycle = 0xffff
-pca.channels[4].duty_cycle = 0xffff
-pca.channels[5].duty_cycle = 0xffff
-pca.channels[12].duty_cycle = 0xffff
-pca.channels[13].duty_cycle = 0xffff
-pca.channels[14].duty_cycle = 0xffff
+value = 0xffff
+pca.channels[0].duty_cycle = 0
+pca.channels[1].duty_cycle = 0
+pca.channels[2].duty_cycle = 0
+pca.channels[3].duty_cycle = 0
+pca.channels[4].duty_cycle = 0
+pca.channels[5].duty_cycle = 0
+pca.channels[12].duty_cycle = 0
+pca.channels[13].duty_cycle = 0
+pca.channels[14].duty_cycle = 0
 
 
-
+# pc fan
 pca.channels[8].duty_cycle = 0xffff
 pca.channels[9].duty_cycle = 0xffff
 pca.channels[10].duty_cycle = 0xffff
+
+
+# water pump
+pca.channels[6].duty_cycle = 0
+pca.channels[7].duty_cycle = 0
+pca.channels[11].duty_cycle = 0
+
