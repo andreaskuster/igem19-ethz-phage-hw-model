@@ -31,5 +31,5 @@ def clear(port: int):
 # note: PCF8574 uses 'sinking': 0 -> on, 1 -> off
 
 set_all()
-clear(1)
+clear(0)
 
