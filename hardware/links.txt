@@ -8,3 +8,8 @@ https://github.com/denyssene/SimpleKalmanFilter
 
 
 
+https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
+https://learn.adafruit.com/16-channel-pwm-servo-driver/python-circuitpython
+https://github.com/adafruit/Adafruit_Python_PCA9685/blob/master/examples/simpletest.py
+https://learn.adafruit.com/adafruit-16-channel-servo-driver-with-raspberry-pi/using-the-adafruit-library
+https://thepihut.com/blogs/raspberry-pi-tutorials/ds18b20-one-wire-digital-temperature-sensor-and-the-raspberry-pi
