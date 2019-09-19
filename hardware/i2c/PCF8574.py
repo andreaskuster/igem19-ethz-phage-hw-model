@@ -66,13 +66,21 @@ if __name__ == "__main__":
     _BUS_NO = 1
     bus = smbus.SMBus(_BUS_NO)
 
-    # run all on / all off interval
-    while True:
-        print("set all outputs")
-        set_all(bus)
-        time.sleep(10)
-        print("reset all outputs")
+    _CASE = 2
+
+    if _CASE == 1:
+
+        # run all on / all off interval
+        while True:
+            print("set all outputs")
+            set_all(bus)
+            time.sleep(10)
+            print("reset all outputs")
+            clear_all(bus)
+            time.sleep(10)
+
+    elif _CASE == 2:
         clear_all(bus)
-        time.sleep(10)
+    
 
 # note: PCF8574 uses 'sinking': 0 -> on, 1 -> off
