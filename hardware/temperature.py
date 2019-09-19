@@ -1,7 +1,8 @@
 import numpy as np
 from simple_pid import PID
 
-import hardware.i2c.ESC
+from hardware.i2c.ESC import set_value, stop_esc, full_forward, full_reverse
+from hardware.one_wire.DS18B20 import get_temperature
 
 if __name__ == "__main__":
 
@@ -30,7 +31,7 @@ if __name__ == "__main__":
         # run control loop till keyboard interrupt (Ctrl + C)
         while True:
             # get current temperature
-            actual_temperature = hardware.one_wire.DS18B20.get_temperature(_TARGET_REACTOR)
+            actual_temperature = get_temperature(_TARGET_REACTOR)
 
             # compute new ouput from the PID according to the systems current value
             control_value = pid(actual_temperature)
@@ -39,7 +40,7 @@ if __name__ == "__main__":
             control_value = control_value if abs(control_value) > 10 else 0.0
 
             # feed the PID output to the system
-            hardware.i2c.ESC.set_value(control_value)
+            set_value(control_value)
 
             # append log
             temp_log.append(actual_temperature)
