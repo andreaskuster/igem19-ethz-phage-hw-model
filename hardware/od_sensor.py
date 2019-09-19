@@ -37,7 +37,7 @@ if __name__ == "__main__":
         
             # let the biomass settle down for 3s
             print("stop peristaltic pump")
-            set_pwm(busio_bus, 13, 0x0000)
+            set_pwm(busio_bus, 13, 0x0)
             time.sleep(3)
 
             # start measuring
@@ -53,6 +53,9 @@ if __name__ == "__main__":
             light = read_light_intensity(busio_bus, 0)
             od = light - dark
             print("od value: {}".format(od))
+
+            # switch led off
+            set(smbus, 0)
 
             # append log
             print("log data")
