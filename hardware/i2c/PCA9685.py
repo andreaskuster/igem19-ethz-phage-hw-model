@@ -39,7 +39,7 @@ if __name__ == "__main__":
     pca.channels[4].duty_cycle = 0
     pca.channels[5].duty_cycle = 0
     pca.channels[12].duty_cycle = 0
-    pca.channels[13].duty_cycle = 0xffff
+    pca.channels[13].duty_cycle = 0x0
     pca.channels[14].duty_cycle = 0
 
 
@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
 
     # water pump
-    pca.channels[6].duty_cycle = 0
+    pca.channels[6].duty_cycle = 0xffff
     pca.channels[7].duty_cycle = 0
     pca.channels[11].duty_cycle = 0
 
