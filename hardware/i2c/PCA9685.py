@@ -2,6 +2,7 @@ from board import SCL, SDA
 import busio
 from adafruit_pca9685 import PCA9685
 
+
 def set_pwm(bus,
             channel,
             value):
@@ -14,7 +15,6 @@ def set_pwm(bus,
     pca = PCA9685(bus)
     pca.frequency = 60
     pca.channels[channel].duty_cycle = value
-
 
 
 if __name__ == "__main__":
