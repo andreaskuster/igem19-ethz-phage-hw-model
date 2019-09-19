@@ -11,6 +11,21 @@ pca = PCA9685(i2c_bus)
 # Set the PWM frequency to 60hz.
 pca.frequency = 60
 
+
+def set_pwm(bus,
+            channel,
+            value):
+    """
+
+    :param bus: busio instance
+    :param channel: channel
+    :param value: pwm value (0x0000 - 0xffff)
+    """
+    pca = PCA9685(bus)
+    pca.frequency = 60
+    pca.channels[channel].duty_cycle = value
+
+
 # peristaltic pumps
 value = 0xffff
 pca.channels[0].duty_cycle = 0
