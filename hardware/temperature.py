@@ -1,22 +1,30 @@
+import smbus
 import numpy as np
+
 from simple_pid import PID
 
-from hardware.i2c.ESC import set_value, stop_esc, full_forward, full_reverse
-from hardware.one_wire.DS18B20 import get_temperature
+from i2c.ESC import set_value, stop_esc, full_forward, full_reverse
+from one_wire.DS18B20 import get_temperature
 
 if __name__ == "__main__":
 
+    _BUS_NO = 1
+    bus = smbus.SMBus(_BUS_NO)
+
+
     # define target value and reactor id
     _TARGET_SETPOINT = 39.7
-    _TARGET_REACTOR = 0
+    _TARGET_REACTOR = 2
+
+
 
     # instantiate PID controller
-    pid = PID(Kp=1.0,
-              Ki=0.0,
-              Kd=0.0,
+    pid = PID(Kp=80.0,#150.0,
+              Ki=0.001,
+              Kd=10.0,
               setpoint=_TARGET_SETPOINT,
-              sample_time=10.0,  # 10.0 s
-              output_limits=(None, None),
+              sample_time=1.0,  # 1.0 s
+              output_limits=(-100, 100),
               auto_mode=True,
               proportional_on_measurement=False)
 
@@ -33,14 +41,19 @@ if __name__ == "__main__":
             # get current temperature
             actual_temperature = get_temperature(_TARGET_REACTOR)
 
+            print("current temperature: {}".format(actual_temperature))
+
             # compute new ouput from the PID according to the systems current value
-            control_value = pid(actual_temperature)
+            control_value = int(pid(actual_temperature))
 
             # do custom control_value heuristics: peltier elements should not change polarity too often
-            control_value = control_value if abs(control_value) > 10 else 0.0
+            #control_value = control_value if abs(control_value) > 10 else 0.0
+
+            print("control value: {}".format(control_value))
+            print("pid components: {}".format(pid.components))
 
             # feed the PID output to the system
-            set_value(control_value)
+            set_value(bus, _TARGET_REACTOR, control_value)
 
             # append log
             temp_log.append(actual_temperature)
