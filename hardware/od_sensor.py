@@ -5,8 +5,8 @@ import busio
 import numpy as np
 from simple_pid import PID
 
-from hardware.i2c.PCF8574 import clear_all, set_all, set, clear
-from hardware.i2c.PCA9685 import set_pwm
+from i2c.PCF8574 import clear_all, set_all, set, clear
+from i2c.PCA9685 import set_pwm
 
 if __name__ == "__main__":
 
@@ -31,17 +31,25 @@ if __name__ == "__main__":
 
             # run peristaltic pump for 10s
             set_pwm(busio_bus, 13, 0xffff)
-
+            
+            print("run peristaltic pump")
+            time.sleep(10)
+        
             # let the biomass settle down for 3s
             set_pwm(busio_bus, 13, 0x0000)
 
+            print("stop peristaltic pump")
+            time.sleep(3)
+    
+
+            print("measure")
             # measure dark value
             set(smbus, 0)
-            time.sleep(0.01)
+            time.sleep(1.0)
             #dark =
             # measure light value
             clear(smbus, 0)
-            time.sleep(0.01)
+            time.sleep(1.0)
             #light =
 
             od = 0.0 #light - dark
