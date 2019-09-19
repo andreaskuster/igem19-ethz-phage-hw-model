@@ -36,24 +36,33 @@ if __name__ == "__main__":
     _BUS_NO = 1
     bus = smbus.SMBus(_BUS_NO)
 
-    while True:
-        print("stop all escs")
+    _CASE = 2
+
+    if _CASE == 1:
+        while True:
+            print("stop all escs")
+            stop_esc(bus, 0)
+            stop_esc(bus, 1)
+            stop_esc(bus, 2)
+            time.sleep(10)
+            print("run full forward")
+            full_forward(bus, 0)
+            full_forward(bus, 1)
+            full_forward(bus, 2)
+            time.sleep(10)
+            print("stop all escs")
+            stop_esc(bus, 0)
+            stop_esc(bus, 1)
+            stop_esc(bus, 2)
+            time.sleep(10)
+            print("run full reverse")
+            full_reverse(bus, 0)
+            full_reverse(bus, 1)
+            full_reverse(bus, 2)
+            time.sleep(10)
+    elif _CASE == 2:
         stop_esc(bus, 0)
         stop_esc(bus, 1)
         stop_esc(bus, 2)
-        time.sleep(10)
-        print("run full forward")
-        full_forward(bus, 0)
-        full_forward(bus, 1)
+    elif _CASE == 3:
         full_forward(bus, 2)
-        time.sleep(10)
-        print("stop all escs")
-        stop_esc(bus, 0)
-        stop_esc(bus, 1)
-        stop_esc(bus, 2)
-        time.sleep(10)
-        print("run full reverse")
-        full_reverse(bus, 0)
-        full_reverse(bus, 1)
-        full_reverse(bus, 2)
-        time.sleep(10)
