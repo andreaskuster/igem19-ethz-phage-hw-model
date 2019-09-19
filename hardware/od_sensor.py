@@ -7,6 +7,7 @@ from simple_pid import PID
 
 from i2c.PCF8574 import clear_all, set_all, set, clear
 from i2c.PCA9685 import set_pwm
+from i2c.TSL2591 import read_light_intensity
 
 if __name__ == "__main__":
 
@@ -30,33 +31,35 @@ if __name__ == "__main__":
         while True:
 
             # run peristaltic pump for 10s
-            set_pwm(busio_bus, 13, 0xffff)
-            
             print("run peristaltic pump")
+            set_pwm(busio_bus, 13, 0xffff)
             time.sleep(10)
         
             # let the biomass settle down for 3s
-            set_pwm(busio_bus, 13, 0x0000)
-
             print("stop peristaltic pump")
+            set_pwm(busio_bus, 13, 0x0000)
             time.sleep(3)
-    
 
+            # start measuring
             print("measure")
+
             # measure dark value
             set(smbus, 0)
             time.sleep(1.0)
-            #dark =
+            dark = read_light_intensity(busio_bus, 0)
             # measure light value
             clear(smbus, 0)
             time.sleep(1.0)
-            #light =
-
-            od = 0.0 #light - dark
+            light = read_light_intensity(busio_bus, 0)
+            od = light - dark
+            print("od value: {}".format(od))
 
             # append log
+            print("log data")
             od_log.append(od)
 
+            # wait for the next measurement cycle
+            print("sleep till next cycle")
             time.sleep(60.0 - ((time.time() - starttime) % 60.0))
 
     except KeyboardInterrupt:
