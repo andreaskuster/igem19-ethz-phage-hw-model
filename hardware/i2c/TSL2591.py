@@ -16,10 +16,16 @@ def read_light_intensity(bus,
     :param id: od sensor id (0,1,2)
     :return: raw light intensity value
     """
+    _OVERSAMPLING = 4
     sensor = adafruit_tsl2591.TSL2591(bus)
     sensor.gain = adafruit_tsl2591.GAIN_HIGH
     sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_200MS
-    return sensor.full_spectrum
+
+    sum = 0.0
+    for i in range(_OVERSAMPLING):
+        sum += sensor.full_spectrum
+
+    return sum/_OVERSAMPLING
 
 
 if __name__ == "__main__":
