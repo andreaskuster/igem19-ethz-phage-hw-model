@@ -14,8 +14,8 @@ i2c = busio.I2C(board.SCL, board.SDA)
 sensor = adafruit_tsl2591.TSL2591(i2c)
 
 # You can optionally change the gain and integration time:
-#sensor.gain = adafruit_tsl2591.GAIN_LOW # (1x gain)
-sensor.gain = adafruit_tsl2591.GAIN_MED # (25x gain, the default)
+sensor.gain = adafruit_tsl2591.GAIN_LOW # (1x gain)
+#sensor.gain = adafruit_tsl2591.GAIN_MED # (25x gain, the default)
 #sensor.gain = adafruit_tsl2591.GAIN_HIGH (428x gain)
 #sensor.gain = adafruit_tsl2591.GAIN_MAX (9876x gain)
 sensor.integration_time = adafruit_tsl2591.INTEGRATIONTIME_100MS # (100ms, default)
