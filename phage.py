@@ -1,11 +1,9 @@
-from typing import List
-
 
 class Phage():
 
     def __init__(self,
-                 c0: int = 1,
                  adsorption_rate: float,
+                 c0: int = 1,
                  burst_size = float,
                  death_rate = float):
         """
