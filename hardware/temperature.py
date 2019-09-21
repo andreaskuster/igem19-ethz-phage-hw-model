@@ -85,5 +85,7 @@ if __name__ == "__main__":
 # https://info.erdosmiller.com/blog/pid-anti-windup-techniques
 # http://brettbeauregard.com/blog/2011/04/improving-the-beginner%E2%80%99s-pid-reset-windup/
 # https://ch.mathworks.com/help/simulink/slref/anti-windup-control-using-a-pid-controller.html;jsessionid=d9bbc6f16c16b3adb8c425a92d74
+# https://onion.io/2bt-pid-control-python/
+# https://simple-pid.readthedocs.io/en/latest/_modules/simple_pid/PID.html
 
 # we do anti-windup by setting Ki to 0 if the control output is higher than the maximum value  (100)
