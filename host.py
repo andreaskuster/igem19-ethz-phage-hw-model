@@ -3,32 +3,33 @@ from typing import List
 
 class Host():
 
+        
     def __init__(self,
-                 growth_rate: float,
+                 yield_coeff: float,
+                 g_max: float,
+                 half_sat: float,
                  c0: int = 1,
-                 t_dep = lambda: 1.0,
-                 lb_threshold = 7000,
-                 lb_cons = lambda: 0.0):
+                 t_dep = lambda: 1.0):
         """
 
-        :param growth_rate:
+        :param g_max:
         :param c0:
+        :param yield_coeff:
+        :param half_sat:
         :param t_dep:
-        :param lb_threshold:
-        :param lb_cons:
         """
-        self.growth_rate = growth_rate
         self.c0 = c0
-        self.lb_threshold = lb_threshold
+        self.g_max = g_max       
+        self.yield_coeff = yield_coeff
+        self.half_sat = half_sat
         self.t_dep = t_dep
-        self.lb_cons = lb_cons
+        
+    def per_cell_growth_rate(self, s):
+        
+        """
+        :param s: nutrient concentration
+        :return: per cell growth rate
+        """
+        return (self.g_max * s) / (self.half_sat + s)
 
-    def lb_dep(self, x):
-        """
-        :param x: lb concentration
-        :return: growth rate factor
-        """
-        if x < self.lb_threshold:
-            return x / self.lb_threshold
-        else:
-            return 1.0
+        
