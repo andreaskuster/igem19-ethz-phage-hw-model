@@ -16,12 +16,14 @@ if __name__ == "__main__":
     _TARGET_SETPOINT = 39.7
     _TARGET_REACTOR = 2
 
-
+    _Kp = 80.0
+    _Ki = 0.2
+    _Kd = 10.0
 
     # instantiate PID controller
-    pid = PID(Kp=80.0,#150.0,
-              Ki=0.001,
-              Kd=10.0,
+    pid = PID(Kp=_Kp, #150.0,
+              Ki=_Ki,
+              Kd=_Kd,
               setpoint=_TARGET_SETPOINT,
               sample_time=1.0,  # 1.0 s
               output_limits=(-100, 100),
@@ -43,11 +45,18 @@ if __name__ == "__main__":
 
             print("current temperature: {}".format(actual_temperature))
 
+            # anti wind-up procedure
+            (kp, ki, kd) = pid.components
+            if (kp + ki + kd) > 100 or (kp + ki + kd) < -100:
+                pid.Ki = 0.0
+            else:
+                pid.Ki = _Ki
+
             # compute new ouput from the PID according to the systems current value
             control_value = int(pid(actual_temperature))
 
             # do custom control_value heuristics: peltier elements should not change polarity too often
-            #control_value = control_value if abs(control_value) > 10 else 0.0
+            # control_value = control_value if abs(control_value) > 10 else 0.0
 
             print("control value: {}".format(control_value))
             print("pid components: {}".format(pid.components))
@@ -70,3 +79,13 @@ if __name__ == "__main__":
         np.savetxt(fname="kp.csv", delimiter=",", X=kp_log)
         np.savetxt(fname="ki.csv", delimiter=",", X=ki_log)
         np.savetxt(fname="kd.csv", delimiter=",", X=kd_log)
+
+
+# integrate anti-windup and increase integral value to reach the target value:
+# https://info.erdosmiller.com/blog/pid-anti-windup-techniques
+# http://brettbeauregard.com/blog/2011/04/improving-the-beginner%E2%80%99s-pid-reset-windup/
+# https://ch.mathworks.com/help/simulink/slref/anti-windup-control-using-a-pid-controller.html;jsessionid=d9bbc6f16c16b3adb8c425a92d74
+# https://onion.io/2bt-pid-control-python/
+# https://simple-pid.readthedocs.io/en/latest/_modules/simple_pid/PID.html
+
+# we do anti-windup by setting Ki to 0 if the control output is higher than the maximum value  (100)
