@@ -5,7 +5,7 @@ from scipy.integrate import odeint
 from host import Host
 
 # simulation time and resolution of samples
-xs = np.linspace(0, 120, 100)
+xs = np.linspace(0, 1200, 100)
 
 
 # lb influx profile of reactor a
@@ -14,7 +14,7 @@ def in_a_lb(t):
     :param t: time t
     :return: lb influx to reactor a at time t
     """
-    return 0.0
+    return 0.007
 
 
 # biomass outflux profile of reactor a
@@ -23,7 +23,7 @@ def out_a(t):
     :param t: time t
     :return: biomass outflux of reactor a at time t
     """
-    return 0.0
+    return 0.007
 
 
 # temperature profile of reactor A
@@ -53,97 +53,119 @@ def temperature_dependency_new_host(x):
     sigma_l = 120.0
     sigma_r = 10.0
     if x < mu:
-        return np.exp(-0.5*(np.square(x-mu)/sigma_l)) # gaussian l: ~(28.0, 120)
+        return np.exp(-0.5*(np.square(x-mu)/sigma_l)) # gaussian l: ~(39.7, 120)
     else:
-        return np.exp(-0.5*(np.square(x-mu)/sigma_r)) # gaussian r: ~(28.0, 10)
+        return np.exp(-0.5*(np.square(x-mu)/sigma_r)) # gaussian r: ~(39.7, 10)
 
 
-new_host = Host(
-    growth_rate=0.040773364,  # doubling time of 17min at optimal temperatures
-    c0=8,
-    t_dep=temperature_dependency_new_host,
-    lb_threshold=9000,
-    lb_cons=lambda: 1.5  # lb consumption per bacterium
+new_host = Host( 
+    c0 = 700,
+    g_max = 0.024,
+    yield_coeff = 0.000000000001,
+    half_sat = 0.00000125,
+    t_dep = temperature_dependency_new_host,
 )
 
+s0=0.0000025 #stock concentration of nutrient (g/mL)
+
 # define system of differential equations
-def dX_dt(X, t):
-    [c_host_a, c_lb_a] = X
+def dXa_dt(X, t):
+    [c_host_a, c_nutr_a] = X
     return np.array([
-        new_host.t_dep(temperature_a(t))*new_host.lb_dep(c_lb_a)*new_host.growth_rate * c_host_a,  # new host concentration reactor A
-        0 if c_lb_a <= 0 else -c_host_a*new_host.lb_cons()  # lb concentration reactor A
-    ])
+        0 if c_host_a <= 0 else new_host.per_cell_growth_rate(c_nutr_a)*c_host_a - out_a(t)*c_host_a,  # new host concentration reactor A
+        0 if c_nutr_a <= 0 else -new_host.yield_coeff*new_host.per_cell_growth_rate(c_nutr_a)*c_host_a
+        +s0*in_a_lb(t)-c_nutr_a*out_a(t)  # nutrient concentration reactor A
+    ])  
 
-
-ys = odeint(dX_dt, [
-    new_host.c0,  # initial new host concentration
-    8000  # initial lb concentration
+ys = odeint(dXa_dt, [
+    new_host.c0,  # initial new host concentration [cell/mL]
+    s0  # initial nutrient concentration [g/mL]
 ], xs)
 
-c_lb_a = [y[1] for y in ys]
+c_new_host_a = [y[0] for y in ys]
+c_nutrient_a = [y[1] for y in ys]
 
 
 plt.figure(figsize=(16, 16))
 
-plt.subplot(6, 3, 1)
-plt.plot(xs, [temperature_a(t) for t in xs])
+
+plt.subplot(3, 3, 1)
+plt.plot(xs, [temperature_a(t) for t in xs], label="reactor A")
 plt.xlabel('time [min]')
 plt.ylabel('temperature [°C]')
 plt.title('Temperature over Time')
+plt.legend()
 
-plt.subplot(6, 3, 2)
-plt.plot(xs, [in_a_lb(t) for t in xs])
+
+plt.subplot(3, 3, 2)
+plt.plot(xs, [in_a_lb(t) for t in xs], label="reactor A")
 plt.xlabel('time [min]')
 plt.ylabel('LB influx [ml]')
 plt.title('LB influx over Time')
+plt.legend()
 
-plt.subplot(6, 3, 3)
-plt.plot(xs, [out_a(t) for t in xs])
+
+plt.subplot(3, 3, 3)
+plt.plot(xs, [out_a(t) for t in xs], label="reactor A")
 plt.xlabel('time [min]')
 plt.ylabel('biomass outflux [ml]')
 plt.title('Biomass Outflux over Time')
+plt.legend()
 
-plt.subplot(6, 3, 4)
+
+plt.subplot(3, 3, 4)
 plt.plot(xs, [y[0] for y in ys], label="new host")
 plt.xlabel('time [min]')
-plt.ylabel('concentration [#bacteria]')
+plt.ylabel('concentration [#bacteria/mL]')
 plt.title('Host Concentration over Time')
 plt.legend()
 
 
-
-plt.subplot(6, 3, 2)
-plt.plot(xs, [new_host.lb_dep(c_lb_a[x])*new_host.t_dep(temperature_a(x))*new_host.growth_rate for x in np.arange(0, len(xs))], label="new host")
+plt.subplot(3, 3, 5)
+plt.plot(xs, [new_host.t_dep(temperature_a(x))*new_host.per_cell_growth_rate(c_nutrient_a[x]) for x in np.arange(0, len(xs))], label="new host")
 plt.xlabel('time [min]')
 plt.ylabel('rate')
 plt.title('Actual Growth Rate over Time')
 plt.legend()
 
 
-
-
-
-plt.subplot(6, 3, 4)
-plt.plot(xs, c_lb_a)
+plt.subplot(3, 3, 6)
+plt.plot(xs, c_nutrient_a, label="reactor A")
 plt.xlabel('time [min]')
-plt.ylabel('LB concentration [mg]')
-plt.title('LB Concentration over Time')
-
-
-plt.subplot(6, 3, 5)
-plt.plot(np.linspace(0, 80, 100), [new_host.t_dep(x) for x in np.linspace(0, 80, 100)], label="new host")
-plt.xlabel('temperature [°C]')
-plt.ylabel('rate')
-plt.title('Growth Rate (T)')
+plt.ylabel('nutrient concentration [g/mL]')
+plt.title('nutrient Concentration over Time')
 plt.legend()
 
 
-plt.subplot(6, 3, 6)
-lb_x = np.linspace(0, 1.3*new_host.lb_threshold)
-plt.plot(lb_x, [new_host.lb_dep(x) for x in lb_x], label="new host")
-plt.xlabel('LB concentration [mg/bacteria]')
-plt.ylabel('rate')
-plt.title('Growth Rate (LB)')
+plt.subplot(3, 3, 7)
+nutrient_x = np.linspace(0, 0.0001)
+plt.plot(nutrient_x, [new_host.per_cell_growth_rate(x) for x in nutrient_x], label="new host")
+plt.ylim([0,0.015])
+plt.xlim([0,0.000002])
+plt.xlabel('nutrient concentration [g/mL]')
+plt.ylabel('per cell growth rate')
+plt.title('Growth Rate at low conc. of nutrient')
+plt.legend()
+
+
+plt.subplot(3, 3, 8)
+nutrient_x = np.linspace(0, 0.0001)
+plt.plot(nutrient_x, [new_host.per_cell_growth_rate(x) for x in nutrient_x], label="new host")
+plt.ylim([0,0.025])
+plt.xlabel('nutrient concentration [g/mL]')
+plt.ylabel('per cell growth rate')
+plt.title('Growth Rate (nutrient)')
+plt.legend()
+
+
+plt.subplot(3, 3, 9)
+nutrient_x = np.linspace(0.1, 1)
+lin = [new_host.per_cell_growth_rate(x) for x in nutrient_x]
+plt.plot(nutrient_x, lin, label="new host")
+plt.ylim([0,0.025])
+plt.xlabel('nutrient concentration [g/mL]')
+plt.ylabel('per cell growth rate')
+plt.title('Growth Rate at high conc. of nutrient')
 plt.legend()
 
 
