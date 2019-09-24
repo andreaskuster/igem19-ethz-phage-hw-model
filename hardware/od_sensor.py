@@ -63,7 +63,8 @@ if __name__ == "__main__":
 
             # wait for the next measurement cycle
             print("sleep till next cycle")
-            time.sleep(60.0 - ((time.time() - starttime) % 60.0))
+            interval = 30.0
+            time.sleep(interval - ((time.time() - starttime) % interval))
 
     except KeyboardInterrupt:
         # save log files
