@@ -7,6 +7,14 @@ import busio
 
 import adafruit_tsl2591
 
+from enum import Enum
+
+
+class I2cChannel(Enum):
+    REACTOR0 = 4
+    REACTOR1 = 3
+    REACTOR2 = 2
+
 
 def read_light_intensity(bus,
                          id):
@@ -16,6 +24,9 @@ def read_light_intensity(bus,
     :param id: od sensor id (0,1,2)
     :return: raw light intensity value
     """
+
+    # TODO: set channel (TCA9548A) first
+
     _OVERSAMPLING = 4
     sensor = adafruit_tsl2591.TSL2591(bus)
     sensor.gain = adafruit_tsl2591.GAIN_HIGH
