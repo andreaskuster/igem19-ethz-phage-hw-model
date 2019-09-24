@@ -22,6 +22,8 @@ if __name__ == "__main__":
     _BUS_NO = 1
     bus = smbus.SMBus(_BUS_NO)
 
-    _CHANNEL = 2
+    _CHANNEL = 4
+    
+    # left: 2 (reactor 2), middle: 3 (reactor1) ,right: 4 (reactor0)
 
     switch(bus, _CHANNEL)
