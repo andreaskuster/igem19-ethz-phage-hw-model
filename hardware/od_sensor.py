@@ -71,3 +71,6 @@ if __name__ == "__main__":
         np.savetxt(fname="od.csv", delimiter=",", X=od_log)
         set_pwm(busio_bus, 13, 0x0000)
 
+
+
+#  calibration and conversion: do ridge regression: https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression
