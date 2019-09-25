@@ -3,18 +3,28 @@ import busio
 from adafruit_pca9685 import PCA9685
 
 
-def set_pwm(bus,
-            channel,
-            value):
+def init(bus: busio) -> PCA9685:
+    pwm_driver = PCA9685(bus)
+    pwm_driver.frequency = 60
+    return pwm_driver
+
+
+def set_pwm(lib: PCA9685,
+            channel: int,
+            value: int):
     """
 
-    :param bus: busio instance
+    :param lib: PCA9685 pwd driver library instance
     :param channel: channel
     :param value: pwm value (0x0000 - 0xffff)
     """
-    pca = PCA9685(bus)
-    pca.frequency = 60
-    pca.channels[channel].duty_cycle = value
+    # check input value
+    if value > 0xffff or value < 0x0000:
+        raise ValueError("Value out of bounds.")
+    if channel > 15 or channel < 0:
+        raise ValueError("Channel number out of bounds.")
+
+    lib.channels[channel].duty_cycle = value
 
 
 if __name__ == "__main__":
@@ -23,34 +33,28 @@ if __name__ == "__main__":
     i2c_bus = busio.I2C(SCL, SDA)
 
     # Create a simple PCA9685 class instance.
-    pca = PCA9685(i2c_bus)
+    pca = init(i2c_bus)
 
-    # Set the PWM frequency to 60hz.
-    pca.frequency = 60
-
-
+    # set all outputs to their default value
 
     # peristaltic pumps
     value = 0xffff
-    pca.channels[0].duty_cycle = 0
-    pca.channels[1].duty_cycle = 0
-    pca.channels[2].duty_cycle = 0
-    pca.channels[3].duty_cycle = 0
-    pca.channels[4].duty_cycle = 0
-    pca.channels[5].duty_cycle = 0
-    pca.channels[12].duty_cycle = 0
-    pca.channels[13].duty_cycle = 0x0
-    pca.channels[14].duty_cycle = 0
-
+    set_pwm(pca, 0, 0x0000)
+    set_pwm(pca, 1, 0x0000)
+    set_pwm(pca, 2, 0x0000)
+    set_pwm(pca, 3, 0x0000)
+    set_pwm(pca, 4, 0x0000)
+    set_pwm(pca, 5, 0x0000)
+    set_pwm(pca, 12, 0x0000)
+    set_pwm(pca, 13, 0x0000)
+    set_pwm(pca, 14, 0x0000)
 
     # pc fan
-    pca.channels[8].duty_cycle = 0xffff
-    pca.channels[9].duty_cycle = 0xffff
-    pca.channels[10].duty_cycle = 0x0000
-
+    set_pwm(pca, 8, 0xffff)
+    set_pwm(pca, 9, 0xffff)
+    set_pwm(pca, 10, 0xffff)
 
     # water pump
-    pca.channels[6].duty_cycle = 0xffff
-    pca.channels[7].duty_cycle = 0
-    pca.channels[11].duty_cycle = 0
-
+    set_pwm(pca, 6, 0xffff)
+    set_pwm(pca, 7, 0x0000)
+    set_pwm(pca, 11, 0x0000)
