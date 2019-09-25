@@ -1,0 +1,17 @@
+install wifi driver using install-wifi
+
+activate 1-wire, i2c, ssh, vnc
+
+
+
+find i2c devices: 
+ 
+
+multiplexer: 70
+16 channel pwm: 40
+8 channel i/o: 38
+arduino: 7
+
+
+
+sudo pip3 install adafruit-pca9685, adafruit-circuitpython-pca9685, adafruit-circuitpython-servokit, adafruit-circuitpython-tsl2591, simple-pid
