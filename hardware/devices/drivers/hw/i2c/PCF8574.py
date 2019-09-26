@@ -10,6 +10,10 @@ class PCF8574:
     bus = smbus.SMBus(_BUS_NO)
 
     @staticmethod
+    def init():
+        pass
+
+    @staticmethod
     def clear_all():
         """
         Resets all eight I/Os to zero.
