@@ -15,16 +15,16 @@ class LightSensor(Enum):
 
     def __init__(self,
                  id: TSL2591,
-                 lock: threading.Lock):
+                 i2c_lock: threading.Lock):
         """
         Initialize the class structure.
         :param id:
-        :param lock:
+        :param i2c_lock:
         """
         self.id = id
-        self.thread_safe = False if lock is None else True
+        self.thread_safe = False if i2c_lock is None else True
         if self.thread_safe:
-            self.lock = lock
+            self.lock = i2c_lock
             with self.lock:
                 TSL2591.init()
         else:
