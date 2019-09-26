@@ -14,16 +14,16 @@ class WaterTemperatureSensor(Enum):
 
     def __init__(self,
                  id: WaterTemperatureSensor,
-                 lock: threading.Lock = None):
+                 one_wire_lock: threading.Lock = None):
         """
 
         :param id: id of the water temperature sensor
-        :param lock: lock for the one wire bus access
+        :param one_wire_lock: lock for the one wire bus access
         """
         self.id = id  # sets name from {REACTOR0, REACTOR1, REACTOR2} and value from {28-xxxxxxxxxxxx, ..}
-        self.thread_safe = False if lock is None else True
+        self.thread_safe = False if one_wire_lock is None else True
         if self.thread_safe:
-            self.lock = lock
+            self.lock = one_wire_lock
             with self.lock:
                 DS18B20.init()
         else:
