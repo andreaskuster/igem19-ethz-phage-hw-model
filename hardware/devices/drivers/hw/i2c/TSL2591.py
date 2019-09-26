@@ -7,7 +7,7 @@ from board import SCL, SDA
 
 
 class TSL2591(Enum):
-    _OVERSAMPLING = 4
+    _OVERSAMPLING = 8
 
     lib = library(busio.I2C(SCL, SDA))
 
