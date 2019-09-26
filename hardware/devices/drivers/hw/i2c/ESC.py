@@ -1,68 +1,73 @@
 import time
+
 import smbus
 
-_DEVICE_ADDRESS = 0x07
 
-def set_value(bus: smbus,
-              device: int,
-              value: int):
-    """
-    Sets the speed of the ESC.
-    :param bus: smbus instance
-    :param device: ESC device id {0, 1, 2}
-    :param value: speed value [-100, 100]
-    """
-    bus.write_i2c_block_data(_DEVICE_ADDRESS, device, [value + 100])  # needs to be mapped to [0, 200]
+class ESC:
+    _BUS_NO = 1
+    _DEVICE_ADDRESS = 0x07
 
+    bus = smbus.SMBus(_BUS_NO)
 
-def stop_esc(bus: smbus,
-             device: int):
-    set_value(bus, device, 0)
+    def __init__(self):
+        pass
 
+    @staticmethod
+    def init():
+        pass
 
-def full_forward(bus: smbus,
-                 device: int):
-    set_value(bus, device, 100)
+    @staticmethod
+    def set_value(device: int,
+                  value: int):
+        """
+        Sets the speed of the ESC.
+        :param device: ESC device id {0, 1, 2}
+        :param value: speed value [-100, 100]
+        """
+        ESC.bus.write_i2c_block_data(ESC._DEVICE_ADDRESS, device, [value + 100])  # needs to be mapped to [0, 200]
 
+    @staticmethod
+    def stop_esc(device: int):
+        ESC.set_value(device, 0)
 
-def full_reverse(bus: smbus,
-                 device: int):
-    set_value(bus, device, -100)
+    @staticmethod
+    def full_forward(device: int):
+        ESC.set_value(device, 100)
+
+    @staticmethod
+    def full_reverse(device: int):
+        ESC.set_value(device, -100)
 
 
 if __name__ == "__main__":
-
-    # instantiate i2c smbus
-    _BUS_NO = 1
-    bus = smbus.SMBus(_BUS_NO)
 
     _CASE = 2
 
     if _CASE == 1:
         while True:
             print("stop all escs")
-            stop_esc(bus, 0)
-            stop_esc(bus, 1)
-            stop_esc(bus, 2)
+            ESC.stop_esc(0)
+            ESC.stop_esc(1)
+            ESC.stop_esc(2)
             time.sleep(10)
             print("run full forward")
-            full_forward(bus, 0)
-            full_forward(bus, 1)
-            full_forward(bus, 2)
+            ESC.full_forward(0)
+            ESC.full_forward(1)
+            ESC.full_forward(2)
             time.sleep(10)
             print("stop all escs")
-            stop_esc(bus, 0)
-            stop_esc(bus, 1)
-            stop_esc(bus, 2)
+            ESC.stop_esc(0)
+            ESC.stop_esc(1)
+            ESC.stop_esc(2)
             time.sleep(10)
             print("run full reverse")
-            full_reverse(bus, 0)
-            full_reverse(bus, 1)
-            full_reverse(bus, 2)
+            ESC.full_reverse(0)
+            ESC.full_reverse(1)
+            ESC.full_reverse(2)
             time.sleep(10)
     elif _CASE == 2:
-        stop_esc(bus, 0)
-        stop_esc(bus, 1)
-        stop_esc(bus, 2)
+        ESC.stop_esc(0)
+        ESC.stop_esc(1)
+        ESC.stop_esc(2)
     elif _CASE == 3:
-        full_forward(bus, 2)
+        ESC.full_forward(2)
