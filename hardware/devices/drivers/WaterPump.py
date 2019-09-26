@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-import time
-from enum import Enum
 import threading
+import time
 import warnings
+from enum import Enum
+
 from hw.i2c import PCA9685
 
 
