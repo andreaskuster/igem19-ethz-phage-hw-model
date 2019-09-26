@@ -39,9 +39,10 @@ class WaterTemperatureSensor(Enum):
 
 
 if __name__ == "__main__":
-    reactors = [WaterTemperatureSensor(WaterTemperatureSensor.REACTOR0),
-                WaterTemperatureSensor(WaterTemperatureSensor.REACTOR1),
-                WaterTemperatureSensor(WaterTemperatureSensor.REACTOR2)]
-    for reactor in reactors:
-        print("Water temperature of {}: {}°C".format(reactor.name, reactor.get_temperature()))
-    time.sleep(10)
+    while True:
+        reactors = [WaterTemperatureSensor(WaterTemperatureSensor.REACTOR0),
+                    WaterTemperatureSensor(WaterTemperatureSensor.REACTOR1),
+                    WaterTemperatureSensor(WaterTemperatureSensor.REACTOR2)]
+        for reactor in reactors:
+            print("Water temperature of {}: {}°C".format(reactor.name, reactor.get_temperature()))
+        time.sleep(10)
