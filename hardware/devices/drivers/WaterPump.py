@@ -3,7 +3,7 @@ from __future__ import annotations
 import time
 from enum import Enum
 
-from hardware.devices.drivers.hw.i2c import PCA9685
+from hw.i2c import PCA9685
 
 
 class WaterPump(Enum):
