@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import time
 from enum import Enum
-
+import threading
+import warnings
 from hw.i2c import PCA9685
 
 
@@ -12,15 +13,29 @@ class WaterPump(Enum):
     REACTOR2 = 11
 
     def __init__(self,
-                 id: WaterPump):
+                 id: WaterPump,
+                 i2c_lock: threading.Lock):
         self.id = id
+        self.thread_safe = False if i2c_lock is None else True
+        if self.thread_safe:
+            self.lock = i2c_lock
+            with self.lock:
+                PCA9685.init()
+        else:
+            warnings.warn("Class functionality is not thread-safe.")
+            PCA9685.init()
 
     def set_speed(self, value: int):
         """
 
         :param value: speed value in percent
         """
-        PCA9685.set_pwm(self.lib, self.value, (float(value) / 100.0) * 0xffff)
+        scaled_value = (float(value) / 100.0) * 0xffff
+        if self.thread_safe:
+            with self.lock:
+                PCA9685.set_pwm(self.lib, self.value, scaled_value)
+        else:
+            PCA9685.set_pwm(self.lib, self.value, scaled_value)
 
     def start(self):
         self.set_speed(100)
