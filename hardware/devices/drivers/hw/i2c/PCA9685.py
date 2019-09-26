@@ -1,10 +1,10 @@
 import busio
-from adafruit_pca9685 import PCA9685
+from adafruit_pca9685 import PCA9685 as library
 from board import SCL, SDA
 
 
 class PCA9685:
-    lib = PCA9685(busio.I2C(SCL, SDA))
+    lib = library(busio.I2C(SCL, SDA))
 
     def __init__(self):
         pass

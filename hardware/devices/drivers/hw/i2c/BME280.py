@@ -1,12 +1,12 @@
 import time
 
 import busio
-from adafruit_bme280 import Adafruit_BME280_I2C
+from adafruit_bme280 import Adafruit_BME280_I2C as library
 from board import SCL, SDA
 
 
 class BME280:
-    lib = Adafruit_BME280_I2C(busio.I2C(SCL, SDA))
+    lib = library(busio.I2C(SCL, SDA))
 
     def __init__(self):
         pass
