@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import threading
 import time
 from enum import Enum
 
@@ -12,12 +12,20 @@ class WaterTemperatureSensor(Enum):
     REACTOR2 = "28-0114534081aa"
 
     def __init__(self,
-                 id: WaterTemperatureSensor):
+                 id: WaterTemperatureSensor,
+                 lock: threading.Lock):
         self.id = id  # sets name from {REACTOR0, REACTOR1, REACTOR2} and value from {28-xxxxxxxxxxxx, ..}
-        DS18B20.init()
+        self.thread_safe = False if lock is None else True
+        if self.thread_safe:
+            self._lock = lock
+            with self._lock:
+                DS18B20.init()
+        else:
+            raise RuntimeWarning("Class functionality is not thread-safe.")
 
     def get_temperature(self):
-        return  DS18B20.get_temperature(self.value)
+        with self._lock:
+            return DS18B20.get_temperature(self.value)
 
 
 if __name__ == "__main__":
