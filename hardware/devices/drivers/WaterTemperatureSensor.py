@@ -23,14 +23,14 @@ class WaterTemperatureSensor(Enum):
         self.id = id  # sets name from {REACTOR0, REACTOR1, REACTOR2} and value from {28-xxxxxxxxxxxx, ..}
         self.thread_safe = False if lock is None else True
         if self.thread_safe:
-            self._lock = lock
-            with self._lock:
+            self.lock = lock
+            with self.lock:
                 DS18B20.init()
         else:
             warnings.warn("Class functionality is not thread-safe.")
 
     def get_temperature(self):
-        with self._lock:
+        with self.lock:
             return DS18B20.get_temperature(self.value)
 
 
