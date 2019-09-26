@@ -45,4 +45,4 @@ if __name__ == "__main__":
     while True:
         for reactor in reactors:
             print("Water temperature of {}: {}°C".format(reactor.name, reactor.get_temperature()))
-        time.sleep(10)
+        time.sleep(10.0)
