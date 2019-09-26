@@ -29,7 +29,7 @@ if __name__ == "__main__":
         for sensor in [("Reactor0:", "28-0114536b03aa"),
                        ("Reactor1:", "28-80000026f3d8"),
                        ("Reactor2:", "28-0114534081aa")]:
-            print("{}: {}°C".format(sensor[0], extract_temperature(raw_sensor_data(sensor[1]))))
+            print("{}: {}°C".format(sensor[0], get_temperature(sensor[1])))
         time.sleep(10)
 
 # credits: https://thepihut.com/blogs/raspberry-pi-tutorials/ds18b20-one-wire-digital-temperature-sensor-and-the-raspberry-pi
