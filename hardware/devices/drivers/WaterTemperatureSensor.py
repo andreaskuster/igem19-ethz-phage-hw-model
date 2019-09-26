@@ -1,6 +1,7 @@
 from __future__ import annotations
 import threading
 import time
+import warnings
 from enum import Enum
 
 from hw.one_wire import DS18B20
@@ -26,7 +27,7 @@ class WaterTemperatureSensor(Enum):
             with self._lock:
                 DS18B20.init()
         else:
-            raise RuntimeWarning("Class functionality is not thread-safe.")
+            raise warnings.warn("Class functionality is not thread-safe.")
 
     def get_temperature(self):
         with self._lock:
