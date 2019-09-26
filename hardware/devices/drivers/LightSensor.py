@@ -6,7 +6,7 @@ import warnings
 from enum import Enum
 
 from hw.i2c import TSL2591
-
+from hw.i2c import TCA9548A
 
 class LightSensor(Enum):
     REACTOR0 = 4
@@ -34,9 +34,11 @@ class LightSensor(Enum):
     def get_light_intensity(self):
         if self.thread_safe:
             with self.lock:
-                return TSL2591.read_light_intensity(self.id)
+                TCA9548A.switch(self.value)  # set i2c multiplexer to correct sensor
+                return TSL2591.read_light_intensity()
         else:
-            return TSL2591.read_light_intensity(self.id)
+            TCA9548A.switch(self.value)
+            return TSL2591.read_light_intensity()
 
 
 if __name__ == "__main__":
