@@ -20,7 +20,7 @@ class WaterPump(Enum):
 
         :param value: speed value in percent
         """
-        PCA9685.set_pwm(self.lib, self.value, (float(value) / 100) * 0xffff)
+        PCA9685.set_pwm(self.lib, self.value, (float(value) / 100.0) * 0xffff)
 
     def start(self):
         self.set_speed(100)
