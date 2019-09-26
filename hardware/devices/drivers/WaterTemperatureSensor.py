@@ -27,7 +27,7 @@ class WaterTemperatureSensor(Enum):
             with self._lock:
                 DS18B20.init()
         else:
-            raise warnings.warn("Class functionality is not thread-safe.")
+            warnings.warn("Class functionality is not thread-safe.")
 
     def get_temperature(self):
         with self._lock:
