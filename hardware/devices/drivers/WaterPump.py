@@ -12,10 +12,8 @@ class WaterPump(Enum):
     REACTOR2 = 11
 
     def __init__(self,
-                 id: WaterPump,
-                 lib):
+                 id: WaterPump):
         self.id = id
-        self.lib = lib
 
     def set_speed(self, value: int):
         """
