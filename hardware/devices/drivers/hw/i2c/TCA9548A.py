@@ -1,4 +1,3 @@
-import time
 import smbus
 
 
@@ -19,7 +18,6 @@ class TCA9548A:
 
 
 if __name__ == "__main__":
-
     _CHANNEL = 4
 
     TCA9548A.switch(_CHANNEL)

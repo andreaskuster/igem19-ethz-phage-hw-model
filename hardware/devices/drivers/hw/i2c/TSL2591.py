@@ -1,8 +1,8 @@
 import time
 from enum import Enum
 
-from adafruit_tsl2591 import TSL2591 as library
 import busio
+from adafruit_tsl2591 import TSL2591 as library
 from board import SCL, SDA
 
 
@@ -26,7 +26,7 @@ class TSL2591(Enum):
         sum = 0.0
         for i in range(TSL2591._OVERSAMPLING):
             sum += TSL2591.lib.full_spectrum
-        return sum/TSL2591._OVERSAMPLING
+        return sum / TSL2591._OVERSAMPLING
 
 
 if __name__ == "__main__":
