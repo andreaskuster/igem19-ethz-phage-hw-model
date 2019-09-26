@@ -17,10 +17,9 @@ class TSL2591(Enum):
         TSL2591.lib.INTEGRATIONTIME_200MS
 
     @staticmethod
-    def read_light_intensity(id: int):
+    def read_light_intensity():
         """
         Read full spectrum light intensity value.
-        :param id: od sensor id (0,1,2)
         :return: raw light intensity value (0..2.4e9)
         """
         sum = 0.0
