@@ -8,6 +8,9 @@ from board import SCL, SDA
 class BME280:
     lib = Adafruit_BME280_I2C(busio.I2C(SCL, SDA))
 
+    def __init__(self):
+        pass
+
     @staticmethod
     def init():
         pass
@@ -15,7 +18,7 @@ class BME280:
     @staticmethod
     def get_temperature() -> float:
         """
-        
+
         :return:
         """
         return BME280.lib.temperature
