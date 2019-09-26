@@ -34,6 +34,6 @@ class BME280:
 
 if __name__ == "__main__":
     while True:
-        print("\nTemperature: {} °C".format(BME280.get_temperature()))
+        print("Temperature: {} °C".format(BME280.get_temperature()))
         print("Pressure: {} hPa".format(BME280.get_pressure()))
         time.sleep(1.0)
