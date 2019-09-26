@@ -3,7 +3,7 @@ import threading
 import time
 from enum import Enum
 
-from hardware.devices.drivers.hw.one_wire import DS18B20
+from hw.one_wire import DS18B20
 
 
 class WaterTemperatureSensor(Enum):
@@ -13,7 +13,7 @@ class WaterTemperatureSensor(Enum):
 
     def __init__(self,
                  id: WaterTemperatureSensor,
-                 lock: threading.Lock):
+                 lock: threading.Lock = None):
         """
 
         :param id: id of the water temperature sensor
