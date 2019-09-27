@@ -5,7 +5,7 @@ import time
 import warnings
 from enum import Enum
 
-from hw.i2c import ESC as ESC_HW
+from drivers.hw.i2c import ESC as ESC_HW
 
 
 class ESC(Enum):
@@ -17,7 +17,7 @@ class ESC(Enum):
 
     def __init__(self,
                  id: ESC,
-                 i2c_lock: threading.Lock):
+                 i2c_lock: threading.Lock = None):
         self.id = id
         self.thread_safe = False if i2c_lock is None else True
         if self.thread_safe:
