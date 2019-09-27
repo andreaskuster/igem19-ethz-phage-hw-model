@@ -65,6 +65,6 @@ if __name__ == "__main__":
     PCA9685.set_pwm(10, 0xffff)
 
     # water pump
-    PCA9685.set_pwm(6, 0xffff)
+    PCA9685.set_pwm(6, 0x0000)
     PCA9685.set_pwm(7, 0x0000)
     PCA9685.set_pwm(11, 0x0000)
