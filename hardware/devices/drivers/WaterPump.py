@@ -3,6 +3,11 @@ from __future__ import annotations
 import threading
 import time
 import warnings
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 
 from drivers.hw.i2c import PCA9685
 
