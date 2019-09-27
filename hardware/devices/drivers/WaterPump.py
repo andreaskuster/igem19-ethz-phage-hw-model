@@ -4,7 +4,7 @@ import threading
 import time
 import warnings
 
-from hw.i2c import PCA9685
+from drivers.hw.i2c import PCA9685
 
 
 class WaterPump:
