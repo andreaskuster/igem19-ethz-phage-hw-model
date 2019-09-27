@@ -14,10 +14,6 @@ class PCA9685:
         PCA9685.lib.frequency = 60
 
     @staticmethod
-    def test():
-        pass
-
-    @staticmethod
     def set_pwm(channel: int,
                 value: int) -> None:
         """
