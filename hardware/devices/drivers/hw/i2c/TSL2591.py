@@ -1,5 +1,4 @@
 import time
-from enum import Enum
 
 import busio
 from adafruit_tsl2591 import TSL2591 as library
@@ -30,5 +29,5 @@ class TSL2591:
 
 if __name__ == "__main__":
     while True:
-        print('Full spectrum light intensity: {}'.format(TSL2591.read_light_intensity()))
+        print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
         time.sleep(1.0)
