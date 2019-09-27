@@ -10,13 +10,13 @@ from drivers.hw.one_wire import DS18B20
 class WaterTemperatureSensor(Enum):
 
     _DEVICE_ID_MAP = {
-        "REACTOR0": "28-0114536b03aa",
-        "REACTOR1": "28-80000026f3d8",
-        "REACTOR2": "28-0114534081aa"
+        0: "28-0114536b03aa",
+        1: "28-80000026f3d8",
+        2: "28-0114534081aa"
     }
 
     def __init__(self,
-                 id: WaterTemperatureSensor,
+                 id: int,
                  one_wire_lock: threading.Lock = None):
         """
 
@@ -36,15 +36,15 @@ class WaterTemperatureSensor(Enum):
     def get_temperature(self):
         if self.thread_safe:
             with self.lock:
-                return DS18B20.get_temperature(self.value)
+                return DS18B20.get_temperature(self._DEVICE_ID_MAP[self.id])
         else:
-            return DS18B20.get_temperature(self.value)
+            return DS18B20.get_temperature(self._DEVICE_ID_MAP[self.id])
 
 
 if __name__ == "__main__":
-    reactors = [WaterTemperatureSensor(WaterTemperatureSensor.REACTOR0),
-                WaterTemperatureSensor(WaterTemperatureSensor.REACTOR1),
-                WaterTemperatureSensor(WaterTemperatureSensor.REACTOR2)]
+    reactors = [WaterTemperatureSensor(0),
+                WaterTemperatureSensor(1),
+                WaterTemperatureSensor(2)]
     while True:
         for reactor in reactors:
             print("Water temperature of {}: {}°C".format(reactor.name, reactor.get_temperature()))
