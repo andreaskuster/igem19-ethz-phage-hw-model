@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import threading
 import time
 import warnings
@@ -8,7 +9,6 @@ from drivers.hw.one_wire import DS18B20
 
 
 class WaterTemperatureSensor(Enum):
-
     _DEVICE_ID_MAP = {
         0: "28-0114536b03aa",
         1: "28-80000026f3d8",
