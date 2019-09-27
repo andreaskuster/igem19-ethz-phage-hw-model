@@ -3,8 +3,16 @@ from __future__ import annotations
 import threading
 import time
 import warnings
+import sys
+import os
 
-from hw.one_wire import DS18B20
+
+from os.path import dirname, join, abspath
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from drivers.hw.one_wire import DS18B20
+
 
 
 class WaterTemperatureSensor:
@@ -41,6 +49,7 @@ class WaterTemperatureSensor:
 
 
 if __name__ == "__main__":
+
     reactors = [WaterTemperatureSensor(0),
                 WaterTemperatureSensor(1),
                 WaterTemperatureSensor(2)]
