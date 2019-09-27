@@ -9,9 +9,11 @@ from hw.i2c import ESC as ESC_HW
 
 
 class ESC(Enum):
-    REACTOR0 = 0
-    REACTOR1 = 1
-    REACTOR2 = 2
+    _DEVICE_ID_MAP = {
+        "REACTOR0": 0,
+        "REACTOR1": 1,
+        "REACTOR2": 2
+    }
 
     def __init__(self,
                  id: ESC,

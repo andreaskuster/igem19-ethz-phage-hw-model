@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-data = np.genfromtxt('od.csv', delimiter=',')
+data = np.genfromtxt('/home/andreas/PycharmProjects/igem19-ethz-phage-hw-model/hardware/data/od.csv', delimiter=',')
 x = np.arange(len(data))
 
 
@@ -49,7 +49,7 @@ plt.show()
 
 
 
-data_raw = np.genfromtxt('od_measurements.csv', delimiter=',')
+data_raw = np.genfromtxt('/home/andreas/PycharmProjects/igem19-ethz-phage-hw-model/hardware/data/od_measurements.csv', delimiter=',')
 data_x = [x[0] for x in data_raw]
 data_y = [x[1] for x in data_raw]
 
@@ -102,11 +102,19 @@ fig = plt.figure()
 ax = fig.add_subplot(111)
 x2 = np.arange(0, 2.2e9, 1e7)
 y2 = [clf.predict(x.reshape(-1,1)) for x in x2]
-ax.plot(x2, y2, label='predicted function')
 ax.scatter(X, y, label="actual measurements")
 plt.legend()
 plt.show()
 
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+x2 = np.arange(0, 2.2e9, 1e7)
+y2 = [clf.predict(x.reshape(-1,1)) for x in x2]
+ax.plot(x2, y2, label='predicted function')
+ax.scatter(X, y, label="actual measurements")
+plt.legend()
+plt.show()
 
 
 fig = plt.figure()
