@@ -107,7 +107,7 @@ class ReactorTemperatureControl:
 
 if __name__ == "__main__":
 
-    reactor0 = ReactorTemperatureControl(0, threading.Lock(), threading.Lock(), 37.0)
+    reactor0 = ReactorTemperatureControl(0, threading.Lock(), threading.Lock(), 39.0)
 
     # run control loop till keyboard interrupt (Ctrl + C)
     while True:
