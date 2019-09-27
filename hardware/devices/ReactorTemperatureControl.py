@@ -24,7 +24,6 @@ class ReactorTemperatureControl:
                  enabled: bool = True,
                  verbose: bool = True):
         self.id = id
-        print(self.name)
         self.water_pump = WaterPump(id=id,
                                     i2c_lock=i2c_lock)
         self.temperature_sensor = WaterTemperatureSensor(id=id,
