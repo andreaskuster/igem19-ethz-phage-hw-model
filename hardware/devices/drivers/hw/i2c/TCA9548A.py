@@ -18,6 +18,6 @@ class TCA9548A:
 
 
 if __name__ == "__main__":
-    _CHANNEL = 4
+    _CHANNEL = 4  # od light sensor @reactor 0
 
     TCA9548A.switch(_CHANNEL)
