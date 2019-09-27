@@ -29,6 +29,7 @@ class ReactorTemperatureControl(Enum):
                  enabled: bool = True,
                  verbose: bool = True):
         self.id = id
+        print(self.name)
         self.water_pump = WaterPump(id=WaterPump._DEVICE_ID_MAP[self.name],
                                     i2c_lock=i2c_lock)
         self.temperature_sensor = WaterTemperatureSensor(id=WaterTemperatureSensor._DEVICE_ID_MAP[self.name],
