@@ -4,7 +4,7 @@ import time
 import warnings
 from enum import Enum
 
-from hw.one_wire import DS18B20
+from drivers.hw.one_wire import DS18B20
 
 
 class WaterTemperatureSensor(Enum):
