@@ -23,8 +23,8 @@ class ReactorTemperatureControl(Enum):
 
     def __init__(self,
                  id: int,
-                 i2c_lock: threading.Lock,
-                 one_wire_lock: threading.Lock,
+                 i2c_lock: threading.Lock = None,
+                 one_wire_lock: threading.Lock = None,
                  target_temperature: float = 25.0,
                  enabled: bool = True,
                  verbose: bool = True):
