@@ -27,10 +27,10 @@ class WaterPump:
         if self.thread_safe:
             self.lock = i2c_lock
             with self.lock:
-                PCA9685.init()
+                PCA9685.test()
         else:
             warnings.warn("Class functionality is not thread-safe.")
-            PCA9685.init()
+            PCA9685.test()
 
     def set_speed(self, value: int):
         """
