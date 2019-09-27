@@ -8,15 +8,10 @@ from enum import Enum
 from drivers.hw.i2c import ESC as ESC_HW
 
 
-class ESC(Enum):
-    _DEVICE_ID_MAP = {
-        "REACTOR0": 0,
-        "REACTOR1": 1,
-        "REACTOR2": 2
-    }
+class ESC:
 
     def __init__(self,
-                 id: ESC,
+                 id: int,
                  i2c_lock: threading.Lock = None):
         self.id = id
         self.thread_safe = False if i2c_lock is None else True
@@ -37,9 +32,9 @@ class ESC(Enum):
         """
         if self.thread_safe:
             with self.lock:
-                ESC_HW.set_value(self.value, value)
+                ESC_HW.set_value(self.id, value)
         else:
-            ESC_HW.set_value(self.value, value)
+            ESC_HW.set_value(self.id, value)
 
     def max_heating(self):
         self.set_value(100)
@@ -53,9 +48,9 @@ class ESC(Enum):
 
 if __name__ == "__main__":
 
-    escs = [ESC(ESC.REACTOR0),
-            ESC(ESC.REACTOR1),
-            ESC(ESC.REACTOR2)]
+    escs = [ESC(0),
+            ESC(1),
+            ESC(2)]
 
     _CASE = 2
 
