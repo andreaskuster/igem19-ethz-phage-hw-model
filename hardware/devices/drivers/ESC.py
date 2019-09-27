@@ -23,10 +23,10 @@ class ESC(Enum):
         if self.thread_safe:
             self.lock = i2c_lock
             with self.lock:
-                ESC_HW.init()
+                #ESC_HW.init()
         else:
             warnings.warn("Class functionality is not thread-safe.")
-            ESC_HW.init()
+            #ESC_HW.init()
 
     def set_value(self,
                   value: int):
