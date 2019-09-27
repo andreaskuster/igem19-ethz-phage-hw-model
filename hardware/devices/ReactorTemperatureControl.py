@@ -14,12 +14,7 @@ from drivers.WaterPump import WaterPump
 from drivers.WaterTemperatureSensor import WaterTemperatureSensor
 
 
-class ReactorTemperatureControl(Enum):
-    _DEVICE_ID_MAP = {
-        0: "REACTOR0",
-        1: "REACTOR1",
-        2: "REACTOR2"
-    }
+class ReactorTemperatureControl:
 
     def __init__(self,
                  id: int,
@@ -30,11 +25,11 @@ class ReactorTemperatureControl(Enum):
                  verbose: bool = True):
         self.id = id
         print(self.name)
-        self.water_pump = WaterPump(id=WaterPump._DEVICE_ID_MAP[ReactorTemperatureControl._DEVICE_ID_MAP[self.id]],
+        self.water_pump = WaterPump(id=id,
                                     i2c_lock=i2c_lock)
-        self.temperature_sensor = WaterTemperatureSensor(id=WaterTemperatureSensor._DEVICE_ID_MAP[ReactorTemperatureControl._DEVICE_ID_MAP[self.id]],
+        self.temperature_sensor = WaterTemperatureSensor(id=id,
                                                          one_wire_lock=one_wire_lock)
-        self.output = ESC(id=ESC._DEVICE_ID_MAP[ReactorTemperatureControl._DEVICE_ID_MAP[self.id]],
+        self.output = ESC(id=id,
                           i2c_lock=i2c_lock)
         self.target_setpoint = target_temperature
 
