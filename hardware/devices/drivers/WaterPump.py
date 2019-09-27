@@ -3,18 +3,19 @@ from __future__ import annotations
 import threading
 import time
 import warnings
-from enum import Enum
 
 from hw.i2c import PCA9685
 
 
-class WaterPump(Enum):
-    REACTOR0 = 6
-    REACTOR1 = 7
-    REACTOR2 = 11
+class WaterPump:
+    _DEVICE_ID_MAP = {
+        "REACTOR0": 6,
+        "REACTOR1": 7,
+        "REACTOR2": 11
+    }
 
     def __init__(self,
-                 id: WaterPump,
+                 id: id,
                  i2c_lock: threading.Lock):
         self.id = id
         self.thread_safe = False if i2c_lock is None else True

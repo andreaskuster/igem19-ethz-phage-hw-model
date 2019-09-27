@@ -8,9 +8,12 @@ from hw.one_wire import DS18B20
 
 
 class WaterTemperatureSensor(Enum):
-    REACTOR0 = "28-0114536b03aa"
-    REACTOR1 = "28-80000026f3d8"
-    REACTOR2 = "28-0114534081aa"
+
+    _DEVICE_ID_MAP = {
+        "REACTOR0": "28-0114536b03aa",
+        "REACTOR1": "28-80000026f3d8",
+        "REACTOR2": "28-0114534081aa"
+    }
 
     def __init__(self,
                  id: WaterTemperatureSensor,
