@@ -11,6 +11,9 @@ class PCF8574:
 
     @staticmethod
     def init():
+        """
+        Initialize board.
+        """
         pass
 
     @staticmethod
