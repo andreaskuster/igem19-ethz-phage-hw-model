@@ -3,12 +3,11 @@ from __future__ import annotations
 import threading
 import time
 import warnings
-from enum import Enum
 
-from drivers.hw.one_wire import DS18B20
+from hw.one_wire import DS18B20
 
 
-class WaterTemperatureSensor(Enum):
+class WaterTemperatureSensor:
     _DEVICE_ID_MAP = {
         0: "28-0114536b03aa",
         1: "28-80000026f3d8",
@@ -47,5 +46,5 @@ if __name__ == "__main__":
                 WaterTemperatureSensor(2)]
     while True:
         for reactor in reactors:
-            print("Water temperature of {}: {}°C".format(reactor.name, reactor.get_temperature()))
+            print("Water temperature of recator {}: {}°C".format(reactor.id, reactor.get_temperature()))
         time.sleep(10.0)
