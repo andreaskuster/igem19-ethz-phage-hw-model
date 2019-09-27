@@ -14,23 +14,23 @@ from drivers.hw.i2c import PCA9685
 
 class WaterPump:
     _DEVICE_ID_MAP = {
-        "REACTOR0": 6,
-        "REACTOR1": 7,
-        "REACTOR2": 11
+        0: 6,
+        1: 7,
+        2: 11
     }
 
     def __init__(self,
-                 id: id,
+                 id: int,
                  i2c_lock: threading.Lock):
         self.id = id
         self.thread_safe = False if i2c_lock is None else True
         if self.thread_safe:
             self.lock = i2c_lock
             with self.lock:
-                PCA9685.test()
+                PCA9685.init()
         else:
             warnings.warn("Class functionality is not thread-safe.")
-            PCA9685.test()
+            PCA9685.init()
 
     def set_speed(self, value: int):
         """
@@ -40,9 +40,9 @@ class WaterPump:
         scaled_value = (float(value) / 100.0) * 0xffff
         if self.thread_safe:
             with self.lock:
-                PCA9685.set_pwm(self.lib, self.value, scaled_value)
+                PCA9685.set_pwm(self.lib, self._DEVICE_ID_MAP[self.id], scaled_value)
         else:
-            PCA9685.set_pwm(self.lib, self.value, scaled_value)
+            PCA9685.set_pwm(self.lib, self._DEVICE_ID_MAP[self.id], scaled_value)
 
     def start(self):
         self.set_speed(100)
@@ -52,9 +52,9 @@ class WaterPump:
 
 
 if __name__ == "__main__":
-    pumps = [WaterPump(WaterPump.REACTOR0),
-             WaterPump(WaterPump.REACTOR1),
-             WaterPump(WaterPump.REACTOR2)]
+    pumps = [WaterPump(0),
+             WaterPump(1),
+             WaterPump(2)]
     while True:
         print("Set speed of all pumps to 100%")
         for pump in pumps:
