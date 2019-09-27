@@ -30,5 +30,5 @@ class TSL2591(Enum):
 
 if __name__ == "__main__":
     while True:
-        print('Full spectrum light intensity: {}'.format(TSL2591.lib.full_spectrum))
+        print('Full spectrum light intensity: {}'.format(TSL2591.lib.read_light_intensity()))
         time.sleep(1.0)
