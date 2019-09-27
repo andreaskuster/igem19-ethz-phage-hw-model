@@ -9,9 +9,9 @@ from enum import Enum
 import numpy as np
 from simple_pid import PID
 
-from hardware.devices.drivers.ESC import ESC
-from hardware.devices.drivers.WaterPump import WaterPump
-from hardware.devices.drivers.WaterTemperatureSensor import WaterTemperatureSensor
+from drivers.ESC import ESC
+from drivers.WaterPump import WaterPump
+from drivers.WaterTemperatureSensor import WaterTemperatureSensor
 
 
 class ReactorTemperatureControl(Enum):
