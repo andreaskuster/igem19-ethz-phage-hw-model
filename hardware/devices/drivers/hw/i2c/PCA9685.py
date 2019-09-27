@@ -11,6 +11,9 @@ class PCA9685:
 
     @staticmethod
     def init():
+        """
+        Initialize board.
+        """
         PCA9685.lib.frequency = 60
 
     @staticmethod
