@@ -6,7 +6,7 @@ from adafruit_tsl2591 import TSL2591 as library
 from board import SCL, SDA
 
 
-class TSL2591(Enum):
+class TSL2591:
     _OVERSAMPLING = 8
 
     lib = library(busio.I2C(SCL, SDA))
@@ -30,5 +30,5 @@ class TSL2591(Enum):
 
 if __name__ == "__main__":
     while True:
-        print('Full spectrum light intensity: {}'.format(TSL2591.lib.read_light_intensity()))
+        print('Full spectrum light intensity: {}'.format(TSL2591.read_light_intensity()))
         time.sleep(1.0)
