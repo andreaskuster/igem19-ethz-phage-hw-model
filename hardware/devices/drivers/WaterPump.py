@@ -9,7 +9,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 
-from drivers.hw.i2c import PCA9685
+from drivers.hw.i2c.PCA9685 import PCA9685
 
 
 class WaterPump:
