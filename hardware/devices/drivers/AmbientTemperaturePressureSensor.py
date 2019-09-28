@@ -3,8 +3,12 @@ from __future__ import annotations
 import threading
 import time
 import warnings
+import os
+import sys
 
-from hw.i2c import BME280
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from hardware.devices.drivers.hw.i2c.BME280 import BME280
 
 
 class AmbientTemperaturePressureSensor():
