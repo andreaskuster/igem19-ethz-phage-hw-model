@@ -9,7 +9,6 @@ from hardware.devices.OpticalDensitySensor import OpticalDensitySensor
 from hardware.devices.PeristalticPump import PeristalticPump
 from hardware.devices.ReactorTemperatureControl import ReactorTemperatureControl
 
-
 _PUMP_MAP = {
     "pump0": 0,
     "pump1": 1,
@@ -34,6 +33,7 @@ _SENSOR_MAP = {
     "od1": 1,
     "od2": 2
 }
+
 
 def print_help():
     print("usage: reactor.py command arg0 arg1 ..")
@@ -214,8 +214,6 @@ if __name__ == "__main__":
         # save log files: TODO
         # put all devices into a safe idle state
         print("Goodbye.")
-
-
 
 # https://docs.python.org/2/library/threading.html#using-locks-conditions-and-semaphores-in-the-with-statement
 # https://stackoverflow.com/questions/3762881/how-do-i-check-if-stdin-has-some-data
