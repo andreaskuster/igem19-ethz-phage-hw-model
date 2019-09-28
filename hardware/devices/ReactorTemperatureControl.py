@@ -54,17 +54,20 @@ class ReactorTemperatureControl:
         self.control_val_log = list()
 
         self.enabled = enabled
+        if not self.enabled:
+            self.output.stop()
         self.verbose = verbose
 
     def set_target_temperature(self,
                                temperature: float):
         self.target_setpoint = temperature
 
-    def start(self):
+    def enable(self):
         self.enabled = True
 
-    def stop(self):
+    def disable(self):
         self.enabled = False
+        self.output.stop()
 
     def control_loop(self):
 
