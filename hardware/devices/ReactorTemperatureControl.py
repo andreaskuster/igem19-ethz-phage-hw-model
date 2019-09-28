@@ -1,17 +1,14 @@
 from __future__ import annotations
 
-import datetime
 import threading
 import time
 import warnings
-from enum import Enum
 
 import numpy as np
-from simple_pid import PID
-
 from drivers.ESC import ESC
 from drivers.WaterPump import WaterPump
 from drivers.WaterTemperatureSensor import WaterTemperatureSensor
+from simple_pid import PID
 
 
 class ReactorTemperatureControl:
@@ -61,6 +58,7 @@ class ReactorTemperatureControl:
     def set_target_temperature(self,
                                temperature: float):
         self.target_setpoint = temperature
+        self.pid.setpoint = self.target_setpoint
 
     def enable(self):
         self.enabled = True
@@ -118,14 +116,12 @@ if __name__ == "__main__":
             reactor0.control_loop()
             time.sleep(1.0)
         except KeyboardInterrupt:
+            print("Exiting...but first put device into a safe state...")
+        finally:
             # save log files
-            np.savetxt(fname="temperature_{:%Y-%m-%d %H:%M:%S}.csv".format(datetime.datetime.now()), delimiter=",",
-                       X=reactor0.temp_log)
-            np.savetxt(fname="control_value_{:%Y-%m-%d %H:%M:%S}.csv".format(datetime.datetime.now()), delimiter=",",
-                       X=reactor0.control_val_log)
-            np.savetxt(fname="kp_{:%Y-%m-%d %H:%M:%S}.csv".format(datetime.datetime.now()), delimiter=",",
-                       X=reactor0.kp_log)
-            np.savetxt(fname="ki_{:%Y-%m-%d %H:%M:%S}.csv".format(datetime.datetime.now()), delimiter=",",
-                       X=reactor0.ki_log)
-            np.savetxt(fname="kd_{:%Y-%m-%d %H:%M:%S}.csv".format(datetime.datetime.now()), delimiter=",",
-                       X=reactor0.kd_log)
+            timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+            np.savetxt(fname="log/{}_temperature.csv".format(timestamp), delimiter=",", X=reactor0.temp_log)
+            np.savetxt(fname="log/{}_control_value.csv".format(timestamp), delimiter=",", X=reactor0.control_val_log)
+            np.savetxt(fname="log/{}_kp.csv".format(timestamp), delimiter=",", X=reactor0.kp_log)
+            np.savetxt(fname="log/{}_ki.csv".format(timestamp), delimiter=",", X=reactor0.ki_log)
+            np.savetxt(fname="log/{}_kd.csv".format(timestamp), delimiter=",", X=reactor0.kd_log)
