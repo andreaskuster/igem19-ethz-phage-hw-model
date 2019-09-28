@@ -54,21 +54,18 @@ def print_help():
 
 
 def temperature_event_loop(reactors: List[ReactorTemperatureControl], interval):
-    while True:
-        starttime = time.time()
+    starttime = time.time()
 
+    while True:
         for reactor in reactors:
             reactor.control_loop()
-
         time.sleep(interval - ((time.time() - starttime) % interval))
 
 
 def od_sensor_event_loop(sensor: OpticalDensitySensor, interval):
+    starttime = time.time()
     while True:
-        starttime = time.time()
-
         sensor.event_loop()
-
         time.sleep(interval - ((time.time() - starttime) % interval))
 
 
@@ -213,6 +210,8 @@ if __name__ == "__main__":
     finally:
         # save log files: TODO
         # put all devices into a safe idle state
+        for sensor in od_sensor:
+            sensor.finalize()
         print("Goodbye.")
 
 # https://docs.python.org/2/library/threading.html#using-locks-conditions-and-semaphores-in-the-with-statement
