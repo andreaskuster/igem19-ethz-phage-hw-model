@@ -14,6 +14,9 @@ class ESC:
 
     @staticmethod
     def init():
+        """
+        Initialize board.
+        """
         pass
 
     @staticmethod
@@ -28,14 +31,26 @@ class ESC:
 
     @staticmethod
     def stop_esc(device: int):
+        """
+        Put esc device into idle mode.
+        :param device: device id
+        """
         ESC.set_value(device, 0)
 
     @staticmethod
     def full_forward(device: int):
+        """
+        Put esc device in maximum heating mode.
+        :param device: device id
+        """
         ESC.set_value(device, 100)
 
     @staticmethod
     def full_reverse(device: int):
+        """
+        Put esc device into maximum cooling mode.
+        :param device: device id
+        """
         ESC.set_value(device, -100)
 
 
@@ -45,6 +60,7 @@ if __name__ == "__main__":
 
     if _CASE == 1:
         while True:
+            # run cyclic program
             print("stop all escs")
             ESC.stop_esc(0)
             ESC.stop_esc(1)
@@ -66,8 +82,7 @@ if __name__ == "__main__":
             ESC.full_reverse(2)
             time.sleep(10)
     elif _CASE == 2:
+        # stop all
         ESC.stop_esc(0)
         ESC.stop_esc(1)
         ESC.stop_esc(2)
-    elif _CASE == 3:
-        ESC.full_forward(2)
