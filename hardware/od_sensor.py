@@ -3,7 +3,6 @@ import smbus
 from board import SCL, SDA
 import busio
 import numpy as np
-from simple_pid import PID
 
 from i2c.PCF8574 import clear_all, set_all, set, clear
 from i2c.PCA9685 import set_pwm
