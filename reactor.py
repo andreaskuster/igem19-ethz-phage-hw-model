@@ -18,8 +18,7 @@ _PUMP_MAP = {
     "pump5": 5,
     "pump6": 6,
     "pump7": 7,
-    "pump8": 8,
-    "pump9": 9
+    "pump8": 8
 }
 
 _REACTOR_MAP = {
@@ -46,7 +45,7 @@ def print_help():
     # peristaltic pumps
     print("set speed pump0 100.0 // [%]")
     print("disable speed pump0")
-    # print("set volume pump0 50 // [ml]") TODO
+    # print("set volume pump0 50 // [ml]") TODO: not implemented yet
     # od sensor
     print("enable sensor od0")
     print("disable sensor od0")
@@ -55,7 +54,6 @@ def print_help():
 
 def temperature_event_loop(reactors: List[ReactorTemperatureControl], interval):
     starttime = time.time()
-
     while True:
         for reactor in reactors:
             reactor.control_loop()
@@ -126,41 +124,50 @@ if __name__ == "__main__":
     od_sensor2_event_loop_thread = threading.Thread(target=od_sensor_event_loop, args=(od_sensor[2], 30.0,),
                                                     daemon=True)
 
-    pump = [
+    pumps = [
         PeristalticPump(
             id=0,
+            i2c_lock=i2c_lock,
             enabled=False,
             verbose=False),
         PeristalticPump(
             id=1,
+            i2c_lock=i2c_lock,
             enabled=False,
             verbose=False),
         PeristalticPump(
             id=2,
+            i2c_lock=i2c_lock,
             enabled=False,
             verbose=False),
         PeristalticPump(
             id=3,
+            i2c_lock=i2c_lock,
             enabled=False,
             verbose=False),
         PeristalticPump(
             id=4,
+            i2c_lock=i2c_lock,
             enabled=False,
             verbose=False),
         PeristalticPump(
             id=5,
+            i2c_lock=i2c_lock,
             enabled=False,
             verbose=False),
         PeristalticPump(
             id=6,
+            i2c_lock=i2c_lock,
             enabled=False,
             verbose=False),
         PeristalticPump(
             id=7,
+            i2c_lock=i2c_lock,
             enabled=False,
             verbose=False),
         PeristalticPump(
             id=8,
+            i2c_lock=i2c_lock,
             enabled=False,
             verbose=False)
     ]
@@ -189,16 +196,16 @@ if __name__ == "__main__":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].disable()
                             elif command[1] == "speed":
-                                pump[_PUMP_MAP[command[2]]].disable()
+                                pumps[_PUMP_MAP[command[2]]].disable()
                             elif command[1] == "sensor":
                                 od_sensor[_SENSOR_MAP[command[2]]].disable()
                         elif command[0] == "set":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].set_target_temperature(float(command[3]))
                             elif command[1] == "speed":
-                                pump[_PUMP_MAP[command[2]]].set_speed(int(command[3]))
+                                pumps[_PUMP_MAP[command[2]]].set_speed(int(command[3]))
                             elif command[1] == "volume":
-                                pump[_PUMP_MAP[command[2]]].set_volume(int(command[3]))
+                                pumps[_PUMP_MAP[command[2]]].set_volume(int(command[3]))
                         else:
                             print_help()
                     except:
@@ -212,6 +219,10 @@ if __name__ == "__main__":
         # put all devices into a safe idle state
         for sensor in od_sensor:
             sensor.finalize()
+        for pump in pumps:
+            pump.finalize()
+        for temp in reactor_temperature:
+            temp.finalize()
         print("Goodbye.")
 
 # https://docs.python.org/2/library/threading.html#using-locks-conditions-and-semaphores-in-the-with-statement
