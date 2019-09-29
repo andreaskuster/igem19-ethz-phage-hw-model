@@ -92,7 +92,7 @@ class OpticalDensitySensor:
 
         kf = KalmanFilter(initial_state_mean=0, n_dim_obs=1)
         (mean, covariance) = kf.filter([x[1] for x in calibration_data_od_device])
-        
+
         self.svr.fit(X.reshape(-1, 1), mean)
 
 
