@@ -43,7 +43,7 @@ class AmbientTemperaturePressureSensor():
 
 
 if __name__ == "__main__":
-    sensor = WaterTemperatureSensor()
+    sensor = AmbientTemperaturePressureSensor()
 
     while True:
         print("Ambient temperature: {}°C".format(sensor.get_temperature()))
