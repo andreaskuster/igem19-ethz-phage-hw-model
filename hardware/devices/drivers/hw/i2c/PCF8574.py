@@ -9,6 +9,9 @@ class PCF8574:
 
     bus = smbus.SMBus(_BUS_NO)
 
+    def __init__(self):
+        pass
+
     @staticmethod
     def init():
         """

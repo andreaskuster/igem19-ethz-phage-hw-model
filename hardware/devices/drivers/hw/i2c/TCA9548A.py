@@ -7,6 +7,9 @@ class TCA9548A:
 
     bus = smbus.SMBus(_BUS_NO)
 
+    def __init__(self):
+        pass
+
     @staticmethod
     def switch(port: int):
         """
