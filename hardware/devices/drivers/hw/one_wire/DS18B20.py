@@ -24,7 +24,8 @@ class DS18B20:
 
     @staticmethod
     def get_temperature(sensor_mac_addr: str) -> float:
-        return DS18B20.extract_temperature(DS18B20.raw_sensor_data("/sys/bus/w1/devices/" + sensor_mac_addr + "/w1_slave"))
+        return DS18B20.extract_temperature(
+            DS18B20.raw_sensor_data("/sys/bus/w1/devices/" + sensor_mac_addr + "/w1_slave"))
 
 
 if __name__ == "__main__":
