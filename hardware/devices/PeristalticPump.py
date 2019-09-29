@@ -39,6 +39,9 @@ class PeristalticPump:
                    value: int):
         raise NotImplementedError()  # TODO: calibrate water flow first
 
+    def finalize(self):
+        self.stop()
+
 
 if __name__ == "__main__":
 
@@ -46,13 +49,18 @@ if __name__ == "__main__":
                            i2c_lock=None,
                            enabled=False,
                            verbose=False)
-
-    while True:
-        pump.start()
-        time.sleep(4.0)
-        pump.stop()
-        time.sleep(4.0)
-        pump.set_speed(50)
-        time.sleep(4.0)
-        pump.stop()
-        time.sleep(10.0)
+    try:
+        while True:
+            pump.start()
+            time.sleep(4.0)
+            pump.stop()
+            time.sleep(4.0)
+            pump.set_speed(50)
+            time.sleep(4.0)
+            pump.stop()
+            time.sleep(10.0)
+    except KeyboardInterrupt:
+        print("Exiting...but first put device into a safe state...")
+    finally:
+        pump.finalize()
+        print("Goodbye.")
