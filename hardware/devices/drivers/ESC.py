@@ -1,14 +1,23 @@
 from __future__ import annotations
 
+import os
+import sys
 import threading
 import time
 import warnings
-from enum import Enum
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from drivers.hw.i2c import ESC as ESC_HW
 
 
 class ESC:
+
+    _DEVICE_ID_MAP = {
+        0: 0,
+        1: 1,
+        2: 2
+    }
 
     def __init__(self,
                  id: int,
@@ -18,10 +27,10 @@ class ESC:
         if self.thread_safe:
             self.lock = i2c_lock
             with self.lock:
-                pass #ESC_HW.init()
+                pass  # ESC_HW.init()
         else:
             warnings.warn("Class functionality is not thread-safe.")
-            pass  #ESC_HW.init()
+            pass  # ESC_HW.init()
 
     def set_value(self,
                   value: int):
@@ -32,9 +41,9 @@ class ESC:
         """
         if self.thread_safe:
             with self.lock:
-                ESC_HW.set_value(self.id, value)
+                ESC_HW.set_value(self._DEVICE_ID_MAP[self.id], value)
         else:
-            ESC_HW.set_value(self.id, value)
+            ESC_HW.set_value(self._DEVICE_ID_MAP[self.id], value)
 
     def max_heating(self):
         self.set_value(100)

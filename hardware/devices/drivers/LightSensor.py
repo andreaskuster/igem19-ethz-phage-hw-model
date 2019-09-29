@@ -3,15 +3,21 @@ from __future__ import annotations
 import threading
 import time
 import warnings
-from enum import Enum
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from hw.i2c import TSL2591
 from hw.i2c import TCA9548A
 
-class LightSensor(Enum):
-    REACTOR0 = 4
-    REACTOR1 = 3
-    REACTOR2 = 2
+class LightSensor:
+
+    _DEVICE_ID_MAP = {
+        0: 4,
+        1: 3,
+        2: 2
+    }
 
     def __init__(self,
                  id: TSL2591,
@@ -21,7 +27,7 @@ class LightSensor(Enum):
         :param id:
         :param i2c_lock:
         """
-        self.id = id
+        self.id = self._DEVICE_ID_MAP[id]
         self.thread_safe = False if i2c_lock is None else True
         if self.thread_safe:
             self.lock = i2c_lock
@@ -42,9 +48,9 @@ class LightSensor(Enum):
 
 
 if __name__ == "__main__":
-    sensors = [LightSensor(LightSensor.REACTOR0),
-               LightSensor(LightSensor.REACTOR1),
-               LightSensor(LightSensor.REACTOR2)]
+    sensors = [LightSensor(0),
+               LightSensor(1),
+               LightSensor(2)]
     while True:
         for sensor in sensors:
             print("Light intensity of {}: {} units.".format(sensor.name, sensor.get_light_intensity()))

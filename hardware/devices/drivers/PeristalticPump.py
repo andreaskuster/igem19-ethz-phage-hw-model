@@ -3,21 +3,26 @@ from __future__ import annotations
 import threading
 import time
 import warnings
-from enum import Enum
+import os
+import sys
 
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from hw.i2c import PCA9685
 
 
-class PeristalticPump(Enum):
-    PUMP0 = 0
-    PUMP1 = 1
-    PUMP2 = 2
-    PUMP3 = 3
-    PUMP4 = 4
-    PUMP5 = 5
-    PUMP6 = 12
-    PUMP7 = 13
-    PUMP8 = 14
+class PeristalticPump:
+
+    _DEVICE_ID_MAP = {
+        0: 0,
+        1: 1,
+        2: 2,
+        3: 3,
+        4: 4,
+        5: 5,
+        6: 6,
+        7: 7,
+        8: 8
+    }
 
     def __init__(self,
                  id: PeristalticPump,
@@ -52,16 +57,15 @@ class PeristalticPump(Enum):
 
 
 if __name__ == "__main__":
-    pumps = [PeristalticPump(PeristalticPump.PUMP0),
-             PeristalticPump(PeristalticPump.PUMP1),
-             PeristalticPump(PeristalticPump.PUMP2),
-             PeristalticPump(PeristalticPump.PUMP3),
-             PeristalticPump(PeristalticPump.PUMP4),
-             PeristalticPump(PeristalticPump.PUMP5),
-             PeristalticPump(PeristalticPump.PUMP6),
-             PeristalticPump(PeristalticPump.PUMP7),
-             PeristalticPump(PeristalticPump.PUMP8),
-             PeristalticPump(PeristalticPump.PUMP9)]
+    pumps = [PeristalticPump(0),
+             PeristalticPump(1),
+             PeristalticPump(2),
+             PeristalticPump(3),
+             PeristalticPump(4),
+             PeristalticPump(5),
+             PeristalticPump(6),
+             PeristalticPump(7),
+             PeristalticPump(8)]
     print("Set speed of all pumps to 100%")
     for pump in pumps:
         pump.set_speed(100)

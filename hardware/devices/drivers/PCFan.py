@@ -3,15 +3,20 @@ from __future__ import annotations
 import threading
 import time
 import warnings
-from enum import Enum
+import os
+import sys
 
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from hw.i2c import PCA9685
 
 
-class PCFan(Enum):
-    REACTOR0 = 8  # TODO: check
-    REACTOR1 = 9
-    REACTOR2 = 10
+class PCFan:
+
+    _DEVICE_ID_MAP = {
+        0: 8,
+        1: 9,
+        2: 10
+    }
 
     def __init__(self,
                  id: PCFan,
@@ -47,9 +52,9 @@ class PCFan(Enum):
 
 if __name__ == "__main__":
 
-    fans = [PCFan(PCFan.REACTOR0),
-            PCFan(PCFan.REACTOR1),
-            PCFan(PCFan.REACTOR2)]
+    fans = [PCFan(PCFan._DEVICE_ID_MAP[0]),
+            PCFan(PCFan._DEVICE_ID_MAP[1]),
+            PCFan(PCFan._DEVICE_ID_MAP[2])]
 
     print("Set speed of all pc fans to 100%")
     for fan in fans:
