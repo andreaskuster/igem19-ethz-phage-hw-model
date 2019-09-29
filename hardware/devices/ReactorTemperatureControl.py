@@ -67,6 +67,9 @@ class ReactorTemperatureControl:
         self.enabled = False
         self.output.stop()
 
+    def finalize(self):
+        self.disable()
+
     def control_loop(self):
 
         if self.enabled:
