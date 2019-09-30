@@ -76,7 +76,8 @@ class ReactorTemperatureControl:
             # get current temperature
             actual_temperature = self.temperature_sensor.get_temperature()
 
-            print("current temperature: {}".format(actual_temperature))
+            if self.verbose:
+                print("current temperature: {}".format(actual_temperature))
 
             # anti wind-up procedure
             (kp, ki, kd) = self.pid.components
