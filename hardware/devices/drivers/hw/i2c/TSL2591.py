@@ -10,6 +10,9 @@ class TSL2591:
 
     lib = library(busio.I2C(SCL, SDA))
 
+    def __init__(self):
+        pass
+
     @staticmethod
     def init():
         TSL2591.lib.GAIN_HIGH
