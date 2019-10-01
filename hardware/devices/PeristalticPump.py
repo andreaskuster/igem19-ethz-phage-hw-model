@@ -28,10 +28,12 @@ class PeristalticPump:
 
     def enable(self):
         self.enabled = True
+        self.speed = 100
         self.pump.start()
 
     def disable(self):
         self.enabled = False
+        self.speed = 0
         self.pump.stop()
 
     def set_speed(self,
@@ -45,6 +47,7 @@ class PeristalticPump:
 
     def stop(self):
         self.pump.stop()
+        self.speed = 0
 
     def set_volume(self,
                    value: int):
