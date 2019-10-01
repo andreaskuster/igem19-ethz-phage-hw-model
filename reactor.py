@@ -99,9 +99,6 @@ if __name__ == "__main__":
     i2c_lock = threading.Lock()
     one_wire_lock = threading.Lock()
 
-    TCA9548A.init()
-    TCA9548A.switch(2)
-
     # instantiate all devices
     reactor_temperature = [
         ReactorTemperatureControl(id=0,
