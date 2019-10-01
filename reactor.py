@@ -145,6 +145,8 @@ def naive_constant_concentration(configuration: NaiveConstantConcentration, inte
 
 if __name__ == "__main__":
 
+    print("Instantiate devices and intialize them.")
+
     # instantiate locks
     i2c_lock = threading.Lock()
     one_wire_lock = threading.Lock()
