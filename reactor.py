@@ -4,10 +4,16 @@ import sys
 import threading
 import time
 from typing import List
+import os
+import sys
+import select
 
-from hardware.devices.OpticalDensitySensor import OpticalDensitySensor
-from hardware.devices.PeristalticPump import PeristalticPump
-from hardware.devices.ReactorTemperatureControl import ReactorTemperatureControl
+sys.path.append(os.path.join(os.path.dirname(__file__), "hardware"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "hardware/devices"))
+
+from devices.OpticalDensitySensor import OpticalDensitySensor
+from devices.PeristalticPump import PeristalticPump
+from devices.ReactorTemperatureControl import ReactorTemperatureControl
 
 _PUMP_MAP = {
     "pump0": 0,
@@ -172,6 +178,7 @@ if __name__ == "__main__":
             verbose=False)
     ]
 
+    print("start deamon threads")
     # start background event loops
     temperature_event_loop_thread.start()
     od_sensor0_event_loop_thread.start()
@@ -179,8 +186,10 @@ if __name__ == "__main__":
     od_sensor2_event_loop_thread.start()
 
     try:
+        print("run input loop")
+        print_help()
         while True:
-            if not sys.stdin.isatty():  # check if input is available
+            if select.select([sys.stdin, ], [], [], 0.0)[0]:  # check if input is available
                 for line in sys.stdin:  # read lines
 
                     command = line.split()  # split command into components
