@@ -219,6 +219,7 @@ if __name__ == "__main__":
                         elif command[0] == "set":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].set_target_temperature(float(command[3]))
+                                reactor_temperature[_REACTOR_MAP[command[2]]].enable()
                             elif command[1] == "speed":
                                 pumps[_PUMP_MAP[command[2]]].set_speed(int(command[3]))
                             elif command[1] == "volume":
