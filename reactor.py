@@ -60,7 +60,7 @@ def print_help():
     print("disable sensor od0")
     print()
 
-def output_info_event_loop(reactors: List[ReactorTemperatureControl], sensors: List[OpticalDensitySensor], pumps: List[PeristalticPump], interval)
+def output_info_event_loop(reactors: List[ReactorTemperatureControl], sensors: List[OpticalDensitySensor], pumps: List[PeristalticPump], interval):
 
     starttime = time.time()
     while True:
