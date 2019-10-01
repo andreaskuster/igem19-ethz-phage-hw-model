@@ -8,7 +8,7 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from hw.i2c import PCF8574
+from hw.i2c.PCF8574 import PCF8574
 
 
 class LED:
@@ -21,7 +21,7 @@ class LED:
 
     def __init__(self,
                  id: int,
-                 i2c_lock: threading.Lock):
+                 i2c_lock: threading.Lock = None):
         self.id = id
         self.thread_safe = False if i2c_lock is None else True
         if self.thread_safe:
@@ -58,5 +58,5 @@ if __name__ == "__main__":
         time.sleep(10)
         print("Reset all leds")
         for led in leds:
-            led.set_speed(50)
+            led.clear_led()
         time.sleep(10)
