@@ -18,6 +18,10 @@ class TSL2591:
     def init():
         TSL2591.lib.gain = GAIN_HIGH
         TSL2591.lib.integration_time = INTEGRATIONTIME_200MS
+        # do a few test runs
+        for i in range(5):
+            TSL2591.read_light_intensity()
+            time.sleep(0.1)
 
     @staticmethod
     def read_light_intensity():
