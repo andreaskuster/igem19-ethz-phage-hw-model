@@ -61,22 +61,22 @@ class OpticalDensitySensor:
             # measure dark value
             self.led.clear_led()
             time.sleep(1.0)
-            print("led off")
+            # print("led off")
             dark = self.sensor.get_light_intensity()
-            print("dark value: {}".format(dark))
+            # print("dark value: {}".format(dark))
             # measure light value
             self.led.set_led()
             time.sleep(1.0)
-            print("led on")
+            # print("led on")
             light = self.sensor.get_light_intensity()
-            print("light value: {}".format(light))
+            # print("light value: {}".format(light))
             raw_value = light - dark
             if self.verbose:
                 print("raw sensor value: {}".format(raw_value))
 
             # switch led off
             self.led.clear_led()
-            print("led off")
+            # print("led off")
             # map raw value to actual od value
             od = self.svr.predict(np.array(raw_value).reshape(1, -1))
 
