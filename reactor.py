@@ -1,12 +1,11 @@
 # this is the top wrapper combining the hardware, model and real-time visualization.
 
+import os
+import select
 import sys
 import threading
 import time
 from typing import List
-import os
-import sys
-import select
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "hardware"))
 sys.path.append(os.path.join(os.path.dirname(__file__), "hardware/devices"))
@@ -60,8 +59,9 @@ def print_help():
     print("disable sensor od0")
     print()
 
-def output_info_event_loop(reactors: List[ReactorTemperatureControl], sensors: List[OpticalDensitySensor], pumps: List[PeristalticPump], interval):
 
+def output_info_event_loop(reactors: List[ReactorTemperatureControl], sensors: List[OpticalDensitySensor],
+                           pumps: List[PeristalticPump], interval):
     starttime = time.time()
     while True:
         print()
@@ -76,6 +76,7 @@ def output_info_event_loop(reactors: List[ReactorTemperatureControl], sensors: L
             if pump.enabled:
                 pump.info()
         time.sleep(interval - ((time.time() - starttime) % interval))
+
 
 def temperature_event_loop(reactors: List[ReactorTemperatureControl], interval):
     starttime = time.time()
@@ -200,8 +201,9 @@ if __name__ == "__main__":
             verbose=False)
     ]
 
-    output_info_event_loop_thread = threading.Thread(target=output_info_event_loop, args=(reactor_temperature, od_sensor,
-                                                                                         pumps, 30.0,), daemon=True)
+    output_info_event_loop_thread = threading.Thread(target=output_info_event_loop,
+                                                     args=(reactor_temperature, od_sensor,
+                                                           pumps, 30.0,), daemon=True)
 
     print("start deamon threads")
     # start background event loops
