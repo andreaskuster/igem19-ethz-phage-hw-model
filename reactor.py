@@ -49,8 +49,9 @@ def print_help():
     print("set temperature reactor0 39.0 // [°C]")
     print("disable temperature reactor0")
     # peristaltic pumps
-    print("set speed pump0 100.0 // [%]")
-    print("disable speed pump0")
+    print("enable pump0")
+    print("set speed pump0 100 // [%]")
+    print("disable pump0")
     # print("set volume pump0 50 // [ml]") TODO: not implemented yet
     # od sensor
     print("enable sensor od0")
@@ -201,6 +202,8 @@ if __name__ == "__main__":
                         elif command[0] == "enable":
                             if command[1] == "sensor":
                                 od_sensor[_SENSOR_MAP[command[2]]].enable()
+                            else:
+                                pumps[_PUMP_MAP[command[1]]].enable()
                         elif command[0] == "disable":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].disable()
