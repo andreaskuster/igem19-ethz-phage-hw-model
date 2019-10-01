@@ -8,8 +8,8 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from hw.i2c import TSL2591
-from hw.i2c import TCA9548A
+from hw.i2c.TSL2591 import TSL2591
+from hw.i2c.TCA9548A import TCA9548A
 
 class LightSensor:
 
@@ -20,30 +20,34 @@ class LightSensor:
     }
 
     def __init__(self,
-                 id: TSL2591,
-                 i2c_lock: threading.Lock):
+                 id: int,
+                 i2c_lock: threading.Lock = None):
         """
         Initialize the class structure.
         :param id:
         :param i2c_lock:
         """
-        self.id = self._DEVICE_ID_MAP[id]
+        self.id = id
         self.thread_safe = False if i2c_lock is None else True
         if self.thread_safe:
             self.lock = i2c_lock
             with self.lock:
+                TCA9548A.init()
                 TSL2591.init()
         else:
             warnings.warn("Class functionality is not thread-safe.")
+            TCA9548A.init()
             TSL2591.init()
 
     def get_light_intensity(self):
         if self.thread_safe:
             with self.lock:
-                TCA9548A.switch(self.value)  # set i2c multiplexer to correct sensor
+                TCA9548A.switch(self._DEVICE_ID_MAP[self.id])  # set i2c multiplexer to correct sensor
+                time.sleep(0.1)
                 return TSL2591.read_light_intensity()
         else:
-            TCA9548A.switch(self.value)
+            TCA9548A.switch(self._DEVICE_ID_MAP[self.id])
+            time.sleep(0.1)
             return TSL2591.read_light_intensity()
 
 
@@ -53,5 +57,5 @@ if __name__ == "__main__":
                LightSensor(2)]
     while True:
         for sensor in sensors:
-            print("Light intensity of {}: {} units.".format(sensor.name, sensor.get_light_intensity()))
+            print("Light intensity of sensor {}: {} units.".format(sensor.id, sensor.get_light_intensity()))
         time.sleep(10.0)
