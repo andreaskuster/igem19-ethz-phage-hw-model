@@ -61,11 +61,14 @@ class ReactorTemperatureControl:
         self.ki_log = list()
         self.kd_log = list()
         self.control_val_log = list()
-
+        self.actual_temperature = -100
         self.enabled = enabled
         if not self.enabled:
             self.output.stop()
         self.verbose = verbose
+
+    def info(self):
+        print("Temperature Control Reactor {}: Target Temperature: {}, Actual Temperature: {}, Coefficients: {}".format(self.id, self.target_setpoint, self.actual_temperature, self.pid.components))
 
     def set_target_temperature(self,
                                temperature: float):
@@ -89,6 +92,7 @@ class ReactorTemperatureControl:
         if self.enabled:
             # get current temperature
             actual_temperature = self.temperature_sensor.get_temperature()
+            self.actual_temperature = actual_temperature
 
             if self.verbose:
                 print("current temperature: {}".format(actual_temperature))

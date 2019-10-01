@@ -21,6 +21,10 @@ class PeristalticPump:
         self.enabled = enabled
         self.verbose = verbose
         self.od_log = list()
+        self.speed = 0
+
+    def info(self):
+        print("Peristaltic Pump {}: Speed: {}".format(self.id, self.speed))
 
     def enable(self):
         self.enabled = True
@@ -32,10 +36,12 @@ class PeristalticPump:
 
     def set_speed(self,
                   value: int):
+        self.speed = value
         self.pump.set_speed(value)
 
     def start(self):
         self.pump.start()
+        self.speed = 100
 
     def stop(self):
         self.pump.stop()

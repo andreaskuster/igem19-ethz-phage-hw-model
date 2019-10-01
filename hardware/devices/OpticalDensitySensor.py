@@ -38,6 +38,11 @@ class OpticalDensitySensor:
         self.od_log = list()
         self.svr: SVR = None
         self.calibrate()
+        self.last_od = -1
+        self.last_raw = -1
+
+    def info(self):
+        print("OD Sensor {}: OD: {}, Raw Value: {}".format(self.id, self.last_od, self.last_raw))
 
     def event_loop(self):
 
@@ -71,6 +76,7 @@ class OpticalDensitySensor:
             light = self.sensor.get_light_intensity()
             # print("light value: {}".format(light))
             raw_value = light - dark
+            self.last_raw = raw_value
             if self.verbose:
                 print("raw sensor value: {}".format(raw_value))
 
@@ -79,7 +85,7 @@ class OpticalDensitySensor:
             # print("led off")
             # map raw value to actual od value
             od = self.svr.predict(np.array(raw_value).reshape(1, -1))
-
+            self.last_od = od
             if self.verbose:
                 print("od sensor value: {}".format(od))
 

@@ -60,6 +60,20 @@ def print_help():
     print("disable sensor od0")
     print()
 
+def output_info_event_loop(reactors: List[ReactorTemperatureControl], sensors: List[OpticalDensitySensor], pumps: List[PeristalticPump], interval)
+
+    starttime = time.time()
+    while True:
+        for reactor in reactors:
+            if reactor.enabled:
+                reactor.info()
+        for sensor in sensors:
+            if sensor.enabled:
+                sensor.info()
+        for pump in pumps:
+            if pump.enabled:
+                pump.info()
+        time.sleep(interval - ((time.time() - starttime) % interval))
 
 def temperature_event_loop(reactors: List[ReactorTemperatureControl], interval):
     starttime = time.time()
@@ -92,19 +106,19 @@ if __name__ == "__main__":
                                   one_wire_lock=one_wire_lock,
                                   target_temperature=25.0,
                                   enabled=False,
-                                  verbose=True),
+                                  verbose=False),
         ReactorTemperatureControl(id=1,
                                   i2c_lock=i2c_lock,
                                   one_wire_lock=one_wire_lock,
                                   target_temperature=25.0,
                                   enabled=False,
-                                  verbose=True),
+                                  verbose=False),
         ReactorTemperatureControl(id=2,
                                   i2c_lock=i2c_lock,
                                   one_wire_lock=one_wire_lock,
                                   target_temperature=25.0,
                                   enabled=False,
-                                  verbose=True),
+                                  verbose=False),
     ]
     temperature_event_loop_thread = threading.Thread(target=temperature_event_loop, args=(reactor_temperature, 2.0,),
                                                      daemon=True)
@@ -114,19 +128,19 @@ if __name__ == "__main__":
             id=0,
             i2c_lock=i2c_lock,
             enabled=False,
-            verbose=True
+            verbose=False
         ),
         OpticalDensitySensor(
             id=1,
             i2c_lock=i2c_lock,
             enabled=False,
-            verbose=True
+            verbose=False
         ),
         OpticalDensitySensor(
             id=2,
             i2c_lock=i2c_lock,
             enabled=False,
-            verbose=True
+            verbose=False
         )
     ]
     od_sensor0_event_loop_thread = threading.Thread(target=od_sensor_event_loop, args=(od_sensor[0], 30.0,),
@@ -184,12 +198,16 @@ if __name__ == "__main__":
             verbose=False)
     ]
 
+    output_info_event_loop_thread = threading.Thread(target=output_info_event_loop, args=(reactor_temperature, od_sensor,
+                                                                                         pumps, 30.0,), daemon=True)
+
     print("start deamon threads")
     # start background event loops
     temperature_event_loop_thread.start()
     od_sensor0_event_loop_thread.start()
     od_sensor1_event_loop_thread.start()
     od_sensor2_event_loop_thread.start()
+    output_info_event_loop_thread.start()
 
     try:
         print("run input loop")
