@@ -8,14 +8,14 @@ import warnings
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from drivers.hw.one_wire import DS18B20
+from drivers.hw.one_wire.DS18B20 import DS18B20
 
 
 class WaterTemperatureSensor:
     _DEVICE_ID_MAP = {
-        0: "28-0114536b03aa",
+        2: "28-0114536b03aa",
         1: "28-80000026f3d8",
-        2: "28-0114534081aa"
+        0: "28-0114534081aa"
     }
 
     def __init__(self,
