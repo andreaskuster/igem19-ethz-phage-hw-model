@@ -10,6 +10,7 @@ import select
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "hardware"))
 sys.path.append(os.path.join(os.path.dirname(__file__), "hardware/devices"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "hardware/devices/drivers/hw/i2c"))
 
 from devices.OpticalDensitySensor import OpticalDensitySensor
 from devices.PeristalticPump import PeristalticPump
