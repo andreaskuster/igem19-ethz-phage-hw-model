@@ -1,7 +1,7 @@
 import time
 
 import busio
-from adafruit_tsl2591 import TSL2591 as library
+from adafruit_tsl2591 import GAIN_HIGH, INTEGRATIONTIME_200MS, TSL2591 as library
 from board import SCL, SDA
 
 
@@ -15,8 +15,8 @@ class TSL2591:
 
     @staticmethod
     def init():
-        TSL2591.lib.GAIN_HIGH
-        TSL2591.lib.INTEGRATIONTIME_200MS
+        TSL2591.lib.gain = GAIN_HIGH
+        TSL2591.lib.integration_time = INTEGRATIONTIME_200MS
 
     @staticmethod
     def read_light_intensity():
@@ -31,6 +31,9 @@ class TSL2591:
 
 
 if __name__ == "__main__":
+
+    TSL2591.init()
+
     while True:
         print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
         time.sleep(1.0)
