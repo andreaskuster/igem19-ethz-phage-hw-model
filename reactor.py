@@ -114,19 +114,19 @@ if __name__ == "__main__":
             id=0,
             i2c_lock=i2c_lock,
             enabled=False,
-            verbose=False
+            verbose=True
         ),
         OpticalDensitySensor(
             id=1,
             i2c_lock=i2c_lock,
             enabled=False,
-            verbose=False
+            verbose=True
         ),
         OpticalDensitySensor(
             id=2,
             i2c_lock=i2c_lock,
             enabled=False,
-            verbose=False
+            verbose=True
         )
     ]
     od_sensor0_event_loop_thread = threading.Thread(target=od_sensor_event_loop, args=(od_sensor[0], 30.0,),
