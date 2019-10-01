@@ -1,7 +1,12 @@
 import threading
 import time
+import os
+import sys
 
-from hardware.devices.drivers.PeristalticPump import PeristalticPump
+sys.path.append(os.path.join(os.path.dirname(__file__), "drivers"))
+
+
+from drivers.PeristalticPump import PeristalticPump as Pump
 
 
 class PeristalticPump:
@@ -12,7 +17,7 @@ class PeristalticPump:
                  enabled: bool = False,
                  verbose: bool = True):
         self.id = id
-        self.pump = PeristalticPump(id, i2c_lock)
+        self.pump = Pump(id, i2c_lock)
         self.enabled = enabled
         self.verbose = verbose
         self.od_log = list()
@@ -51,12 +56,16 @@ if __name__ == "__main__":
                            verbose=False)
     try:
         while True:
+            print("Run pump 0 at full speed.")
             pump.start()
             time.sleep(4.0)
+            print("Stop pump 0.")
             pump.stop()
             time.sleep(4.0)
+            print("Run pump 0 at 50% speed.")
             pump.set_speed(50)
             time.sleep(4.0)
+            print("Stop pump 0.")
             pump.stop()
             time.sleep(10.0)
     except KeyboardInterrupt:
