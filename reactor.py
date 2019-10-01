@@ -207,10 +207,10 @@ if __name__ == "__main__":
                         elif command[0] == "disable":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].disable()
-                            elif command[1] == "speed":
-                                pumps[_PUMP_MAP[command[2]]].disable()
                             elif command[1] == "sensor":
                                 od_sensor[_SENSOR_MAP[command[2]]].disable()
+                            else:
+                                pumps[_PUMP_MAP[command[1]]].disable()
                         elif command[0] == "set":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].set_target_temperature(float(command[3]))
