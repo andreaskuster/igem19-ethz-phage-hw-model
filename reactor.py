@@ -64,6 +64,8 @@ def output_info_event_loop(reactors: List[ReactorTemperatureControl], sensors: L
 
     starttime = time.time()
     while True:
+        print()
+        print("Bioreactor State Report:")
         for reactor in reactors:
             if reactor.enabled:
                 reactor.info()
