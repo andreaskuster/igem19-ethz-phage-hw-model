@@ -15,6 +15,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "hardware/devices/driver
 from devices.OpticalDensitySensor import OpticalDensitySensor
 from devices.PeristalticPump import PeristalticPump
 from devices.ReactorTemperatureControl import ReactorTemperatureControl
+from devices.drivers.hw.i2c.TCA9548A import TCA9548A
 
 _PUMP_MAP = {
     "pump0": 0,
@@ -80,6 +81,9 @@ if __name__ == "__main__":
     # instantiate locks
     i2c_lock = threading.Lock()
     one_wire_lock = threading.Lock()
+
+    TCA9548A.init()
+    TCA9548A.switch(2)
 
     # instantiate all devices
     reactor_temperature = [
