@@ -52,7 +52,7 @@ def temperature_dependency_new_host(x):
 
 new_host = Host( 
     c0 = 10**5,
-    g_max = 0.024,
+    g_max = 0.036, #lit: 0.012
     yield_coeff = 0.000000000001,
     half_sat = 0.00000125,
     death_rate = 0.001,
@@ -148,7 +148,7 @@ plt.legend()
 plt.subplot(3, 3, 8)
 nutrient_x = np.linspace(0, 0.0001)
 plt.plot(nutrient_x, [new_host.per_cell_growth_rate(x,37) for x in nutrient_x], label="new host")
-plt.ylim([0,0.025])
+plt.ylim([0,0.04])
 plt.xlabel('nutrient concentration [g/mL]')
 plt.ylabel('per cell growth rate')
 plt.title('Growth Rate (nutrient)')
@@ -159,7 +159,7 @@ plt.subplot(3, 3, 9)
 nutrient_x = np.linspace(0.1, 1)
 lin = [new_host.per_cell_growth_rate(x,37) for x in nutrient_x]
 plt.plot(nutrient_x, lin, label="new host")
-plt.ylim([0,0.025])
+plt.ylim([0,0.04])
 plt.xlabel('nutrient concentration [g/mL]')
 plt.ylabel('per cell growth rate')
 plt.title('Growth Rate at high conc. of nutrient')
