@@ -2,15 +2,25 @@ import threading
 import time
 
 import numpy as np
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "drivers"))
+
 from pykalman import KalmanFilter
 from sklearn.svm import SVR
 
-from hardware.devices.drivers.LED import LED
-from hardware.devices.drivers.LightSensor import LightSensor
-from hardware.devices.drivers.PeristalticPump import PeristalticPump
+from drivers.LED import LED
+from drivers.LightSensor import LightSensor
+from drivers.PeristalticPump import PeristalticPump
 
 
 class OpticalDensitySensor:
+    _DEVICE_ID_MAP = {
+        0: 7,
+        1: 4,
+        2: 1
+    }
 
     def __init__(self,
                  id: int,
@@ -19,7 +29,7 @@ class OpticalDensitySensor:
                  verbose: bool = True):
 
         self.id = id
-        self.pump = PeristalticPump(id, i2c_lock)
+        self.pump = PeristalticPump(self._DEVICE_ID_MAP[id], i2c_lock)
         self.led = LED(id, i2c_lock)
         self.sensor = LightSensor(id, i2c_lock)
         self.enabled = enabled
@@ -30,48 +40,54 @@ class OpticalDensitySensor:
         self.calibrate()
 
     def event_loop(self):
-        # run peristaltic pump for 10s
-        if self.verbose:
-            print("run peristaltic pump")
-        self.pump.start()
-        time.sleep(10)
 
-        # let the biomass settle down for 3s
-        if self.verbose:
-            print("stop peristaltic pump")
-        self.pump.stop()
-        time.sleep(3)
+        if self.enabled:
+            # run peristaltic pump for 10s
+            if self.verbose:
+                print("run peristaltic pump")
+            self.pump.start()
+            time.sleep(10)
 
-        # start measuring
-        if self.verbose:
-            print("measure")
+            # let the biomass settle down for 3s
+            if self.verbose:
+                print("stop peristaltic pump")
+            self.pump.stop()
+            time.sleep(3)
 
-        # measure dark value
-        self.led.set_led()
-        time.sleep(1.0)
-        dark = self.sensor.get_light_intensity()
-        # measure light value
-        self.led.clear_led()
-        time.sleep(1.0)
-        light = self.sensor.get_light_intensity()
-        raw_value = light - dark
-        if self.verbose:
-            print("raw sensor value: {}".format(raw_value))
+            # start measuring
+            if self.verbose:
+                print("measure")
 
-        # switch led off
-        self.led.clear_led()
+            # measure dark value
+            self.led.clear_led()
+            time.sleep(1.0)
+            print("led off")
+            dark = self.sensor.get_light_intensity()
+            print("dark value: {}".format(dark))
+            # measure light value
+            self.led.set_led()
+            time.sleep(1.0)
+            print("led on")
+            light = self.sensor.get_light_intensity()
+            print("light value: {}".format(light))
+            raw_value = light - dark
+            if self.verbose:
+                print("raw sensor value: {}".format(raw_value))
 
-        # map raw value to actual od value
-        od = self.svr.predict(raw_value.reshape(-1, 1))
+            # switch led off
+            self.led.clear_led()
+            print("led off")
+            # map raw value to actual od value
+            od = self.svr.predict(np.array(raw_value).reshape(1, -1))
 
-        if self.verbose:
-            print("od sensor value: {}".format(od))
+            if self.verbose:
+                print("od sensor value: {}".format(od))
 
-        # append log
-        if self.verbose:
-            print("log data")
-        self.raw_log(raw_value)
-        self.od_log.append(od)
+            # append log
+            if self.verbose:
+                print("log data")
+            self.raw_log.append(raw_value)
+            self.od_log.append(od)
 
     def enable(self):
         self.enabled = True
@@ -85,15 +101,17 @@ class OpticalDensitySensor:
 
     def calibrate(self, ):
         self.svr = SVR(gamma='scale', C=10000.0, epsilon=0.01)
-        calibration_data_sensor = np.genfromtxt('calibration_sensor_data.csv', delimiter=',')  # od.csv
-        calibration_data_od_device = np.genfromtxt('calibration_od_data.csv', delimiter=',')  # od_measurements.csv
+        calibration_data_sensor = np.genfromtxt(os.path.join(os.path.dirname(__file__), 'calibration_sensor_data.csv'),
+                                                delimiter=',')  # od.csv
+        calibration_data_od_device = np.genfromtxt(os.path.join(os.path.dirname(__file__), 'calibration_od_data.csv'),
+                                                   delimiter=',')  # od_measurements.csv
 
-        X = np.array([calibration_data_sensor[int(x) * 2] for x in calibration_data_od_device[0]])
+        X = np.array([calibration_data_sensor[int(x) * 2] for x in [x[0] for x in calibration_data_od_device]])
 
         kf = KalmanFilter(initial_state_mean=0, n_dim_obs=1)
         (mean, covariance) = kf.filter([x[1] for x in calibration_data_od_device])
 
-        self.svr.fit(X.reshape(-1, 1), mean)
+        self.svr.fit(X.reshape(-1, 1), mean.ravel())
 
 
 if __name__ == "__main__":
@@ -102,7 +120,7 @@ if __name__ == "__main__":
     sensor = OpticalDensitySensor(id=0,
                                   i2c_lock=None,
                                   enabled=False,
-                                  verbose=False)
+                                  verbose=True)
     sensor.enable()
 
     try:
