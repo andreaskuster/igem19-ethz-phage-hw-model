@@ -3,6 +3,7 @@ import time
 import busio
 from adafruit_tsl2591 import GAIN_HIGH, INTEGRATIONTIME_200MS, TSL2591 as library
 from board import SCL, SDA
+from TCA9548A import TCA9548A
 
 
 class TSL2591:
@@ -11,7 +12,7 @@ class TSL2591:
     lib = library(busio.I2C(SCL, SDA))
 
     def __init__(self):
-        pass
+        TCA9548A.switch(2) # initialize i2c mux to have at valid sensor
 
     @staticmethod
     def init():
