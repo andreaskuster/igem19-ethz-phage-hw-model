@@ -33,10 +33,12 @@ class LightSensor:
             self.lock = i2c_lock
             with self.lock:
                 TCA9548A.init()
+                TCA9548A.switch(self._DEVICE_ID_MAP[self.id])
                 TSL2591.init()
         else:
             warnings.warn("Class functionality is not thread-safe.")
             TCA9548A.init()
+            TCA9548A.switch(self._DEVICE_ID_MAP[self.id])
             TSL2591.init()
 
     def get_light_intensity(self):
