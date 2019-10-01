@@ -120,8 +120,6 @@ class ReactorTemperatureControl:
             self.kp_log.append(kp)
             self.ki_log.append(ki)
             self.kd_log.append(kd)
-        else:
-            warnings.warn("Control loop called, but device is disabled.")
 
 
 if __name__ == "__main__":
