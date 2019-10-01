@@ -11,6 +11,10 @@ class TCA9548A:
         pass
 
     @staticmethod
+    def init():
+        pass
+
+    @staticmethod
     def switch(port: int):
         """
         Sets an individual I/O to one.
@@ -21,6 +25,6 @@ class TCA9548A:
 
 
 if __name__ == "__main__":
-    _CHANNEL = 4  # od light sensor @reactor 0
-
+    _CHANNEL = 2  # od light sensor @reactor 2
+    TCA9548A.init()
     TCA9548A.switch(_CHANNEL)
