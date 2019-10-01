@@ -7,26 +7,26 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from hw.i2c import PCA9685
+from hw.i2c.PCA9685 import PCA9685
 
 
 class PeristalticPump:
 
     _DEVICE_ID_MAP = {
-        0: 0,
-        1: 1,
-        2: 2,
-        3: 3,
-        4: 4,
-        5: 5,
-        6: 6,
-        7: 7,
-        8: 8
+        0: 14,
+        1: 0,
+        2: 1,
+        3: 2,
+        4: 3,
+        5: 4,
+        6: 5,
+        7: 12,
+        8: 13
     }
 
     def __init__(self,
-                 id: PeristalticPump,
-                 i2c_lock: threading.Lock):
+                 id: int,
+                 i2c_lock: threading.Lock = None):
         self.id = id
         self.thread_safe = False if i2c_lock is None else True
         if self.thread_safe:
@@ -42,12 +42,12 @@ class PeristalticPump:
 
         :param value: speed value in percent
         """
-        scaled_value = (float(value) / 100.0) * 0xffff
+        scaled_value = int((float(value) / 100.0) * 0xffff)
         if self.thread_safe:
             with self.lock:
-                PCA9685.set_pwm(self.lib, self.value, scaled_value)
+                PCA9685.set_pwm(self._DEVICE_ID_MAP[self.id], scaled_value)
         else:
-            PCA9685.set_pwm(self.lib, self.value, scaled_value)
+            PCA9685.set_pwm(self._DEVICE_ID_MAP[self.id], scaled_value)
 
     def start(self):
         self.set_speed(100)
@@ -69,12 +69,12 @@ if __name__ == "__main__":
     print("Set speed of all pumps to 100%")
     for pump in pumps:
         pump.set_speed(100)
-    time.sleep(10)
+    time.sleep(1)
     print("Set speed of all pumps to 50%")
     for pump in pumps:
         pump.set_speed(50)
-    time.sleep(10)
+    time.sleep(1)
     print("Set speed of all pumps to 0%")
     for pump in pumps:
         pump.set_speed(0)
-    time.sleep(10)
+    time.sleep(1)

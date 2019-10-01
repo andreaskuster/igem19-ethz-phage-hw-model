@@ -7,7 +7,7 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from hw.i2c import PCA9685
+from hw.i2c.PCA9685 import PCA9685
 
 
 class PCFan:
@@ -19,8 +19,8 @@ class PCFan:
     }
 
     def __init__(self,
-                 id: PCFan,
-                 i2c_lock: threading.Lock):
+                 id: int,
+                 i2c_lock: threading.Lock = None):
         self.id = id
         self.thread_safe = False if i2c_lock is None else True
         if self.thread_safe:
@@ -36,12 +36,12 @@ class PCFan:
 
         :param value: speed value in percent
         """
-        scaled_value = (float(value) / 100.0) * 0xffff
+        scaled_value = int((float(value) / 100.0) * 0xffff)
         if self.thread_safe:
             with self.lock:
-                PCA9685.set_pwm(self.lib, self.value, scaled_value)
+                PCA9685.set_pwm(self._DEVICE_ID_MAP[self.id], scaled_value)
         else:
-            PCA9685.set_pwm(self.lib, self.value, scaled_value)
+            PCA9685.set_pwm(self._DEVICE_ID_MAP[self.id], scaled_value)
 
     def start(self):
         self.set_speed(100)
@@ -52,9 +52,9 @@ class PCFan:
 
 if __name__ == "__main__":
 
-    fans = [PCFan(PCFan._DEVICE_ID_MAP[0]),
-            PCFan(PCFan._DEVICE_ID_MAP[1]),
-            PCFan(PCFan._DEVICE_ID_MAP[2])]
+    fans = [PCFan(0),
+            PCFan(1),
+            PCFan(2)]
 
     print("Set speed of all pc fans to 100%")
     for fan in fans:

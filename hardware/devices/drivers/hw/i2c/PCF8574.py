@@ -69,7 +69,7 @@ class PCF8574:
 
 if __name__ == "__main__":
 
-    _CASE = 2
+    _CASE = 1
 
     if _CASE == 1:
         # run all on / all off interval

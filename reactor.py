@@ -4,10 +4,18 @@ import sys
 import threading
 import time
 from typing import List
+import os
+import sys
+import select
 
-from hardware.devices.OpticalDensitySensor import OpticalDensitySensor
-from hardware.devices.PeristalticPump import PeristalticPump
-from hardware.devices.ReactorTemperatureControl import ReactorTemperatureControl
+sys.path.append(os.path.join(os.path.dirname(__file__), "hardware"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "hardware/devices"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "hardware/devices/drivers/hw/i2c"))
+
+from devices.OpticalDensitySensor import OpticalDensitySensor
+from devices.PeristalticPump import PeristalticPump
+from devices.ReactorTemperatureControl import ReactorTemperatureControl
+from devices.drivers.hw.i2c.TCA9548A import TCA9548A
 
 _PUMP_MAP = {
     "pump0": 0,
@@ -43,14 +51,29 @@ def print_help():
     print("set temperature reactor0 39.0 // [°C]")
     print("disable temperature reactor0")
     # peristaltic pumps
-    print("set speed pump0 100.0 // [%]")
-    print("disable speed pump0")
+    print("enable pump0")
+    print("set speed pump0 100 // [%]")
+    print("disable pump0")
     # print("set volume pump0 50 // [ml]") TODO: not implemented yet
     # od sensor
     print("enable sensor od0")
     print("disable sensor od0")
     print()
 
+def output_info_event_loop(reactors: List[ReactorTemperatureControl], sensors: List[OpticalDensitySensor], pumps: List[PeristalticPump], interval):
+
+    starttime = time.time()
+    while True:
+        for reactor in reactors:
+            if reactor.enabled:
+                reactor.info()
+        for sensor in sensors:
+            if sensor.enabled:
+                sensor.info()
+        for pump in pumps:
+            if pump.enabled:
+                pump.info()
+        time.sleep(interval - ((time.time() - starttime) % interval))
 
 def temperature_event_loop(reactors: List[ReactorTemperatureControl], interval):
     starttime = time.time()
@@ -72,6 +95,9 @@ if __name__ == "__main__":
     # instantiate locks
     i2c_lock = threading.Lock()
     one_wire_lock = threading.Lock()
+
+    TCA9548A.init()
+    TCA9548A.switch(2)
 
     # instantiate all devices
     reactor_temperature = [
@@ -172,15 +198,22 @@ if __name__ == "__main__":
             verbose=False)
     ]
 
+    output_info_event_loop_thread = threading.Thread(target=output_info_event_loop, args=(reactor_temperature, od_sensor,
+                                                                                         pumps, 30.0,), daemon=True)
+
+    print("start deamon threads")
     # start background event loops
     temperature_event_loop_thread.start()
     od_sensor0_event_loop_thread.start()
     od_sensor1_event_loop_thread.start()
     od_sensor2_event_loop_thread.start()
+    output_info_event_loop_thread.start()
 
     try:
+        print("run input loop")
+        print_help()
         while True:
-            if not sys.stdin.isatty():  # check if input is available
+            if select.select([sys.stdin, ], [], [], 0.0)[0]:  # check if input is available
                 for line in sys.stdin:  # read lines
 
                     command = line.split()  # split command into components
@@ -192,16 +225,19 @@ if __name__ == "__main__":
                         elif command[0] == "enable":
                             if command[1] == "sensor":
                                 od_sensor[_SENSOR_MAP[command[2]]].enable()
+                            else:
+                                pumps[_PUMP_MAP[command[1]]].enable()
                         elif command[0] == "disable":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].disable()
-                            elif command[1] == "speed":
-                                pumps[_PUMP_MAP[command[2]]].disable()
                             elif command[1] == "sensor":
                                 od_sensor[_SENSOR_MAP[command[2]]].disable()
+                            else:
+                                pumps[_PUMP_MAP[command[1]]].disable()
                         elif command[0] == "set":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].set_target_temperature(float(command[3]))
+                                reactor_temperature[_REACTOR_MAP[command[2]]].enable()
                             elif command[1] == "speed":
                                 pumps[_PUMP_MAP[command[2]]].set_speed(int(command[3]))
                             elif command[1] == "volume":

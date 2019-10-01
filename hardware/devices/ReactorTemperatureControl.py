@@ -5,6 +5,12 @@ import time
 import warnings
 
 import numpy as np
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "drivers"))
+
+
 from drivers.ESC import ESC
 from drivers.WaterPump import WaterPump
 from drivers.WaterTemperatureSensor import WaterTemperatureSensor
@@ -13,19 +19,25 @@ from simple_pid import PID
 
 class ReactorTemperatureControl:
 
+    _DEVICE_ID_MAP = {
+            0: 2,
+            1: 1,
+            2: 0
+            }
+
     def __init__(self,
                  id: int,
                  i2c_lock: threading.Lock = None,
                  one_wire_lock: threading.Lock = None,
                  target_temperature: float = 25.0,
-                 enabled: bool = True,
+                 enabled: bool = False,
                  verbose: bool = True):
         self.id = id
         self.water_pump = WaterPump(id=id,
                                     i2c_lock=i2c_lock)
         self.temperature_sensor = WaterTemperatureSensor(id=id,
                                                          one_wire_lock=one_wire_lock)
-        self.output = ESC(id=id,
+        self.output = ESC(id=self._DEVICE_ID_MAP[id],
                           i2c_lock=i2c_lock)
         self.target_setpoint = target_temperature
 
@@ -49,11 +61,14 @@ class ReactorTemperatureControl:
         self.ki_log = list()
         self.kd_log = list()
         self.control_val_log = list()
-
+        self.actual_temperature = -100
         self.enabled = enabled
         if not self.enabled:
             self.output.stop()
         self.verbose = verbose
+
+    def info(self):
+        print("Temperature Control Reactor {}: Target Temperature: {}, Actual Temperature: {}, Coefficients: {}".format(self.id, self.target_setpoint, self.actual_temperature, self.pid.components))
 
     def set_target_temperature(self,
                                temperature: float):
@@ -62,9 +77,11 @@ class ReactorTemperatureControl:
 
     def enable(self):
         self.enabled = True
+        self.water_pump.start()
 
     def disable(self):
         self.enabled = False
+        self.water_pump.stop()
         self.output.stop()
 
     def finalize(self):
@@ -75,10 +92,11 @@ class ReactorTemperatureControl:
         if self.enabled:
             # get current temperature
             actual_temperature = self.temperature_sensor.get_temperature()
+            self.actual_temperature = actual_temperature
 
             if self.verbose:
                 print("current temperature: {}".format(actual_temperature))
-
+                print("target temperature: {}".format(self.target_setpoint))
             # anti wind-up procedure
             (kp, ki, kd) = self.pid.components
             if (kp + ki + kd) > 100 or (kp + ki + kd) < -100:
@@ -106,26 +124,26 @@ class ReactorTemperatureControl:
             self.kp_log.append(kp)
             self.ki_log.append(ki)
             self.kd_log.append(kd)
-        else:
-            warnings.warn("Control loop called, but device is disabled.")
 
 
 if __name__ == "__main__":
 
-    reactor0 = ReactorTemperatureControl(0, threading.Lock(), threading.Lock(), 39.0)
+    reactor0 = ReactorTemperatureControl(1, threading.Lock(), threading.Lock(), 27.0)
+    reactor0.enable()
 
     # run control loop till keyboard interrupt (Ctrl + C)
-    while True:
-        try:
+    try:
+        while True:
             reactor0.control_loop()
             time.sleep(1.0)
-        except KeyboardInterrupt:
-            print("Exiting...but first put device into a safe state...")
-        finally:
-            # save log files
-            timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
-            np.savetxt(fname="log/{}_temperature.csv".format(timestamp), delimiter=",", X=reactor0.temp_log)
-            np.savetxt(fname="log/{}_control_value.csv".format(timestamp), delimiter=",", X=reactor0.control_val_log)
-            np.savetxt(fname="log/{}_kp.csv".format(timestamp), delimiter=",", X=reactor0.kp_log)
-            np.savetxt(fname="log/{}_ki.csv".format(timestamp), delimiter=",", X=reactor0.ki_log)
-            np.savetxt(fname="log/{}_kd.csv".format(timestamp), delimiter=",", X=reactor0.kd_log)
+    except KeyboardInterrupt:
+        print("Exiting...but first put device into a safe state...")
+    finally:
+        reactor0.finalize()
+        # save log files
+        timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+        np.savetxt(fname="log/{}_temperature.csv".format(timestamp), delimiter=",", X=reactor0.temp_log)
+        np.savetxt(fname="log/{}_control_value.csv".format(timestamp), delimiter=",", X=reactor0.control_val_log)
+        np.savetxt(fname="log/{}_kp.csv".format(timestamp), delimiter=",", X=reactor0.kp_log)
+        np.savetxt(fname="log/{}_ki.csv".format(timestamp), delimiter=",", X=reactor0.ki_log)
+        np.savetxt(fname="log/{}_kd.csv".format(timestamp), delimiter=",", X=reactor0.kd_log)
