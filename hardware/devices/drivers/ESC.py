@@ -8,7 +8,7 @@ import warnings
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from drivers.hw.i2c import ESC as ESC_HW
+from hw.i2c.ESC import ESC as ESC_HW
 
 
 class ESC:
@@ -61,10 +61,10 @@ if __name__ == "__main__":
             ESC(1),
             ESC(2)]
 
-    _CASE = 2
+    _CASE = 1
 
-    while True:
-        if _CASE == 1:
+    if _CASE == 1:
+        while True:
             print("Max heating for 10 seconds.")
             for esc in escs:
                 esc.max_heating()
@@ -81,7 +81,7 @@ if __name__ == "__main__":
             for esc in escs:
                 esc.stop()
             time.sleep(20.0)
-        elif _CASE == 2:
-            print("Stop all devices.")
-            for esc in escs:
-                esc.stop()
+    elif _CASE == 2:
+        print("Stop all devices.")
+        for esc in escs:
+            esc.stop()
