@@ -27,12 +27,12 @@ class Host():
         self.death_rate = death_rate
         self.t_dep = t_dep
         
-    def per_cell_growth_rate(self, s):
+    def per_cell_growth_rate(self, s, t):
         
         """
         :param s: nutrient concentration
         :return: per cell growth rate
         """
-        return (self.g_max * s) / (self.half_sat + s)
+        return self.t_dep(t) * (self.g_max * s) / (self.half_sat + s)
 
         
