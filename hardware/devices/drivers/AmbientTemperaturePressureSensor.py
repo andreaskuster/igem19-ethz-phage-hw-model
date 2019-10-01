@@ -8,7 +8,7 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from hardware.devices.drivers.hw.i2c.BME280 import BME280
+from hw.i2c.BME280 import BME280
 
 
 class AmbientTemperaturePressureSensor():
