@@ -86,7 +86,7 @@ old_host = Host(
 
 
 s0 = 0.000010 #stock concentration of nutrient (g/mL)#0.0000025
-
+s0 = 0.000001
 # define system of differential equations
 def dXa_dt(X, t):
     [c_host_a, c_nutr_a, c_host_b] = X
@@ -110,27 +110,26 @@ c_new_host_a = [y[0] for y in ys]
 c_old_host_a = [y[2] for y in ys]
 c_nutrient_a = [y[1] for y in ys]
 
-plt.figure(figsize=(16, 16))
+plt.figure(figsize=(12, 6))
 
 
-plt.subplot(2, 3, 1)
+plt.subplot(2, 3, 4)
 plt.plot(xs, [temperature_a(t) for t in xs], label="reactor A")
 plt.xlabel('time [min]')
 plt.ylabel('temperature [°C]')
 plt.title('Temperature over Time')
-plt.legend()
 
-
-plt.subplot(2, 3, 2)
+plt.subplot(2, 3, 1)
 plt.plot(xs, [y[2] for y in ys], label="original host")
 plt.plot(xs, [y[0] for y in ys], label="new host")
 plt.xlabel('time [min]')
 plt.ylabel('concentration [#bacteria/mL]')
 plt.title('Host Concentration over Time')
+plt.ticklabel_format(axis='y', style='sci', scilimits=(-2, 2))
 plt.legend()
 
 
-plt.subplot(2, 3, 5)
+plt.subplot(2, 3, 2)
 plt.plot(xs, [old_host.per_cell_growth_rate(c_nutrient_a[x],temperature_a(x)) for x in np.arange(0, len(xs))], label="original host")
 plt.plot(xs, [new_host.per_cell_growth_rate(c_nutrient_a[x],temperature_a(x)) for x in np.arange(0, len(xs))], label="new host")
 plt.xlabel('time [min]')
@@ -139,15 +138,14 @@ plt.title('Actual Growth Rate over Time')
 plt.legend()
 
 
-plt.subplot(2, 3, 4)
+plt.subplot(2, 3, 3)
 plt.plot(xs, c_nutrient_a, label="reactor A")
 plt.xlabel('time [min]')
 plt.ylabel('nutrient concentration [g/mL]')
-plt.title('Nutrient Concentration over Time')
-plt.legend()
+plt.title('Nutrient Concentration')
+plt.ticklabel_format(axis='y', style='sci', scilimits=(-2, 2))
 
-
-plt.subplot(2, 3, 3)
+plt.subplot(2, 3, 5)
 plt.plot(np.linspace(0, 80, 100), [old_host.t_dep(x) for x in np.linspace(0, 80, 100)], label="original host")
 plt.plot(np.linspace(0, 80, 100), [new_host.t_dep(x) for x in np.linspace(0, 80, 100)], label="new host")
 plt.xlabel('temperature [°C]')
@@ -162,8 +160,8 @@ plt.plot(nutrient_x, [new_host.per_cell_growth_rate(x,37) for x in nutrient_x])
 plt.ylim([0,0.04])
 plt.xlabel('nutrient concentration [g/mL]')
 plt.ylabel('per cell growth rate')
+plt.ticklabel_format(axis='both', style='sci', scilimits=(-2, 2))
 plt.title('Growth Rate (nutrient)')
-plt.legend()
 
 
 
