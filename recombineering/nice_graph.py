@@ -87,6 +87,8 @@ old_host = Host(
 
 s0 = 0.000010 #stock concentration of nutrient (g/mL)#0.0000025
 s0 = 0.000001
+# s0 = 0.0000001 # nutrient concentration is wrong!!!
+
 # define system of differential equations
 def dXa_dt(X, t):
     [c_host_a, c_nutr_a, c_host_b] = X
@@ -130,8 +132,10 @@ plt.legend()
 
 
 plt.subplot(2, 3, 2)
-plt.plot(xs, [old_host.per_cell_growth_rate(c_nutrient_a[x],temperature_a(x)) for x in np.arange(0, len(xs))], label="original host")
-plt.plot(xs, [new_host.per_cell_growth_rate(c_nutrient_a[x],temperature_a(x)) for x in np.arange(0, len(xs))], label="new host")
+
+
+plt.plot(np.arange(0, 120), [old_host.per_cell_growth_rate(c_nutrient_a[int(x/120.0 * 100.0)],temperature_a(x)) for x in np.arange(0, 120)], label="original host")
+plt.plot(np.arange(0, 120), [new_host.per_cell_growth_rate(c_nutrient_a[int(x/120.0 * 100.0)],temperature_a(x)) for x in np.arange(0, 120)], label="new host")
 plt.xlabel('time [min]')
 plt.ylabel('rate')
 plt.title('Actual Growth Rate over Time')
