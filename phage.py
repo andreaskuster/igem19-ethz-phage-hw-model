@@ -19,12 +19,12 @@ class Phage():
         self.death_rate = death_rate
         
         
-    def infection_rate(self, host_c):
+    def infection_rate(self, host_c, phage_c):
         
         """
         :param host_c: host_concentration
         :return: infection rate
         """
         
-        return self.adsorption_rate * self.c0 * host_c
+        return self.adsorption_rate * phage_c * host_c
 
