@@ -299,8 +299,10 @@ if __name__ == "__main__":
                                                     pumps[_PUMP_MAP[command[6]]],
                                                     pumps[_PUMP_MAP[command[7]]]]
                                 controller.enabled = True
+                                print("Command accepted.")
                             else:
                                 pumps[_PUMP_MAP[command[1]]].enable()
+                            print("Command accepted.")
                         elif command[0] == "disable":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].disable()
@@ -310,6 +312,7 @@ if __name__ == "__main__":
                                 controller.disable()
                             else:
                                 pumps[_PUMP_MAP[command[1]]].disable()
+                            print("Command accepted.")
                         elif command[0] == "set":
                             if command[1] == "temperature":
                                 reactor_temperature[_REACTOR_MAP[command[2]]].set_target_temperature(float(command[3]))
@@ -318,6 +321,7 @@ if __name__ == "__main__":
                                 pumps[_PUMP_MAP[command[2]]].set_speed(int(command[3]))
                             elif command[1] == "volume":
                                 pumps[_PUMP_MAP[command[2]]].set_volume(int(command[3]))
+                            print("Command accepted.")
                         else:
                             print_help()
                     except:
