@@ -8,7 +8,7 @@ from host import Host
 # simulation time and resolution of samples
 xs = np.linspace(0, 120, 100)
 
-f= 0.007
+f= 0.000
 
 #Reactor A
 # lb influx profile of reactor A
@@ -85,8 +85,8 @@ old_host = Host(
 )
 
 
-s0 = 0.000010 #stock concentration of nutrient (g/mL)#0.0000025
-s0 = 0.000001
+#s0 = 0.000010 #stock concentration of nutrient (g/mL)#0.0000025
+s0 = 0.0000001
 # s0 = 0.0000001 # nutrient concentration is wrong!!!
 
 # define system of differential equations
