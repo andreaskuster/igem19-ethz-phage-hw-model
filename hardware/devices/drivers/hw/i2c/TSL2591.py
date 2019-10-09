@@ -43,7 +43,7 @@ if __name__ == "__main__":
     TSL2591.init()
 
 
-    _CASE = 1
+    _CASE = 2
 
     if _CASE == 1:
         while True:
