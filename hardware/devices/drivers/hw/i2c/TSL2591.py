@@ -16,12 +16,15 @@ class TSL2591:
 
     @staticmethod
     def init():
-        TSL2591.lib.gain = GAIN_HIGH
-        TSL2591.lib.integration_time = INTEGRATIONTIME_200MS
-        # do a few test runs
-        for i in range(5):
-            TSL2591.read_light_intensity()
+        for dev in [2, 3, 4]:
+            TCA9548A.switch(dev)
             time.sleep(0.1)
+            TSL2591.lib.gain = GAIN_HIGH
+            TSL2591.lib.integration_time = INTEGRATIONTIME_200MS
+            # do a few test runs
+            for i in range(5):
+                TSL2591.read_light_intensity()
+                time.sleep(0.1)
 
     @staticmethod
     def read_light_intensity():
@@ -39,14 +42,23 @@ if __name__ == "__main__":
 
     TSL2591.init()
 
-    for i in range(4):
-        TCA9548A.switch(2)
-        time.sleep(0.1)
-        print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
-        TCA9548A.switch(3)
-        time.sleep(0.1)
-        print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
-        TCA9548A.switch(4)
-        time.sleep(0.1)
-        print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
-        time.sleep(1.0)
+
+    _CASE = 1
+
+    if _CASE == 1:
+        while True:
+            TCA9548A.switch(3)
+            print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
+            time.sleep(1.0)
+    elif _CASE == 2:
+        for i in range(4):
+            TCA9548A.switch(2)
+            time.sleep(0.1)
+            print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
+            TCA9548A.switch(3)
+            time.sleep(0.1)
+            print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
+            TCA9548A.switch(4)
+            time.sleep(0.1)
+            print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
+            time.sleep(1.0)
