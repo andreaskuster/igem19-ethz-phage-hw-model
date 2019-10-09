@@ -15,8 +15,8 @@ class LightSensor:
 
     _DEVICE_ID_MAP = {
         0: 4,
-        1: 3,
-        2: 2
+        1: 2,
+        2: 3
     }
 
     def __init__(self,
