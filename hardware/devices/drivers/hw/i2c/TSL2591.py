@@ -39,6 +39,14 @@ if __name__ == "__main__":
 
     TSL2591.init()
 
-    while True:
+    for i in range(4):
+        TCA9548A.switch(2)
+        time.sleep(0.1)
+        print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
+        TCA9548A.switch(3)
+        time.sleep(0.1)
+        print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
+        TCA9548A.switch(4)
+        time.sleep(0.1)
         print('Light intensity: {}'.format(TSL2591.read_light_intensity()))
         time.sleep(1.0)
