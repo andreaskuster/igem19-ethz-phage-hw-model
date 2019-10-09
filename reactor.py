@@ -57,7 +57,7 @@ def print_help():
     print("enable sensor od0")
     print("disable sensor od0")
     # controller
-    print("enable controller reactor0 reactor1 sensor0 pump0 pump1 pump2 0.5 // target od")
+    print("enable controller reactor0 reactor1 od0 pump8 pump6 pump5 0.5 // target od")
     print("disable controller")
     print()
 
@@ -119,13 +119,13 @@ class NaiveConstantConcentration:
         if self.enabled:
             diff = self.sensor[0].last_od - (self.target_od + self.tol)
             if diff > 0:  # too high, pump out
-                    pumps[0].enable()
-                    pumps[1].enable()
-                    pumps[2].enable()
+                    self.pumps[0].enable()
+                    self.pumps[1].enable()
+                    self.pumps[2].enable()
                     time.sleep(diff*100)
-                    pumps[0].disable()
-                    pumps[1].disable()
-                    pumps[2].disable()
+                    self.pumps[0].disable()
+                    self.pumps[1].disable()
+                    self.pumps[2].disable()
 
     def finalize(self):
         for pump in self.pumps:
