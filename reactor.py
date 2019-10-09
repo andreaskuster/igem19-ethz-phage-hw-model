@@ -258,7 +258,7 @@ if __name__ == "__main__":
         reactors=None,
         sensors=None,
         pumps=None,
-
+        target_od=0.5
     )
     naive_constant_concentration_thread  = threading.Thread(target=naive_constant_concentration, args=(controller, 10.0), daemon=True)
 
