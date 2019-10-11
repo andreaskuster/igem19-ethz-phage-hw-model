@@ -47,7 +47,7 @@ class ReactorTemperatureControl:
         self.Kp = 80.0
         self.Ki = 0.2
         self.Kd = 10.0
-
+        self.reset = 10
         # instantiate PID controller
         self.pid = PID(Kp=self.Kp,
                        Ki=self.Ki,
@@ -65,6 +65,7 @@ class ReactorTemperatureControl:
         self.kd_log = list()
         self.control_val_log = list()
         self.actual_temperature = -100
+        self.control_value  = 0
         self.enabled = enabled
         if not self.enabled:
             self.output.stop()
@@ -92,9 +93,19 @@ class ReactorTemperatureControl:
     def finalize(self):
         self.disable()
 
+
     def control_loop(self):
 
         if self.enabled:
+
+            if self.reset < 0:
+                self.output.stop()
+                time.sleep(1.0)
+                self.reset = 10
+                self.output.set_value(int(self.pid(self.actual_temperature)))
+            else:
+                self.reset -= 1
+                
             # get current temperature
             actual_temperature = self.temperature_sensor.get_temperature()
             self.actual_temperature = actual_temperature
@@ -110,21 +121,21 @@ class ReactorTemperatureControl:
                 self.pid.Ki = self.Ki
 
             # compute new ouput from the PID according to the systems current value
-            control_value = int(self.pid(actual_temperature))
+            self.control_value = int(self.pid(actual_temperature))
 
             # do custom control_value heuristics: peltier elements should not change polarity too often
             # control_value = control_value if abs(control_value) > 10 else 0.0
 
             if self.verbose:
-                print("control value: {}".format(control_value))
+                print("control value: {}".format(self.control_value))
                 print("pid components: {}".format(self.pid.components))
 
             # feed the PID output to the system
-            self.output.set_value(control_value)
+            self.output.set_value(self.control_value)
 
             # append log
             self.temp_log.append(actual_temperature)
-            self.control_val_log.append(control_value)
+            self.control_val_log.append(self.control_value)
             (kp, ki, kd) = self.pid.components
             self.kp_log.append(kp)
             self.ki_log.append(ki)
