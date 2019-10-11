@@ -8,7 +8,7 @@ We are currently testing three approaches to generate these libraries.
 * In vitro: The tail fiber variable regions are ligated to the T7 genome in vitro by Gibson assembly. 
 
 ## Project Trailer
-[![T007 - License to Lyse - iGEM 2019 ETH Zurich - Trailer](https://img.youtube.com/vi/lpeFW6eoZ5g/0.jpg)](https://www.youtube.com/watch?v=lpeFW6eoZ5g)
+[![T007 - License to Lyse - iGEM 2019 ETH Zurich - Trailer](https://img.youtube.com/vi/lpeFW6eoZ5g/maxresdefault.jpg)](https://www.youtube.com/watch?v=lpeFW6eoZ5g?autoplay=1)
 
 ## Software Model
 
