@@ -13,6 +13,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "drivers"))
 
 from drivers.ESC import ESC
 from drivers.WaterPump import WaterPump
+from drivers.PCFan import PCFan
 from drivers.WaterTemperatureSensor import WaterTemperatureSensor
 from simple_pid import PID
 
@@ -35,6 +36,8 @@ class ReactorTemperatureControl:
         self.id = id
         self.water_pump = WaterPump(id=id,
                                     i2c_lock=i2c_lock)
+        self.pc_fan = PCFan(id=id,
+                            i2c_lock=i2c_lock)
         self.temperature_sensor = WaterTemperatureSensor(id=id,
                                                          one_wire_lock=one_wire_lock)
         self.output = ESC(id=self._DEVICE_ID_MAP[id],
@@ -78,10 +81,12 @@ class ReactorTemperatureControl:
     def enable(self):
         self.enabled = True
         self.water_pump.start()
+        self.pc_fan.set_speed(100)
 
     def disable(self):
         self.enabled = False
         self.water_pump.stop()
+        self.pc_fan.set_speed(0)
         self.output.stop()
 
     def finalize(self):
