@@ -7,8 +7,8 @@ We are currently testing three approaches to generate these libraries.
 * Recombineering: A randomised sequence present on a plasmid is inserted into the tail fiber gene in vivo by using E. coli's homologous recombination machinery.
 * In vitro: The tail fiber variable regions are ligated to the T7 genome in vitro by Gibson assembly. 
 
-## Video
-[![T007 - License to Lyse - iGEM 2019 ETH Zurich - Trailer](https://img.youtube.com/vi/lpeFW6eoZ5g/0.jpg)](https://www.youtube.com/watch?v=lpeFW6eoZ5g)
+## Project Trailer
+[![T007 - License to Lyse - iGEM 2019 ETH Zurich - Trailer](https://img.youtube.com/vi/lpeFW6eoZ5g/maxresdefault.jpg)](https://www.youtube.com/watch?v=lpeFW6eoZ5g?autoplay=1)
 
 ## Software Model
 
@@ -52,3 +52,9 @@ We are currently testing three approaches to generate these libraries.
 ## Hardware Software Interaction
 ...
 
+### Motivation
+
+
+### Naive Constant Cell Density Controller
+
+### Model Driven Constant Cell Density Controller
