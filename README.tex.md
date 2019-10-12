@@ -52,3 +52,9 @@ We are currently testing three approaches to generate these libraries.
 ## Hardware Software Interaction
 ...
 
+### Motivation
+
+
+### Naive Constant Cell Density Controller
+
+### Model Driven Constant Cell Density Controller
