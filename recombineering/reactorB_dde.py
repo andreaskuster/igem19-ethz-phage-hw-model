@@ -148,7 +148,7 @@ def dXb_dt(X, t):#TODO add delay diff term for infected host and phages
 """
 
 n=8
-l=1
+l=20
 equations = [new_host.per_cell_growth_rate(y(1),temperature_b(t))*y(0) - out_a(t)*y(0) - new_host.death_rate*y(0),#c_host_a
             - new_host.yield_coeff*new_host.per_cell_growth_rate(y(1),temperature_b(t))*y(0) + s0*in_a_lb(t) - y(1)*out_a(t),#c_nutr_a
             new_host.per_cell_growth_rate(y(3),temperature_b(t))*y(2) + y(0)*in_nh(t) - new_phage.infection_rate(y(2),new_phage.c0) - original_phage.infection_rate(y(2),original_phage.c0) - new_host.death_rate*y(2) - out_b(t)*y(2),#c_host_b
@@ -168,7 +168,7 @@ DDE.constant_past([new_host.c0,s0,new_host.c0,s0,0.0,0.0,original_phage.c0,new_p
 DDE.step_on_discontinuities()
 
 data = []
-x = np.arange(DDE.t, DDE.t+120, 100/50)
+x = np.arange(DDE.t, DDE.t+220, 100/50)
 for time in x:
 	data.append(DDE.integrate(time))
 np.savetxt("timeseries.dat", data)

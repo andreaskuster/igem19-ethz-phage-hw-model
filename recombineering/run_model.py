@@ -6,9 +6,9 @@ from host import Host
 
 
 # simulation time and resolution of samples
-xs = np.linspace(0, 120, 100)
+xs = np.linspace(0, 1200, 100)
 
-f= 0.007
+f= 0.02
 
 #Reactor A
 # lb influx profile of reactor A
@@ -33,10 +33,7 @@ def temperature_a(t):
     :param t: time t
     :return: temperature at time t
     """
-    if t<60:
-        return 39.7
-    else:
-        return 36
+    return 39.7
 
 
 def temperature_dependency_new_host(x):
@@ -58,12 +55,12 @@ new_host = Host(
     g_max = 0.036, #lit: 0.012
     yield_coeff = 0.000000000001,
     half_sat = 0.00000125,
-    death_rate = 0.001,
+    death_rate = 0.00005,
     t_dep = temperature_dependency_new_host,
 )
 
 
-s0 = 0.0000025 #stock concentration of nutrient (g/mL)#0.0000025
+s0 = 0.0005 #stock concentration of nutrient (g/mL)#0.0000025
 
 # define system of differential equations
 def dXa_dt(X, t):
@@ -179,7 +176,7 @@ plt.legend()
 
 plt.subplot(3, 3, 8)
 nutrient_x = np.linspace(0, 0.0001)
-plt.plot(nutrient_x, [new_host.per_cell_growth_rate(x,37) for x in nutrient_x], label="new host")
+plt.plot(nutrient_x, [new_host.per_cell_growth_rate(x,37) for x in nutrient_x])
 plt.ylim([0,0.04])
 plt.xlabel('nutrient concentration [g/mL]')
 plt.ylabel('per cell growth rate')
