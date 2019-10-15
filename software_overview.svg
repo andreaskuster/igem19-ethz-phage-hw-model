@@ -19,6 +19,21 @@
   <defs
      id="defs4">
     <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13777"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path13779"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
        inkscape:stockid="Arrow2Mstart"
        orient="auto"
        refY="0.0"
@@ -127,7 +142,8 @@
        refX="0"
        id="Arrow2Mend-0-7"
        style="overflow:visible"
-       inkscape:isstock="true">
+       inkscape:isstock="true"
+       inkscape:collect="always">
       <path
          inkscape:connector-curvature="0"
          id="path7361-2-4"
@@ -210,6 +226,96 @@
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
          transform="scale(-0.6,-0.6)" />
     </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13777-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path13779-9"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13777-9-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path13779-9-1"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13777-9-5-3"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path13779-9-1-7"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13777-9-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path13779-9-6"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13777-9-5-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path13779-9-1-4"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker13777-9-5-3-6"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Mend">
+      <path
+         transform="scale(-0.6,-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path13779-9-1-7-7"
+         inkscape:connector-curvature="0" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -218,9 +324,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0729879"
-     inkscape:cx="249.21135"
-     inkscape:cy="681.47813"
+     inkscape:zoom="1.42"
+     inkscape:cx="278.53642"
+     inkscape:cy="815.04006"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -826,53 +932,109 @@
          y="438.82675"
          style="font-size:20px"
          id="tspan7232">Pump.py</tspan></text>
-    <flowRoot
+    <text
        xml:space="preserve"
-       id="flowRoot7234"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(-0.75477004,2.2643101)"><flowRegion
-         id="flowRegion7236"><rect
-           id="rect7238"
-           width="121.51797"
-           height="67.174538"
-           x="58.872063"
-           y="459.11295" /></flowRegion><flowPara
-         id="flowPara7240"
-         style="font-size:15px">-Light Sensor</flowPara><flowPara
-         style="font-size:15px"
-         id="flowPara7242">-LED</flowPara><flowPara
-         style="font-size:15px"
-         id="flowPara7244">-PeristalticPump</flowPara></flowRoot>    <flowRoot
+       x="58.116325"
+       y="476.32883"
+       id="text13707"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="58.116325"
+         y="476.32883"
+         id="tspan13709"><tspan
+           x="58.116325"
+           y="476.32883"
+           style="font-size:15px"
+           id="tspan13711">-Light Sensor</tspan><tspan
+           dx="0"
+           x="157.19835"
+           y="476.32883"
+           style="font-size:15px"
+           id="tspan13713" /></tspan><tspan
+         sodipodi:role="line"
+         x="58.116325"
+         y="495.07883"
+         id="tspan13715"><tspan
+           x="58.116325"
+           y="495.07883"
+           style="font-size:15px"
+           id="tspan13717">-LED</tspan><tspan
+           dx="0"
+           x="92.921013"
+           y="495.07883"
+           style="font-size:15px"
+           id="tspan13719" /></tspan><tspan
+         sodipodi:role="line"
+         x="58.116325"
+         y="513.8288"
+         id="tspan13721"><tspan
+           x="58.116325"
+           y="513.8288"
+           style="font-size:15px"
+           id="tspan13723">-PeristalticPump</tspan></tspan></text>
+    <text
        xml:space="preserve"
-       id="flowRoot7234-0"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(239.76956,8.9298873)"><flowRegion
-         id="flowRegion7236-8"><rect
-           id="rect7238-1"
-           width="200.01405"
-           height="60.381599"
-           x="58.872063"
-           y="459.11295" /></flowRegion><flowPara
-         style="font-size:15px"
-         id="flowPara7244-7">-WaterPump</flowPara><flowPara
-         style="font-size:15px"
-         id="flowPara7280">-WaterTemperatureSensor</flowPara><flowPara
-         style="font-size:15px"
-         id="flowPara7282">-ESC</flowPara></flowRoot>    <flowRoot
+       x="298.64066"
+       y="482.99442"
+       id="text13725"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="298.64066"
+         y="482.99442"
+         id="tspan13727"><tspan
+           x="298.64066"
+           y="482.99442"
+           style="font-size:15px"
+           id="tspan13729">-WaterPump</tspan><tspan
+           dx="0"
+           x="390.25198"
+           y="482.99442"
+           style="font-size:15px"
+           id="tspan13731" /></tspan><tspan
+         sodipodi:role="line"
+         x="298.64066"
+         y="501.74442"
+         id="tspan13733"><tspan
+           x="298.64066"
+           y="501.74442"
+           style="font-size:15px"
+           id="tspan13735">-WaterTemperatureSensor</tspan><tspan
+           dx="0"
+           x="494.34378"
+           y="501.74442"
+           style="font-size:15px"
+           id="tspan13737" /></tspan><tspan
+         sodipodi:role="line"
+         x="298.64066"
+         y="520.49438"
+         id="tspan13739"><tspan
+           x="298.64066"
+           y="520.49438"
+           style="font-size:15px"
+           id="tspan13741">-ESC</tspan></tspan></text>
+    <text
        xml:space="preserve"
-       id="flowRoot7234-0-8"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(514.62564,9.436422)"><flowRegion
-         id="flowRegion7236-8-2"><rect
-           id="rect7238-1-5"
-           width="200.01405"
-           height="60.381599"
-           x="58.872063"
-           y="459.11295" /></flowRegion><flowPara
-         style="font-size:15px"
-         id="flowPara7244-7-3">-PeristalticPump</flowPara><flowPara
-         style="font-size:15px"
-         id="flowPara7282-9" /></flowRoot>    <ellipse
+       x="573.4967"
+       y="483.50095"
+       id="text13743"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="573.4967"
+         y="483.50095"
+         id="tspan13745"><tspan
+           x="573.4967"
+           y="483.50095"
+           style="font-size:15px"
+           id="tspan13747">-PeristalticPump</tspan><tspan
+           dx="0"
+           x="694.84436"
+           y="483.50095"
+           style="font-size:15px"
+           id="tspan13749" /></tspan></text>
+    <ellipse
        style="opacity:1;fill:#ffe680;fill-opacity:1;fill-rule:evenodd;stroke:#d4aa00;stroke-width:3.09903932;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path7316"
        cx="618.77911"
@@ -954,18 +1116,18 @@
       <text
          sodipodi:linespacing="125%"
          id="text7867-2"
-         y="255.91643"
-         x="209.87889"
+         y="253.91643"
+         x="217.87889"
          style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            id="tspan7891-7"
            style="font-size:15px"
-           y="255.91643"
-           x="209.87889"
+           y="253.91643"
+           x="217.87889"
            sodipodi:role="line">Temperature </tspan><tspan
            style="font-size:15px"
-           y="274.66644"
-           x="209.87889"
+           y="272.66644"
+           x="217.87889"
            sodipodi:role="line"
            id="tspan8203">Control Loop</tspan></text>
       <text
@@ -1015,18 +1177,6 @@
            x="612.92914"
            sodipodi:role="line">Controller</tspan></text>
     </g>
-    <circle
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#483e37;stroke-width:2.35489345;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path8085"
-       cx="268.44693"
-       cy="224.09421"
-       r="24.098249" />
-    <circle
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#483e37;stroke-width:2.35489345;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path8085-1"
-       cx="389.20804"
-       cy="224.09421"
-       r="24.098249" />
     <g
        transform="matrix(-1,0,0,1,964.79357,60.007621)"
        id="g8258-7">
@@ -1110,23 +1260,48 @@
            sodipodi:nodetypes="cc" />
       </g>
     </g>
-    <flowRoot
+    <text
        xml:space="preserve"
-       id="flowRoot7234-07"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(181.4353,-335.78448)"><flowRegion
-         id="flowRegion7236-0"><rect
-           id="rect7238-10"
-           width="204.46391"
-           height="61.582668"
-           x="58.872063"
-           y="459.11295" /></flowRegion><flowPara
-         id="flowPara7240-1"
-         style="font-size:15px">-OpticalDensitySensor</flowPara><flowPara
-         style="font-size:15px"
-         id="flowPara7242-3">-ReactorTemperatureCtrl</flowPara><flowPara
-         style="font-size:15px"
-         id="flowPara7244-77">-PeristalticPump</flowPara></flowRoot>    <g
+       x="240.3064"
+       y="138.28003"
+       id="text13751"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="240.3064"
+         y="138.28003"
+         id="tspan13753"><tspan
+           x="240.3064"
+           y="138.28003"
+           style="font-size:15px"
+           id="tspan13755">-OpticalDensitySensor</tspan><tspan
+           dx="0"
+           x="407.62085"
+           y="138.28003"
+           style="font-size:15px"
+           id="tspan13757" /></tspan><tspan
+         sodipodi:role="line"
+         x="240.3064"
+         y="157.03003"
+         id="tspan13759"><tspan
+           x="240.3064"
+           y="157.03003"
+           style="font-size:15px"
+           id="tspan13761">-ReactorTemperatureCtrl</tspan><tspan
+           dx="0"
+           x="425.22827"
+           y="157.03003"
+           style="font-size:15px"
+           id="tspan13763" /></tspan><tspan
+         sodipodi:role="line"
+         x="240.3064"
+         y="175.78003"
+         id="tspan13765"><tspan
+           x="240.3064"
+           y="175.78003"
+           style="font-size:15px"
+           id="tspan13767">-PeristalticPump</tspan></tspan></text>
+    <g
        transform="matrix(0,1,-1,0,776.86017,-332.60685)"
        id="g8258-2">
       <path
@@ -1139,6 +1314,59 @@
          id="path7328-0-0"
          d="m 512.89933,102.27255 -48.4628,18.63954"
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.0999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend-0-2)" />
+    </g>
+    <g
+       id="g17114">
+      <circle
+         r="24.098249"
+         cy="224.09421"
+         cx="389.20804"
+         id="path8085-1"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#483e37;stroke-width:2.35489345;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path13769-4"
+         d="m 392.41366,200.56489 -6.98901,0"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13777-9)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path13769-4-0"
+         d="m 365.973,230.50029 2.9928,6.31581"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13777-9-5)" />
+      <path
+         inkscape:transform-center-y="-3.357763"
+         inkscape:transform-center-x="-0.85550548"
+         inkscape:connector-curvature="0"
+         id="path13769-4-0-8"
+         d="m 410.2242,234.53365 2.44887,-6.54594"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13777-9-5-3)" />
+    </g>
+    <g
+       transform="translate(-114.94568,0.61268248)"
+       id="g17114-6">
+      <circle
+         r="24.098249"
+         cy="224.09421"
+         cx="389.20804"
+         id="path8085-1-0"
+         style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#483e37;stroke-width:2.35489345;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path13769-4-9"
+         d="m 392.41366,200.56489 -6.98901,0"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13777-9-8)" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path13769-4-0-7"
+         d="m 365.973,230.50029 2.9928,6.31581"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13777-9-5-0)" />
+      <path
+         inkscape:transform-center-y="-3.357763"
+         inkscape:transform-center-x="-0.85550548"
+         inkscape:connector-curvature="0"
+         id="path13769-4-0-8-5"
+         d="m 410.2242,234.53365 2.44887,-6.54594"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker13777-9-5-3-6)" />
     </g>
   </g>
 </svg>
