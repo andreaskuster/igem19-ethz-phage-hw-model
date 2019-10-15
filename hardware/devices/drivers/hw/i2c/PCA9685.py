@@ -7,7 +7,7 @@ class PCA9685:
     lib = library(busio.I2C(SCL, SDA))
 
     def __init__(self):
-        pass
+        PCA9685.init()
 
     @staticmethod
     def init():
