@@ -92,5 +92,12 @@ update local repo to the most recent version:
 git pull
 ```
 
+```
+keep the experiment running while disconnecting the computer:
+- at startup, run: screen
+- detach from session: Ctrl + a d
+- attach to session: screen -r
+```
+
 ## Raspberry Pi Setup
 ...
