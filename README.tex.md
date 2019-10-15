@@ -36,7 +36,43 @@ Our prototype was of great use for our long term and large volume experiments wh
 <img src="hardware_overview.svg" alt="Reactor Hardware Overview"/>
 
 ### Hardware Components
-...
+
+#### Computer: Raspberry Pi 3B
+
+#### Water Temperature Sensor: DS18B20
+
+#### Microprocessor: Arduino Nano
+
+#### Electronic Speed Controller ESC
+
+#### Thermoelectric Peltier Element: TEC1-12715
+
+#### Ambient Temperature and Pressure Sensor: BME280
+
+#### 8 Channel Input/Output Port Extender: PCF8574
+
+#### Light Emitting Diode LED: TLCY5800
+
+#### I2C Bus Multiplexer: TCA9548A
+
+#### High Dynamic Range Digital Light Sensor: TSL2591
+
+#### 16 Channel Pulse Width Modulation Module: PCA9685
+
+#### Optocoupler: TLP281
+
+#### PC Fan
+
+#### Water Pump
+
+#### Peristaltic Pump
+
+#### Magnetic Stirrer
+
+#### Control Terminal
+
+
+
 
 ### Software Overview
 <img src="software_overview.svg" alt="Reactor Software Overview"/>
@@ -44,6 +80,16 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 ### Devices
 ...
+
+#### Optical Density Sensor
+...
+
+#### Reactor Temperature Control
+...
+
+#### Peristaltic Pump
+...
+
 
 ### Drivers
 ...
@@ -53,9 +99,22 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 #### 1 Wire
 ...
+##### DS18B20
 
 #### I2C
 ...
+##### PCA9685
+...
+
+##### PCF8574
+...
+
+##### TCA9548A
+...
+
+##### TSL2591
+....
+
 
 
 ## Hardware Software Interaction
@@ -66,7 +125,11 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 ### Naive Constant Cell Density Controller
 
+### Advanced Naive Constant Cell Density Controller
+
 ### Model Driven Constant Cell Density Controller
+
+### Model Driven Constant Cell Denisty Controller with Fluorescent Original Host
 
 
 ## Usage
@@ -98,7 +161,6 @@ keep the experiment running while disconnecting the computer:
 - detach from session: Ctrl + a d
 - attach to session: screen -r
 ```
-
 ```
 connect to the graphical user interface:
 1. connect to the wifi
@@ -109,3 +171,9 @@ connect to the graphical user interface:
 
 ## Raspberry Pi Setup
 ...
+
+## 3D Print CAD Design
+
+### Optical Density Sensor
+
+### Water Bath
