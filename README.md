@@ -71,7 +71,7 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 ## Usage
 ```
-connect to device:
+connect to the device:
 1. plug in the power cable and switch on the power supply (the system starts up autoatically)
 2. connect to the wifi network 'igem-ethz' (you should get an ip address from the DHCP server in the range 192.168.4.2-100)
 3. connect to the server at address 192.168.4.1: (i.e. ssh pi@192.168.4.1)
@@ -97,6 +97,14 @@ keep the experiment running while disconnecting the computer:
 - at startup, run: screen
 - detach from session: Ctrl + a d
 - attach to session: screen -r
+```
+
+```
+connect to the graphical user interface:
+1. connect to the wifi
+2. use vnc viewer (realvnc)
+ -address: 192.168.4.1
+ -username: pi
 ```
 
 ## Raspberry Pi Setup
