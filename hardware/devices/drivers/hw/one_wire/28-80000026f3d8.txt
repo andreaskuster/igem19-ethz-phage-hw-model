@@ -1,2 +1,0 @@
-88 01 ff ff 7f ff ff ff 4e : crc=4e YES
-88 01 ff ff 7f ff ff ff 4e t=24500
