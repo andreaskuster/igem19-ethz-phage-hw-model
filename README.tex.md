@@ -68,14 +68,27 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 
 ## Usage
+```
+connect to device:
+1. plug in the power cable and switch on the power supply (the system starts up autoatically)
+2. connect to the wifi network 'igem-ethz' (you should get an ip address from the DHCP server in the range 192.168.4.2-100)
+3. connect to the server at address 192.168.4.1: (i.e. ssh pi@192.168.4.1)
+ - username: pi
+ - password: PASSWORD
+4. change directory to igem19-ethz-phage-hw-model (i.e. cd igem19-ethz-phage-hw-model)
+5. start the reactor software using the command: ./startup.sh
+6. after the automatic device initialization, you should see all available commands printed to stdout
+```
 
 ```
+fetch the whole repo:
 git clone https://github.com/andreaskuster/igem19-ethz-phage-hw-model.git
-cd igem19-ethz-phage-hw-model
-./startup.sh
-```
-
-
 ```
 
 ```
+update local repo to the most recent version:
+git pull
+```
+
+## Raspberry Pi Setup
+...
