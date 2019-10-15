@@ -33,7 +33,7 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 
 ### Hardware Overview
-![Image of Yaktocat](hardware_overview.svg)
+<img src="hardware_overview.svg" alt="Reactor Hardware Overview"/>
 
 ### Hardware Components
 ...
