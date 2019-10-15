@@ -7,11 +7,10 @@ from host import Host
 from phage import Phage
 
 # simulation time and resolution of samples
-xs = np.linspace(0, 120, 100)
+xs = np.linspace(0, 120, 120)
 
 fluxA= 0.02
 fluxB= 0.02
-
 #Reactor A
 # lb influx profile of reactor A
 def in_a_lb(t):
@@ -112,7 +111,7 @@ original_phage = Phage(
 )
 new_phage = Phage(
     c0 = 10**6,
-    adsorption_rate = 0.0000001,
+    adsorption_rate = 0.0000000001,
     burst_size = 100,
     death_rate = 0.00272,
 )
@@ -127,18 +126,19 @@ d = 7#lysis time delay
 def model(Y, t, d):
     c_host_a, c_nutr_a, c_host_b, c_nutr_b, c_inf_poo, c_inf_pnn, c_poo, c_pnn = Y(t)
     c_host_a_d, c_nutr_a_d, c_host_b_d, c_nutr_b_d, c_inf_poo_d, c_inf_pnn_d, c_poo_d, c_pnn_d = Y(t - d)
-    return np.array([0 if c_host_a <= 0 else new_host.per_cell_growth_rate(c_nutr_a, 37)*c_host_a - out_a(t)*c_host_a - new_host.death_rate*c_host_a,
-                     0 if c_nutr_a <= 0 else - new_host.yield_coeff*new_host.per_cell_growth_rate(c_nutr_a,37)*c_host_a
+    return np.array([0 if c_host_a < 0 else new_host.per_cell_growth_rate(c_nutr_a, temperature_a(t))*c_host_a - out_a(t)*c_host_a - new_host.death_rate*c_host_a,
+                     0 if c_nutr_a < 0 else - new_host.yield_coeff*new_host.per_cell_growth_rate(c_nutr_a, temperature_a(t))*c_host_a
         + s0*in_a_lb(t) - c_nutr_a*out_a(t),
-        0 if c_host_b <= 0 else new_host.per_cell_growth_rate(c_nutr_b,37)*c_host_b + in_nh(t)*c_host_a - new_phage.infection_rate(c_host_b, new_phage.c0) - original_phage.infection_rate(c_host_b, original_phage.c0)
+        0 if c_host_b < 0 else new_host.per_cell_growth_rate(c_nutr_b, temperature_b(t))*c_host_b + in_nh(t)*c_host_a 
+        - new_phage.infection_rate(c_host_b, c_pnn) - original_phage.infection_rate(c_host_b, c_poo)
         - new_host.death_rate*c_host_b - out_b(t)*c_host_b,
-         0 if c_nutr_b <= 0 else - new_host.yield_coeff*new_host.per_cell_growth_rate(c_nutr_b,37)*(c_host_b+c_inf_poo+c_inf_pnn)
+        0 if c_nutr_b < 0 else - new_host.yield_coeff*new_host.per_cell_growth_rate(c_nutr_b, temperature_b(t))*(c_host_b+c_inf_poo+c_inf_pnn)
         + s0*in_b_lb(t) + c_nutr_a*in_nh(t) - c_nutr_b*out_b(t),
         0 if c_inf_poo < 0 else original_phage.infection_rate(c_host_b, original_phage.c0) - c_inf_poo_d - out_b(t)*c_inf_poo,
         0 if c_inf_pnn < 0 else new_phage.infection_rate(c_host_b,new_phage.c0) - c_inf_pnn_d - out_b(t)*c_inf_pnn,
-        0 if c_poo <= 0 else original_phage.burst_size*c_inf_poo_d - original_phage.infection_rate(c_host_b, original_phage.c0)
+        0 if c_poo < 0 else original_phage.burst_size*c_inf_poo_d - original_phage.infection_rate(c_host_b, c_poo)
         - out_b(t)*c_poo - original_phage.death_rate*c_poo + in_lib(t)*(1 - R_pnn),
-        0 if c_pnn <= 0 else new_phage.burst_size*c_inf_pnn_d - new_phage.infection_rate(c_host_b,new_phage.c0)
+        0 if c_pnn < 0 else new_phage.burst_size*c_inf_pnn_d - new_phage.infection_rate(c_host_b, c_pnn)
         - out_b(t)*c_pnn - new_phage.death_rate*c_pnn + in_lib(t)*R_pnn])
 
 def initial_conditions(t):
