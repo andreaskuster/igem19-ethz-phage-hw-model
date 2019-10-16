@@ -122,18 +122,18 @@ class AdvancedNaiveConstantConcentration:
         if self.enabled:
             diff = self.sensors[0].last_od - self.target_od
             if diff > self.tol:
-                self.pumps[1].enable()
-                self.pumps[3].enable()
-                time.sleep(max(8.0, diff * 100))
-                self.pumps[1].disable()
-                self.pumps[3].disable()
-            elif diff < -self.tol:
                 self.pumps[0].enable()
                 self.pumps[2].enable()
                 self.pumps[3].enable()
-                time.sleep(max(8.0, abs(diff * 100)))
+                time.sleep(max(5.0, abs(diff * 100)))
                 self.pumps[0].disable()
                 self.pumps[2].disable()
+                self.pumps[3].disable()
+            elif diff < -self.tol:
+                self.pumps[1].enable()
+                self.pumps[3].enable()
+                time.sleep(max(5.0, diff * 100))
+                self.pumps[1].disable()
                 self.pumps[3].disable()
             self.pumps[0].enable()
             self.pumps[2].enable()
