@@ -418,8 +418,10 @@ if __name__ == "__main__":
                             print("Command accepted.")
                         else:
                             print_help()
-                    except:
+                    except Exception as ex:
                         print("Invalid syntax, try again.")
+                        print(ex)
+
             time.sleep(0.5)
 
     except KeyboardInterrupt:
