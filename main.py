@@ -339,7 +339,7 @@ if __name__ == "__main__":
         target_od=0.5,
         continuous_pump_time=2.0
     )
-    advanced_naive_constant_concentration_thread  = threading.Thread(target=advanced_naive_constant_concentration, args=(controller1, 10.0), daemon=True)
+    advanced_naive_constant_concentration_thread  = threading.Thread(target=advanced_naive_constant_concentration, args=(controller2, 10.0), daemon=True)
 
 
     print("start deamon threads")
