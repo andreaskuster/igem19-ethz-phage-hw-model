@@ -404,7 +404,7 @@ if __name__ == "__main__":
                             elif command[1] == "controller":
                                 controller1.disable()
                             elif command[1] == "advanced":
-                                controller2.disable()
+                                controller2.enabled = False
                             else:
                                 pumps[_PUMP_MAP[command[1]]].disable()
                             print("Command accepted.")
