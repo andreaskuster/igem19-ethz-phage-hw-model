@@ -36,25 +36,86 @@ Our prototype was of great use for our long term and large volume experiments wh
 <img src="hardware_overview.svg" alt="Reactor Hardware Overview"/>
 
 ### Hardware Components
-...
+
+#### Computer: Raspberry Pi 3B
+
+#### Water Temperature Sensor: DS18B20
+
+#### Microprocessor: Arduino Nano
+
+#### Electronic Speed Controller ESC
+
+#### Thermoelectric Peltier Element: TEC1-12715
+
+#### Ambient Temperature and Pressure Sensor: BME280
+
+#### 8 Channel Input/Output Port Extender: PCF8574
+
+#### Light Emitting Diode LED: TLCY5800
+
+#### I2C Bus Multiplexer: TCA9548A
+
+#### High Dynamic Range Digital Light Sensor: TSL2591
+
+#### 16 Channel Pulse Width Modulation Module: PCA9685
+
+#### Optocoupler: TLP281
+
+#### PC Fan
+
+#### Water Pump
+
+#### Peristaltic Pump
+
+#### Magnetic Stirrer
+
+#### Control Terminal
+
+
+
 
 ### Software Overview
+<img src="software_overview.svg" alt="Reactor Software Overview"/>
+
+
+### Devices
+...
+
+#### Optical Density Sensor
+...
+
+#### Reactor Temperature Control
+...
+
+#### Peristaltic Pump
+...
+
+
+### Drivers
 ...
 
 ### HW
 ...
 
-#### I2C
-...
-
 #### 1 Wire
 ...
+##### DS18B20
 
-### Drivers
+#### I2C
+...
+##### PCA9685
 ...
 
-### Devices
+##### PCF8574
 ...
+
+##### TCA9548A
+...
+
+##### TSL2591
+....
+
+
 
 ## Hardware Software Interaction
 ...
@@ -64,12 +125,16 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 ### Naive Constant Cell Density Controller
 
+### Advanced Naive Constant Cell Density Controller
+
 ### Model Driven Constant Cell Density Controller
+
+### Model Driven Constant Cell Denisty Controller with Fluorescent Original Host
 
 
 ## Usage
 ```
-connect to device:
+connect to the device:
 1. plug in the power cable and switch on the power supply (the system starts up autoatically)
 2. connect to the wifi network 'igem-ethz' (you should get an ip address from the DHCP server in the range 192.168.4.2-100)
 3. connect to the server at address 192.168.4.1: (i.e. ssh pi@192.168.4.1)
@@ -90,5 +155,25 @@ update local repo to the most recent version:
 git pull
 ```
 
+```
+keep the experiment running while disconnecting the computer:
+- at startup, run: screen
+- detach from session: Ctrl + a d
+- attach to session: screen -r
+```
+```
+connect to the graphical user interface:
+1. connect to the wifi
+2. use vnc viewer (realvnc)
+ -address: 192.168.4.1
+ -username: pi
+```
+
 ## Raspberry Pi Setup
 ...
+
+## 3D Print CAD Design
+
+### Optical Density Sensor
+
+### Water Bath
