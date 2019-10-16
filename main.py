@@ -387,9 +387,10 @@ if __name__ == "__main__":
                                 controller2.sensors = [od_sensor[_SENSOR_MAP[command[4]]]]
                                 controller2.pumps = [pumps[_PUMP_MAP[command[5]]],
                                                     pumps[_PUMP_MAP[command[6]]],
-                                                    pumps[_PUMP_MAP[command[7]]]]
-                                controller2.target_od = float(command[8])
-                                controller2.continuous_pump_time = float(command[9])
+                                                    pumps[_PUMP_MAP[command[7]]],
+                                                     pumps[_PUMP_MAP[command[8]]]]
+                                controller2.target_od = float(command[9])
+                                controller2.continuous_pump_time = float(command[10])
                                 controller2.enabled = True
                                 print("Command accepted.")
                             else:
