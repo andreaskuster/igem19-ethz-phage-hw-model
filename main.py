@@ -124,14 +124,14 @@ class AdvancedNaiveConstantConcentration:
             if diff > self.tol:
                 self.pumps[1].enable()
                 self.pumps[3].enable()
-                time.sleep(max(5.0, diff * 100))
+                time.sleep(diff * 100 if diff * 100 < 5.0 else 5.0)
                 self.pumps[1].disable()
                 self.pumps[3].disable()
             elif diff < -self.tol:
                 self.pumps[0].enable()
                 self.pumps[2].enable()
                 self.pumps[3].enable()
-                time.sleep(max(5.0, abs(diff * 100)))
+                time.sleep(abs(diff * 100) if abs(diff * 100) < 5.0 else 5.0)
                 self.pumps[0].disable()
                 self.pumps[2].disable()
                 self.pumps[3].disable()
