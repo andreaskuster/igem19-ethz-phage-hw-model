@@ -120,7 +120,7 @@ class AdvancedNaiveConstantConcentration:
 
     def control_loop(self):
         if self.enabled:
-            diff = self.sensor[0].last_od - self.target_od
+            diff = self.sensors[0].last_od - self.target_od
             if diff > self.tol:
                 self.pumps[1].enable()
                 self.pumps[3].enable()
