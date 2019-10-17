@@ -82,6 +82,7 @@ Our prototype was of great use for our long term and large volume experiments wh
 ...
 
 #### Optical Density Sensor
+<img src="doc/od_sensor.svg.svg" alt="Optical Density Sensor"/>
 ...
 
 #### Reactor Temperature Control
