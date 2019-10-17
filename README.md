@@ -1,4 +1,4 @@
-# <img src="igem-ethz-logo.svg" alt="iGEM ETHZ Logo" width="75"/> iGEM ETH Zurich - <img src="igem19-ethz-logo.svg" alt="iGEM 19 ETHZ Logo" width="120"/> Libraries for Personalized Phage Therapy
+# <img src="doc/igem-ethz-logo.svg" alt="iGEM ETHZ Logo" width="75"/> iGEM ETH Zurich - <img src="doc/igem19-ethz-logo.svg" alt="iGEM 19 ETHZ Logo" width="120"/> Libraries for Personalized Phage Therapy
 
 ## Abstract
 Antibiotic resistant pathogens are a major threat to global health. Emerging superbugs are rapidly becoming resistant to available antibiotics, while the discovery of new antibiotics is falling behind. Phage therapy offers a potential solution that has achieved remarkable successes. However, it is limited by the number of pathogens that can be targeted by available natural phages. To address this limitation, we aim to increase the range of phage specificities. Host specificity is influenced by the affinity of the phage’s binding protein to the bacterial surface. We developed a system that integrates random codons in phage genomes at any locus of interest. This allows for the formation of phage libraries with novel binding proteins that alter the host spectrum. Our bioreactor selects and evolves the best variants. The observed phage-host interactions can be used to further improve library design. Our system could be the basis for personalized treatment of bacterial infections. 
@@ -33,7 +33,7 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 
 ### Hardware Overview
-<img src="hardware_overview.svg" alt="Reactor Hardware Overview"/>
+<img src="doc/hardware_overview.svg" alt="Reactor Hardware Overview"/>
 
 ### Hardware Components
 
@@ -75,13 +75,14 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 
 ### Software Overview
-<img src="software_overview.svg" alt="Reactor Software Overview"/>
+<img src="doc/software_overview.svg" alt="Reactor Software Overview"/>
 
 
 ### Devices
 ...
 
 #### Optical Density Sensor
+<img src="doc/od_sensor.svg.svg" alt="Optical Density Sensor"/>
 ...
 
 #### Reactor Temperature Control
