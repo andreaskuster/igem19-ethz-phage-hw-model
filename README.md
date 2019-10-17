@@ -86,6 +86,8 @@ Our prototype was of great use for our long term and large volume experiments wh
 ...
 
 #### Reactor Temperature Control
+<img src="doc/temperature_control.svg" alt="Temperature Control"/>
+
 ...
 
 #### Peristaltic Pump
