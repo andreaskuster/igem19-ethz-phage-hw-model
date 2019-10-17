@@ -103,20 +103,35 @@ Our prototype was of great use for our long term and large volume experiments wh
 #### 1 Wire
 ...
 ##### DS18B20
+<img src="doc/ds18b20.jpg" alt="DS18B20"/>
+[Datasheet](../hardware/devices/drivers/hw/datasheets/DS18B20.pdf)
+https://www.adafruit.com/product/381
 
 #### I2C
 ...
 ##### PCA9685
+<img src="doc/pca9685.jpg" alt="PCA9685"/>
+[Datasheet](../hardware/devices/drivers/hw/datasheets/PCA9685.pdf)
+https://www.adafruit.com/product/815
 ...
 
 ##### PCF8574
+<img src="doc/pcf8574.jpg" alt="PCF8574"/>
+[Datasheet](../hardware/devices/drivers/hw/datasheets/PCF8574.pdf)
+aliexpress.com
 ...
 
 ##### TCA9548A
+<img src="doc/tca9548a.jpg" alt="TCA9548A"/>
+[Datasheet](../hardware/devices/drivers/hw/datasheets/TCA9448A.pdf)
+https://learn.adafruit.com/adafruit-tca9548a-1-to-8-i2c-multiplexer-breakout/overview
 ...
 
 ##### TSL2591
-....
+<img src="doc/tsl2591.jpg" alt="TSL2591"/>
+[Datasheet](../hardware/devices/drivers/hw/datasheets/TSL2591.pdf)
+https://www.adafruit.com/product/1980
+...
 
 
 
