@@ -40,6 +40,10 @@ Our prototype was of great use for our long term and large volume experiments wh
 #### Computer: Raspberry Pi 3B
 
 #### Water Temperature Sensor: DS18B20
+<img src="doc/ds18b20.jpg" alt="DS18B20" width="100"/>
+[Datasheet](hardware/devices/drivers/hw/datasheets/DS18B20.pdf)
+https://www.adafruit.com/product/381
+
 
 #### Microprocessor: Arduino Nano
 
@@ -50,14 +54,26 @@ Our prototype was of great use for our long term and large volume experiments wh
 #### Ambient Temperature and Pressure Sensor: BME280
 
 #### 8 Channel Input/Output Port Extender: PCF8574
+<img src="doc/pcf8574.jpg" alt="PCF8574" width="100"/>
+[Datasheet](hardware/devices/drivers/hw/datasheets/PCF8574.pdf)
+aliexpress.com
 
 #### Light Emitting Diode LED: TLCY5800
 
 #### I2C Bus Multiplexer: TCA9548A
+<img src="doc/tca9548a.jpg" alt="TCA9548A" width="100"/>
+[Datasheet](hardware/devices/drivers/hw/datasheets/TCA9448A.pdf)
+https://learn.adafruit.com/adafruit-tca9548a-1-to-8-i2c-multiplexer-breakout/overview
 
 #### High Dynamic Range Digital Light Sensor: TSL2591
+<img src="doc/tsl2591.jpg" alt="TSL2591" width="100"/>
+[Datasheet](hardware/devices/drivers/hw/datasheets/TSL2591.pdf)
+https://www.adafruit.com/product/1980
 
 #### 16 Channel Pulse Width Modulation Module: PCA9685
+<img src="doc/pca9685.jpg" alt="PCA9685" width="100"/>
+[Datasheet](hardware/devices/drivers/hw/datasheets/PCA9685.pdf)
+https://www.adafruit.com/product/815
 
 #### Optocoupler: TLP281
 
@@ -102,36 +118,16 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 #### 1 Wire
 ...
-##### DS18B20
-<img src="doc/ds18b20.jpg" alt="DS18B20"/>
-[Datasheet](../hardware/devices/drivers/hw/datasheets/DS18B20.pdf)
-https://www.adafruit.com/product/381
+* DS18B20
+
 
 #### I2C
 ...
-##### PCA9685
-<img src="doc/pca9685.jpg" alt="PCA9685"/>
-[Datasheet](../hardware/devices/drivers/hw/datasheets/PCA9685.pdf)
-https://www.adafruit.com/product/815
-...
-
-##### PCF8574
-<img src="doc/pcf8574.jpg" alt="PCF8574"/>
-[Datasheet](../hardware/devices/drivers/hw/datasheets/PCF8574.pdf)
-aliexpress.com
-...
-
-##### TCA9548A
-<img src="doc/tca9548a.jpg" alt="TCA9548A"/>
-[Datasheet](../hardware/devices/drivers/hw/datasheets/TCA9448A.pdf)
-https://learn.adafruit.com/adafruit-tca9548a-1-to-8-i2c-multiplexer-breakout/overview
-...
-
-##### TSL2591
-<img src="doc/tsl2591.jpg" alt="TSL2591"/>
-[Datasheet](../hardware/devices/drivers/hw/datasheets/TSL2591.pdf)
-https://www.adafruit.com/product/1980
-...
+* BME280
+* PCA9685
+* PCF8574
+* TCA9548A
+* TSL2591
 
 
 
