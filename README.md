@@ -37,11 +37,11 @@ Our prototype was of great use for our long term and large volume experiments wh
 
 ### Hardware Components
 
-#### Computer: Raspberry Pi 3B
-<img src="doc/ds18b20.jpg" alt="DS18B20" width="200"/>
+#### Computer: Raspberry Pi 3B+
+<img src="doc/raspberry_pi_3b.jpg" alt="Raspberry Pi 3B+" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/raspberry_pi_3b.pdf)
-[Source](raspberrypi.org)
+[Source](https://www.raspberrypi.org/)
 
 
 #### Water Temperature Sensor: DS18B20
@@ -55,21 +55,21 @@ Our prototype was of great use for our long term and large volume experiments wh
 <img src="doc/arduino_nano.jpg" alt="Arduino Nano" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/a.pdf)
-[Source](core-electronics.com.au)
+[Source](https://core-electronics.com.au/)
 
 
 #### Electronic Speed Controller ESC
 <img src="doc/ESC.jpg" alt="ESC" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/ESC.pdf)
-[Source](aliexpress.com)
+[Source](https://www.aliexpress.com/)
 
 
 #### Thermoelectric Peltier Element: TEC1-12715
 <img src="doc/tec1-12715.jpg" alt="TEC1-12715" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/TEC1_12715.pdf)
-[Source](aliexpress.com)
+[Source](https://www.aliexpress.com/)
 
 
 #### Ambient Temperature and Pressure Sensor: BME280
@@ -83,7 +83,7 @@ Our prototype was of great use for our long term and large volume experiments wh
 <img src="doc/pcf8574.jpg" alt="PCF8574" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/PCF8574.pdf)
-[Source](aliexpress.com)
+[Source](https://www.aliexpress.com/)
 
 
 #### Light Emitting Diode LED: TLCY5800
@@ -118,42 +118,42 @@ Our prototype was of great use for our long term and large volume experiments wh
 <img src="doc/tlp281.jpg" alt="TLP281" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/TLP281-4.pdf)
-[Source](aliexpress.com)
+[Source](https://www.aliexpress.com/)
 
 
 #### Magnetic Stirrer
 <img src="doc/magnetic_stirrer.jpg" alt="Magnetic Stirrer" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/magnetic_stirrer.pdf)
-[Source](aliexpress.com)
+[Source](https://www.aliexpress.com/)
 
 
 #### CPU PC Fan
 <img src="doc/cpu_fan.jpg" alt="CPU PC Fan" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/cpu_fan.pdf)
-[Source](bequiet.com)
+[Source](https://www.bequiet.com/en)
 
 
 #### Water Pump
 <img src="doc/water_pump.jpg" alt="Water Pump" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/water_pump.pdf)
-[Source](aliexpress.com)
+[Source](https://www.aliexpress.com/)
 
 
 #### Peristaltic Pump
 <img src="doc/peristaltic_pump.jpg" alt="Peristaltic Pump" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/peristaltic_pump.pdf)
-[Source](aliexpress.com)
+[Source](https://www.aliexpress.com/)
 
 
 #### Mosfet Transistor
 <img src="doc/mosfet.jpg" alt="Mosfet Transistor" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/mosfet.pdf)
-[Source](aliexpress.com)
+[Source](https://www.aliexpress.com/)
 
 
 #### Control Terminal
