@@ -38,57 +38,123 @@ Our prototype was of great use for our long term and large volume experiments wh
 ### Hardware Components
 
 #### Computer: Raspberry Pi 3B
+<img src="doc/ds18b20.jpg" alt="DS18B20" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/raspberry_pi_3b.pdf)
+[Source](raspberrypi.org)
+
 
 #### Water Temperature Sensor: DS18B20
 <img src="doc/ds18b20.jpg" alt="DS18B20" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/DS18B20.pdf)
-https://www.adafruit.com/product/381
+[Source](https://www.adafruit.com/product/381)
 
 
 #### Microprocessor: Arduino Nano
+<img src="doc/arduino_nano.jpg" alt="Arduino Nano" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/a.pdf)
+[Source](core-electronics.com.au)
+
 
 #### Electronic Speed Controller ESC
+<img src="doc/ESC.jpg" alt="ESC" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/ESC.pdf)
+[Source](aliexpress.com)
+
 
 #### Thermoelectric Peltier Element: TEC1-12715
+<img src="doc/tec1-12715.jpg" alt="TEC1-12715" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/TEC1_12715.pdf)
+[Source](aliexpress.com)
+
 
 #### Ambient Temperature and Pressure Sensor: BME280
+<img src="doc/bme280.jpg" alt="BME280" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/BME280.pdf)
+[Source](https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout)
+
 
 #### 8 Channel Input/Output Port Extender: PCF8574
 <img src="doc/pcf8574.jpg" alt="PCF8574" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/PCF8574.pdf)
-aliexpress.com
+[Source](aliexpress.com)
+
 
 #### Light Emitting Diode LED: TLCY5800
+<img src="doc/tlcy5800.jpg" alt="TLCY5800" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/TLCY5800.pdf)
+[Source](https://www.distrelec.ch/de/led-gelb-mm-vishay-tlcy5800/p/30105848)
+
 
 #### I2C Bus Multiplexer: TCA9548A
 <img src="doc/tca9548a.jpg" alt="TCA9548A" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/TCA9448A.pdf)
-https://learn.adafruit.com/adafruit-tca9548a-1-to-8-i2c-multiplexer-breakout/overview
+[Source](https://learn.adafruit.com/adafruit-tca9548a-1-to-8-i2c-multiplexer-breakout/overview)
+
 
 #### High Dynamic Range Digital Light Sensor: TSL2591
 <img src="doc/tsl2591.jpg" alt="TSL2591" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/TSL2591.pdf)
-https://www.adafruit.com/product/1980
+[Source](https://www.adafruit.com/product/1980)
+
 
 #### 16 Channel Pulse Width Modulation Module: PCA9685
 <img src="doc/pca9685.jpg" alt="PCA9685" width="200"/>
 
 [Datasheet](hardware/devices/drivers/hw/datasheets/PCA9685.pdf)
-https://www.adafruit.com/product/815
+[Source](https://www.adafruit.com/product/815)
+
 
 #### Optocoupler: TLP281
+<img src="doc/tlp281.jpg" alt="TLP281" width="200"/>
 
-#### PC Fan
+[Datasheet](hardware/devices/drivers/hw/datasheets/TLP281-4.pdf)
+[Source](aliexpress.com)
 
-#### Water Pump
-
-#### Peristaltic Pump
 
 #### Magnetic Stirrer
+<img src="doc/magnetic_stirrer.jpg" alt="Magnetic Stirrer" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/magnetic_stirrer.pdf)
+[Source](aliexpress.com)
+
+
+#### CPU PC Fan
+<img src="doc/cpu_fan.jpg" alt="CPU PC Fan" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/cpu_fan.pdf)
+[Source](bequiet.com)
+
+
+#### Water Pump
+<img src="doc/water_pump.jpg" alt="Water Pump" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/water_pump.pdf)
+[Source](aliexpress.com)
+
+
+#### Peristaltic Pump
+<img src="doc/peristaltic_pump.jpg" alt="Peristaltic Pump" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/peristaltic_pump.pdf)
+[Source](aliexpress.com)
+
+
+#### Mosfet Transistor
+<img src="doc/mosfet.jpg" alt="Mosfet Transistor" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/mosfet.pdf)
+[Source](aliexpress.com)
+
 
 #### Control Terminal
 
