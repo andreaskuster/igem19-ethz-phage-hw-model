@@ -114,8 +114,9 @@ class OpticalDensitySensor:
         self.enabled = False
 
     def finalize(self):
-        timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
-        np.savetxt(fname="log/{}_od{}.csv".format(timestamp, self.id), delimiter=",", X=self.od_log)
+        self.disable()
+        #timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+        #np.savetxt(fname="log/{}_od{}.csv".format(timestamp, self.id), delimiter=",", X=self.od_log)
 
     def calibrate(self, ):
         self.svr = SVR(gamma='scale', C=10000.0, epsilon=0.01)
