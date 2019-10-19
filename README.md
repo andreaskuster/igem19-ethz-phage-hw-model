@@ -209,13 +209,18 @@ The goal of this case study is to show the reader a real-world usage scenario of
 <img src="doc/od_sensor.svg" alt="Optical Density Sensor"/>
 ...
 ##### Calibration
+<img src="doc/od_calibration_raw_data.png" alt="Raw Sensor Data"/>
+<img src="doc/od_calibration_ref_data.png" alt="Reference Data"/>
+<img src="doc/od_calibration_relation.png" alt="Relation Light Sensor and OD"/>
+<img src="doc/od_calibration_regression.png" alt="Regression"/>
+<img src="doc/od_calibration_sample_run.png" alt="Sample Run"/>
 
 
 #### Reactor Temperature Control
 <img src="doc/temperature_control.svg" alt="Temperature Control"/>
 
-<img src="doc/temperature_control_heating_397.jpg" alt="Reactor Heating"/>
-<img src="doc/temperature_control_cooling222.jpg" alt="Reactor Cooling"/>
+<img src="doc/temperature_control_heating397.png" alt="Reactor Heating"/>
+<img src="doc/temperature_control_cooling222.png" alt="Reactor Cooling"/>
 
 
 ...
