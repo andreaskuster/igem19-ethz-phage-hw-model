@@ -42,6 +42,8 @@ class OpticalDensitySensor:
         self.last_raw = -1
         data = np.genfromtxt(os.path.join(os.path.dirname(__file__), 'calibration_sensor_data.csv'), delimiter=',')
         self.max_od_raw_val = max(data)
+        timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+        self.file = "log/{}_od{}.csv".format(timestamp, self.id)
 
     def info(self):
         print("OD Sensor {}: OD: {}, Raw Value: {}".format(self.id, self.last_od, self.last_raw))
@@ -97,8 +99,13 @@ class OpticalDensitySensor:
             # append log
             if self.verbose:
                 print("log data")
-            self.raw_log.append((time.strftime("%Y-%m-%d_%H:%M:%S"), raw_value))
-            self.od_log.append(od)
+            timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+            self.raw_log.append((timestamp, raw_value))
+            self.od_log.append((timestamp, od))
+
+            # write data point to file
+            with open(self.file, "a") as myfile:
+                np.savetxt(myfile, (timestamp, od))
 
     def enable(self):
         self.enabled = True
