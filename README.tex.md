@@ -35,14 +35,19 @@ To ensure the clinical relevance of our library, the rapid selection of the best
 
  
 ## Case Study: Recombineering Library Experiment
-<img src="doc/case_study.svg" alt="Reactor Configuration"/>
-<img src="doc/case_study_sim.jpg" alt="Growth Simulation"/>
-<img src="doc/case_study_result.svg" alt="Plate Result"/>
-
+The goal of this case study is to show the reader a real-world usage scenario of the reactor system. Furthermore, it emphasizes the advantage of a fully automated and self-regulating experiment setup.
 
 ### Setup
 
+
+
+<img src="doc/case_study.svg" alt="Reactor Configuration"/>
+
+<img src="doc/case_study_sim.jpg" alt="Growth Simulation"/>
+
 ### Result
+ 
+<img src="doc/case_study_result.svg" alt="Plate Result"/>
 
 
 ## Software Model
@@ -76,11 +81,12 @@ To ensure the clinical relevance of our library, the rapid selection of the best
 [Source](https://www.adafruit.com/product/381)
 
 
-#### Microprocessor: Arduino Nano
-<img src="doc/arduino_nano.jpg" alt="Arduino Nano" width="200"/>
 
-[Datasheet](hardware/devices/drivers/hw/datasheets/a.pdf)
-[Source](https://core-electronics.com.au/)
+#### Thermoelectric Peltier Element: TEC1-12715
+<img src="doc/tec1-12715.jpg" alt="TEC1-12715" width="200"/>
+
+[Datasheet](hardware/devices/drivers/hw/datasheets/TEC1_12715.pdf)
+[Source](https://www.aliexpress.com/)
 
 
 #### Electronic Speed Controller ESC
@@ -90,11 +96,17 @@ To ensure the clinical relevance of our library, the rapid selection of the best
 [Source](https://www.aliexpress.com/)
 
 
-#### Thermoelectric Peltier Element: TEC1-12715
-<img src="doc/tec1-12715.jpg" alt="TEC1-12715" width="200"/>
+#### Microprocessor: Arduino Nano
+<img src="doc/arduino_nano.jpg" alt="Arduino Nano" width="200"/>
 
-[Datasheet](hardware/devices/drivers/hw/datasheets/TEC1_12715.pdf)
-[Source](https://www.aliexpress.com/)
+[Datasheet](hardware/devices/drivers/hw/datasheets/a.pdf)
+[Source](https://core-electronics.com.au/)
+
+
+
+
+
+
 
 
 #### Ambient Temperature and Pressure Sensor: BME280
@@ -193,12 +205,18 @@ To ensure the clinical relevance of our library, the rapid selection of the best
 ### Devices
 ...
 
-#### Optical Density Sensor
+####  Online Optical Density Sensor
 <img src="doc/od_sensor.svg" alt="Optical Density Sensor"/>
 ...
+##### Calibration
+
 
 #### Reactor Temperature Control
 <img src="doc/temperature_control.svg" alt="Temperature Control"/>
+
+<img src="doc/temperature_control_heating_397.jpg" alt="Reactor Heating"/>
+<img src="doc/temperature_control_cooling222.jpg" alt="Reactor Cooling"/>
+
 
 ...
 
