@@ -137,7 +137,7 @@ fig = plt.figure()
 ax = fig.add_subplot(111)
 x2 = np.arange(0, len(data))
 y2 = [clf.predict(np.array(data[x]).reshape(-1, 1)) for x in x2]
-ax.plot(x2, np.array(y2).ravel())
+ax.plot([val/2 for val in x2], np.array(y2).ravel())
 ax.set_xlabel('Time [min]')
 ax.set_ylabel('Optical Density [Units]')
 ax.set_title("Sample Run: Growth Curve using the Calibrated Sensor")
