@@ -91,7 +91,7 @@ class OpticalDensitySensor:
             if raw_value > self.max_od_raw_val:  # overshoot, od zero is minimum
                 od = 0.0
             else:
-                od = self.svr.predict(np.array(raw_value).reshape(1, -1))
+                od = self.svr.predict(np.array(raw_value).reshape(1, -1))[0]
             self.last_od = od
             if self.verbose:
                 print("od sensor value: {}".format(od))
