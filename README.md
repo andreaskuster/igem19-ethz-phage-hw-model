@@ -30,6 +30,9 @@ We are currently testing three approaches to generate these libraries.
  
 ## Case Study: Recombineering Library Experiment
 <img src="doc/case_study.svg" alt="Reactor Configuration"/>
+<img src="doc/case_study_sim.jpg" alt="Growth Simulation"/>
+<img src="doc/case_study_result.svg" alt="Plate Result"/>
+
 
 ### Setup
 
