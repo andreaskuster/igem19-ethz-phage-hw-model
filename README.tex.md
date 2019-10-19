@@ -12,6 +12,8 @@ We are currently testing three approaches to generate these libraries.
 
 
 ## Hardware Reactor Abstract
+To ensure the clinical relevance of our library, the rapid selection of the best phage variants is necessary and ensured by our bioreactor. Three flasks for cell growth each have integrated temperature control and peristaltic pumps on top of continuous OD measurement using our self-built OD sensors. This enables the cultivation of bacteria under controlled OD profiles. Real-time data from ongoing experiments is fed into our model to predict host concentrations and adjust growth conditions accordingly. User-friendly software allows the implementation of other experimental setups with custom parameters and monitoring mechanisms. Remote access and alerts permit long-term experiments. Our prototype was of great use for our own long-term and large volume experiments which led to multiple iterations of hardware and software improvements. To allow others to benefit from our design, we extensively documented the hardware and software. This bioreactor offers a cost-efficient solution to perform complex experimental designs with ease.
+
 
 
 ## Table of content
