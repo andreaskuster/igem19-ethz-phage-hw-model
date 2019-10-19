@@ -20,7 +20,7 @@ To ensure the clinical relevance of our library, the rapid selection of the best
 
 ## Table of content
 * [Case Study](#case-study-recombineering-library-experiment)
-    * [Setup](#setup)
+    * [Setup](#experiment-setup)
     * [Result](#result)
 * [Hardware Reactor](#hardware-reactor)
     * [Hardware Overview](#hardware-overview)
@@ -37,7 +37,7 @@ To ensure the clinical relevance of our library, the rapid selection of the best
 ## Case Study: Recombineering Library Experiment
 The goal of this case study is to show the reader a real-world usage scenario of the reactor system. Furthermore, it emphasizes the advantage of a fully automated and self-regulating experiment setup.
 
-### Setup
+### Experiment Setup
 
 
 
