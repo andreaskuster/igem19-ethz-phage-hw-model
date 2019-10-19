@@ -49,7 +49,7 @@ plt.show()
 
 
 
-data_raw = np.genfromtxt('/home/andreas/PycharmProjects/igem19-ethz-phage-hw-model/hardware/data/od_measurements.csv', delimiter=',')
+data_raw = np.genfromtxt('data/od_measurements.csv', delimiter=',')
 data_x = [x[0] for x in data_raw]
 data_y = [x[1] for x in data_raw]
 
