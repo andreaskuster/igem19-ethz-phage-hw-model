@@ -105,7 +105,7 @@ class OpticalDensitySensor:
 
             # write data point to file
             with open(self.file, "a") as myfile:
-                np.savetxt(myfile, (timestamp, od))
+                myfile.write("{},{}\n".format(timestamp, od))
 
     def enable(self):
         self.enabled = True
