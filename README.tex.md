@@ -219,7 +219,7 @@ The goal of this case study is to show the reader a real-world usage scenario of
 #### Reactor Temperature Control
 <img src="doc/temperature_control.svg" alt="Temperature Control"/>
 
-<img src="doc/temperature_control_heating397.png" alt="Reactor Heating"/>
+<img src="doc/temperature_control_heating387.png" alt="Reactor Heating"/>
 <img src="doc/temperature_control_cooling222.png" alt="Reactor Cooling"/>
 
 
