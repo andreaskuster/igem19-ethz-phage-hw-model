@@ -208,6 +208,7 @@ The goal of this case study is to show the reader a real-world usage scenario of
 ####  Online Optical Density Sensor
 <img src="doc/od_sensor.svg" alt="Optical Density Sensor"/>
 ...
+
 ##### Calibration
 <img src="doc/od_calibration_raw_data.png" alt="Raw Sensor Data"/>
 <img src="doc/od_calibration_ref_data.png" alt="Reference Data"/>
