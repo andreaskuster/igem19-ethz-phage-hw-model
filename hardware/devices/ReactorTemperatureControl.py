@@ -146,7 +146,8 @@ class ReactorTemperatureControl:
 
             # write data point to file
             with open(self.file, "a") as myfile:
-                np.savetxt(myfile, (timestamp, actual_temperature))
+                myfile.write("{},{}\n".format(timestamp, actual_temperature))
+
 
 if __name__ == "__main__":
 
