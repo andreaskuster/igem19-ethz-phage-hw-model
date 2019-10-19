@@ -97,7 +97,7 @@ class OpticalDensitySensor:
             # append log
             if self.verbose:
                 print("log data")
-            self.raw_log.append(raw_value)
+            self.raw_log.append((time.strftime("%Y-%m-%d_%H:%M:%S"), raw_value))
             self.od_log.append(od)
 
     def enable(self):

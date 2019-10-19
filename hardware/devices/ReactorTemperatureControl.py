@@ -134,12 +134,13 @@ class ReactorTemperatureControl:
             self.output.set_value(self.control_value)
 
             # append log
-            self.temp_log.append(actual_temperature)
-            self.control_val_log.append(self.control_value)
+            timestamp  = time.strftime("%Y-%m-%d_%H:%M:%S")
+            self.temp_log.append((timestamp, actual_temperature))
+            self.control_val_log.append((timestamp, self.control_value))
             (kp, ki, kd) = self.pid.components
-            self.kp_log.append(kp)
-            self.ki_log.append(ki)
-            self.kd_log.append(kd)
+            self.kp_log.append((timestamp, kp))
+            self.ki_log.append((timestamp, ki))
+            self.kd_log.append((timestamp, kd))
 
 
 if __name__ == "__main__":
