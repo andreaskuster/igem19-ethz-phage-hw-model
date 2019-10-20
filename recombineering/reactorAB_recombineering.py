@@ -1,20 +1,22 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from pylab import array
+from math import e
 
 from ddeint import ddeint
 from host import Host
 from phage import Phage
 
 
+
 # simulation time and resolution of samples
 
 xs = np.linspace(0, 120, 12000)
 
-#bioreactor pump about 100uL/sec 1s evry 10sec = 0.06ml/min
+#bioreactor pump about 100uL/sec 1s every 10sec = 0.06ml/min
 #bioreactor volume 400mL
-fluxA= 0.0
-fluxB= 0.0
+fluxA= 0.02
+fluxB= 0.02
 
 #Reactor A
 # lb influx profile of reactor A
@@ -144,11 +146,11 @@ def model(Y, t, d):
         - new_host.death_rate*c_host_b - out_b(t)*c_host_b,
         s0*in_b_lb(t) + c_nutr_a*in_nh(t) if c_nutr_b < 0 else - new_host.yield_coeff*new_host.per_cell_growth_rate(c_nutr_b, temperature_b(t))*(c_host_b+c_inf_poo+c_inf_pnn)
         + s0*in_b_lb(t) + c_nutr_a*in_nh(t) - c_nutr_b*out_b(t),
-        original_phage.infection_rate(c_host_b, c_poo) if c_inf_poo < 0 else original_phage.infection_rate(c_host_b, c_poo) - y - out_b(t)*c_inf_poo,
-        new_phage.infection_rate(c_host_b, c_pnn) if c_inf_pnn < 0 else new_phage.infection_rate(c_host_b, c_pnn) - z - out_b(t)*c_inf_pnn,
-        original_phage.burst_size*y if c_poo < 0 else original_phage.burst_size*y - original_phage.infection_rate(c_host_b, c_poo)
+        original_phage.infection_rate(c_host_b, c_poo) if c_inf_poo < 0 else original_phage.infection_rate(c_host_b, c_poo) - y*e**(-d*fluxB) - out_b(t)*c_inf_poo,
+        new_phage.infection_rate(c_host_b, c_pnn) if c_inf_pnn < 0 else new_phage.infection_rate(c_host_b, c_pnn) - z*e**(-d*fluxB) - out_b(t)*c_inf_pnn,
+        original_phage.burst_size*y*e**(-d*fluxB) if c_poo < 0 else original_phage.burst_size*y*e**(-d*fluxB) - original_phage.infection_rate(c_host_b, c_poo)
         - out_b(t)*c_poo - original_phage.death_rate*c_poo + in_lib(t)*(1 - R_pnn),
-        new_phage.burst_size*z if c_pnn < 0 else new_phage.burst_size*z - new_phage.infection_rate(c_host_b, c_pnn)
+        new_phage.burst_size*z*e**(-d*fluxB) if c_pnn < 0 else new_phage.burst_size*z*e**(-d*fluxB) - new_phage.infection_rate(c_host_b, c_pnn)
         - out_b(t)*c_pnn - new_phage.death_rate*c_pnn + in_lib(t)*R_pnn])
 
 def initial_conditions(t):
