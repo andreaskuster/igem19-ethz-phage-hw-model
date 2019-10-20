@@ -70,6 +70,8 @@ class ReactorTemperatureControl:
         if not self.enabled:
             self.output.stop()
         self.verbose = verbose
+        timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+        self.file = "log/{}_temperature_reactor{}.csv".format(timestamp, self.id)
 
     def info(self):
         print("Temperature Control Reactor {}: Target Temperature: {}, Actual Temperature: {}, Coefficients: {}".format(self.id, self.target_setpoint, self.actual_temperature, self.pid.components))
@@ -134,12 +136,17 @@ class ReactorTemperatureControl:
             self.output.set_value(self.control_value)
 
             # append log
-            self.temp_log.append(actual_temperature)
-            self.control_val_log.append(self.control_value)
+            timestamp  = time.strftime("%Y-%m-%d_%H:%M:%S")
+            self.temp_log.append((timestamp, actual_temperature))
+            self.control_val_log.append((timestamp, self.control_value))
             (kp, ki, kd) = self.pid.components
-            self.kp_log.append(kp)
-            self.ki_log.append(ki)
-            self.kd_log.append(kd)
+            self.kp_log.append((timestamp, kp))
+            self.ki_log.append((timestamp, ki))
+            self.kd_log.append((timestamp, kd))
+
+            # write data point to file
+            with open(self.file, "a") as myfile:
+                myfile.write("{},{}\n".format(timestamp, actual_temperature))
 
 
 if __name__ == "__main__":

@@ -40,6 +40,10 @@ class OpticalDensitySensor:
         self.calibrate()
         self.last_od = -1
         self.last_raw = -1
+        data = np.genfromtxt(os.path.join(os.path.dirname(__file__), 'calibration_sensor_data.csv'), delimiter=',')
+        self.max_od_raw_val = max(data)
+        timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+        self.file = "log/{}_od{}.csv".format(timestamp, self.id)
 
     def info(self):
         print("OD Sensor {}: OD: {}, Raw Value: {}".format(self.id, self.last_od, self.last_raw))
@@ -84,7 +88,10 @@ class OpticalDensitySensor:
             self.led.clear_led()
             # print("led off")
             # map raw value to actual od value
-            od = self.svr.predict(np.array(raw_value).reshape(1, -1))
+            if raw_value > self.max_od_raw_val:  # overshoot, od zero is minimum
+                od = 0.0
+            else:
+                od = self.svr.predict(np.array(raw_value).reshape(1, -1))[0]
             self.last_od = od
             if self.verbose:
                 print("od sensor value: {}".format(od))
@@ -92,8 +99,13 @@ class OpticalDensitySensor:
             # append log
             if self.verbose:
                 print("log data")
-            self.raw_log.append(raw_value)
-            self.od_log.append(od)
+            timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+            self.raw_log.append((timestamp, raw_value))
+            self.od_log.append((timestamp, od))
+
+            # write data point to file
+            with open(self.file, "a") as myfile:
+                myfile.write("{},{}\n".format(timestamp, od))
 
     def enable(self):
         self.enabled = True
@@ -102,8 +114,9 @@ class OpticalDensitySensor:
         self.enabled = False
 
     def finalize(self):
-        timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
-        np.savetxt(fname="log/{}_od{}.csv".format(timestamp, self.id), delimiter=",", X=self.od_log)
+        self.disable()
+        #timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+        #np.savetxt(fname="log/{}_od{}.csv".format(timestamp, self.id), delimiter=",", X=self.od_log)
 
     def calibrate(self, ):
         self.svr = SVR(gamma='scale', C=10000.0, epsilon=0.01)
