@@ -5,6 +5,7 @@ import select
 import sys
 import threading
 import time
+import numpy as np
 from typing import List
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "hardware"))
@@ -60,6 +61,7 @@ def print_help():
     print("enable controller reactor0 reactor1 od0 pump8 pump6 pump5 0.5 // target od")
     print("disable controller")
     print()
+
 
 def output_info_event_loop(reactors: List[ReactorTemperatureControl], sensors: List[OpticalDensitySensor],
                            pumps: List[PeristalticPump], interval):
@@ -143,7 +145,6 @@ class AdvancedNaiveConstantConcentration:
             self.pumps[2].disable()
             self.pumps[3].disable()
 
-
     def finalize(self):
         for pump in self.pumps:
             pump.disable()
@@ -151,7 +152,6 @@ class AdvancedNaiveConstantConcentration:
             sensor.disable()
         for reactor in self.reactors:
             reactor.disable()
-
 
 
 class NaiveConstantConcentration:
@@ -174,19 +174,27 @@ class NaiveConstantConcentration:
         self.reactors = reactors
         self.sensors = sensors
         self.pumps = pumps
-        self.tol = 0.1
+        self.tol = 0.05
+        timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+        self.file = "log/{}_growth_rate.csv".format(timestamp)
+        self.pump_time = 20.0
 
     def control_loop(self):
         if self.enabled:
-            diff = self.sensor[0].last_od - (self.target_od + self.tol)
+            diff = self.sensors[0].last_od - (self.target_od + self.tol)
             if diff > 0:  # too high, pump out
-                    self.pumps[0].enable()
-                    self.pumps[1].enable()
-                    self.pumps[2].enable()
-                    time.sleep(diff*100)
-                    self.pumps[0].disable()
-                    self.pumps[1].disable()
-                    self.pumps[2].disable()
+                self.pumps[0].enable()
+                self.pumps[1].enable()
+                self.pumps[2].enable()
+                time.sleep(self.pump_time)
+                self.pumps[0].disable()
+                self.pumps[1].disable()
+                self.pumps[2].disable()
+
+                # append log and write data point to file
+                timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+                with open(self.file, "a") as myfile:
+                    myfile.write("{},{},{}\n".format(timestamp, self.sensors[0].last_od, self.pump_time))
 
     def finalize(self):
         for pump in self.pumps:
@@ -209,7 +217,6 @@ def advanced_naive_constant_concentration(configuration: AdvancedNaiveConstantCo
     while True:
         configuration.control_loop()
         time.sleep(interval - ((time.time() - starttime) % interval))
-
 
 
 if __name__ == "__main__":
@@ -327,9 +334,10 @@ if __name__ == "__main__":
         reactors=None,
         sensors=None,
         pumps=None,
-        target_od=0.5
+        target_od=0.6
     )
-    naive_constant_concentration_thread  = threading.Thread(target=naive_constant_concentration, args=(controller1, 10.0), daemon=True)
+    naive_constant_concentration_thread = threading.Thread(target=naive_constant_concentration,
+                                                           args=(controller1, 30.0), daemon=True)
 
     controller2: AdvancedNaiveConstantConcentration = AdvancedNaiveConstantConcentration(
         enabled=False,
@@ -339,8 +347,8 @@ if __name__ == "__main__":
         target_od=0.5,
         continuous_pump_time=2.0
     )
-    advanced_naive_constant_concentration_thread  = threading.Thread(target=advanced_naive_constant_concentration, args=(controller2, 10.0), daemon=True)
-
+    advanced_naive_constant_concentration_thread = threading.Thread(target=advanced_naive_constant_concentration,
+                                                                    args=(controller2, 10.0), daemon=True)
 
     print("start deamon threads")
     # start background event loops
@@ -375,8 +383,8 @@ if __name__ == "__main__":
                                 ]
                                 controller1.sensors = [od_sensor[_SENSOR_MAP[command[4]]]]
                                 controller1.pumps = [pumps[_PUMP_MAP[command[5]]],
-                                                    pumps[_PUMP_MAP[command[6]]],
-                                                    pumps[_PUMP_MAP[command[7]]]]
+                                                     pumps[_PUMP_MAP[command[6]]],
+                                                     pumps[_PUMP_MAP[command[7]]]]
                                 controller1.enabled = True
                                 print("Command accepted.")
                             elif command[1] == "advanced":
@@ -386,8 +394,8 @@ if __name__ == "__main__":
                                 ]
                                 controller2.sensors = [od_sensor[_SENSOR_MAP[command[4]]]]
                                 controller2.pumps = [pumps[_PUMP_MAP[command[5]]],
-                                                    pumps[_PUMP_MAP[command[6]]],
-                                                    pumps[_PUMP_MAP[command[7]]],
+                                                     pumps[_PUMP_MAP[command[6]]],
+                                                     pumps[_PUMP_MAP[command[7]]],
                                                      pumps[_PUMP_MAP[command[8]]]]
                                 controller2.target_od = float(command[9])
                                 controller2.continuous_pump_time = float(command[10])
