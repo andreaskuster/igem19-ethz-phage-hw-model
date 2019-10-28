@@ -118,7 +118,7 @@ if __name__ == "__main__":
                                                plot=True)
 
     od_final = Prediction.concentration_to_od(c_final)
-    
+
     print("OD before simulation: {}, after {}min of simulation: {}".format(_INITIAL_OD, _SIMULATION_TIME, od_final))
 
 # credits:
