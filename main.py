@@ -174,15 +174,16 @@ class NaiveConstantConcentration:
         self.reactors = reactors
         self.sensors = sensors
         self.pumps = pumps
-        self.tol = 0.05
+        self.tol = 0.0
         timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
         self.file = "log/{}_growth_rate.csv".format(timestamp)
         self.pump_time = 20.0
 
     def control_loop(self):
         if self.enabled:
+            start_val = self.sensors[0].last_od
             diff = self.sensors[0].last_od - (self.target_od + self.tol)
-            if diff > 0:  # too high, pump out
+            if diff > 0.0:  # too high, pump out
                 self.pumps[0].enable()
                 self.pumps[1].enable()
                 self.pumps[2].enable()
@@ -190,11 +191,17 @@ class NaiveConstantConcentration:
                 self.pumps[0].disable()
                 self.pumps[1].disable()
                 self.pumps[2].disable()
+                print("pump")
+            else:
+                print("not pumping")
+            # append log and write data point to file
+            timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
+            with open(self.file, "a") as myfile:
+                myfile.write("{},{},{}\n".format(timestamp, start_val, self.pump_time if (diff > 0.0) else 0.0))
 
-                # append log and write data point to file
-                timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
-                with open(self.file, "a") as myfile:
-                    myfile.write("{},{},{}\n".format(timestamp, self.sensors[0].last_od, self.pump_time))
+    def disable(self):
+        self.enable = False
+        self.finalize()
 
     def finalize(self):
         for pump in self.pumps:
@@ -334,7 +341,7 @@ if __name__ == "__main__":
         reactors=None,
         sensors=None,
         pumps=None,
-        target_od=0.6
+        target_od=0.5
     )
     naive_constant_concentration_thread = threading.Thread(target=naive_constant_concentration,
                                                            args=(controller1, 30.0), daemon=True)
@@ -385,6 +392,7 @@ if __name__ == "__main__":
                                 controller1.pumps = [pumps[_PUMP_MAP[command[5]]],
                                                      pumps[_PUMP_MAP[command[6]]],
                                                      pumps[_PUMP_MAP[command[7]]]]
+                                controller1.target_od = float(command[8])
                                 controller1.enabled = True
                                 print("Command accepted.")
                             elif command[1] == "advanced":
