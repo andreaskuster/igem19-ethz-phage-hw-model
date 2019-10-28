@@ -13,7 +13,7 @@ class Prediction:
 
     def __init__(self,
                  optimal_growth_rate: float = 1.0,
-                 verbose = True):
+                 verbose=True):
         self.optimal_growth_rate = optimal_growth_rate  # optimal growth rate
         self.temperature_profile = lambda t: 39.0  # default: constant 39.0
         self.temperature_dependency = lambda T: 1.0  # default: independent
@@ -71,7 +71,7 @@ class Prediction:
     def predict_cell_concentration(self,
                                    simulation_time,
                                    temperature_profile,
-                                   initial_concentration = 1.0,
+                                   initial_concentration=1.0,
                                    plot=False) -> float:
         self.temperature_profile = temperature_profile
         tt = linspace(0, simulation_time, 1000)
@@ -87,16 +87,26 @@ class Prediction:
 
         return simulation_data[-1][0]  # return last value
 
+    def predict_od(self,
+                   simulation_time,
+                   temperature_profile,
+                   initial_od=0.3,
+                   plot=False):
+        return Prediction.concentration_to_od(self.predict_cell_concentration(simulation_time=simulation_time,
+                                                                              temperature_profile=temperature_profile,
+                                                                              initial_concentration=Prediction.od_to_concentration(
+                                                                                  initial_od),
+                                                                              plot=plot))
+
 
 if __name__ == "__main__":
-
     _SIMULATION_TIME = 10
     _TEMPERATURE_PROFILE = lambda t: 30.0  # lambda t: 33.0 if (t < 50) else 45.0
 
     _INITIAL_OD = 0.2
     _INITIAL_CONCENTRATION = Prediction.od_to_concentration(_INITIAL_OD)
 
-    model = Prediction(verbose=True)
+    model = Prediction(verbose=False)
 
     warnings.warn("The current implementation only supports temperature profiles in the interval []")
 
@@ -108,8 +118,8 @@ if __name__ == "__main__":
                                                plot=True)
 
     od_final = Prediction.concentration_to_od(c_final)
+    
     print("OD before simulation: {}, after {}min of simulation: {}".format(_INITIAL_OD, _SIMULATION_TIME, od_final))
-
 
 # credits:
 # - od conversion: https://www.labtools.us/bacterial-cell-number-od600/
