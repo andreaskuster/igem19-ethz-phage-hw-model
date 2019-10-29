@@ -1,0 +1,9 @@
+{
+  "prediction_constant_concentration":
+  {
+    "target_od_reactor0": 0.2,
+    "target_od_reactor1": 0.7,
+    "continuous_pump_time": 2.0,
+    "tol": 0.0
+  }
+}
