@@ -1,4 +1,28 @@
+#!/usr/bin/env python3
+# encoding: utf-8
+
 from __future__ import annotations
+
+"""
+    Copyright (C) 2019-2020  Andreas Kuster
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+
+__author__ = "Andreas Kuster"
+__copyright__ = "Copyright 2019-2020"
+__license__ = "GPL"
 
 import threading
 import time
@@ -10,7 +34,6 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "drivers"))
 
-
 from drivers.ESC import ESC
 from drivers.WaterPump import WaterPump
 from drivers.PCFan import PCFan
@@ -19,12 +42,11 @@ from simple_pid import PID
 
 
 class ReactorTemperatureControl:
-
     _DEVICE_ID_MAP = {
-            0: 2,
-            1: 1,
-            2: 0
-            }
+        0: 2,
+        1: 1,
+        2: 0
+    }
 
     def __init__(self,
                  id: int,
@@ -65,7 +87,7 @@ class ReactorTemperatureControl:
         self.kd_log = list()
         self.control_val_log = list()
         self.actual_temperature = -100
-        self.control_value  = 0
+        self.control_value = 0
         self.enabled = enabled
         if not self.enabled:
             self.output.stop()
@@ -74,7 +96,8 @@ class ReactorTemperatureControl:
         self.file = "log/{}_temperature_reactor{}.csv".format(timestamp, self.id)
 
     def info(self):
-        print("Temperature Control Reactor {}: Target Temperature: {}, Actual Temperature: {}, Coefficients: {}".format(self.id, self.target_setpoint, self.actual_temperature, self.pid.components))
+        print("Temperature Control Reactor {}: Target Temperature: {}, Actual Temperature: {}, Coefficients: {}".format(
+            self.id, self.target_setpoint, self.actual_temperature, self.pid.components))
 
     def set_target_temperature(self,
                                temperature: float):
@@ -95,7 +118,6 @@ class ReactorTemperatureControl:
     def finalize(self):
         self.disable()
 
-
     def control_loop(self):
 
         if self.enabled:
@@ -107,7 +129,7 @@ class ReactorTemperatureControl:
                 self.output.set_value(int(self.pid(self.actual_temperature)))
             else:
                 self.reset -= 1
-                
+
             # get current temperature
             actual_temperature = self.temperature_sensor.get_temperature()
             self.actual_temperature = actual_temperature
@@ -136,7 +158,7 @@ class ReactorTemperatureControl:
             self.output.set_value(self.control_value)
 
             # append log
-            timestamp  = time.strftime("%Y-%m-%d_%H:%M:%S")
+            timestamp = time.strftime("%Y-%m-%d_%H:%M:%S")
             self.temp_log.append((timestamp, actual_temperature))
             self.control_val_log.append((timestamp, self.control_value))
             (kp, ki, kd) = self.pid.components
