@@ -2,8 +2,7 @@
 # encoding: utf-8
 
 """
-    Tutty Crawler
-    Copyright (C) 2020  Andreas Kuster
+    Copyright (C) 2019-2020  Andreas Kuster
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +20,7 @@
 
 __description__ = "Continuous integration unit testing."
 __author__ = "Andreas Kuster"
-__copyright__ = "Copyright 2020, Tutti Crawler"
+__copyright__ = "Copyright 2019-2020"
 __license__ = "GPL"
 
 import unittest
